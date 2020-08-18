@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1bK0OIrawZv00EoIifQPSR9DUtA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.voorbereidenTakeOneWelNiet">
+    <configuration name="1 preTrainedCovNetGedeeltelijkUnfreeze" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1 preTrainedCovNetGedeeltelijkUnfreeze.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ControlerenLaatsteModel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ControlerenLaatsteModel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="voorbereidenKattenHondenData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/voorbereidenKattenHondenData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="voorbereidenTakeOneWelNiet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/voorbereidenTakeOneWelNiet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="werkt niet goed preTrainedCovNetGedeeltelijkeHertrainingMetAugmentation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/werkt niet goed preTrainedCovNetGedeeltelijkeHertrainingMetAugmentation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.voorbereidenTakeOneWelNiet" />
+        <item itemvalue="Python.ControlerenLaatsteModel" />
+        <item itemvalue="Python.1 preTrainedCovNetGedeeltelijkUnfreeze" />
+        <item itemvalue="Python.voorbereidenKattenHondenData" />
+        <item itemvalue="Python.werkt niet goed preTrainedCovNetGedeeltelijkeHertrainingMetAugmentation" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="" />
+      <created>1588366205415</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588366205415</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="257" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594025556707">
+      <screen x="67" y="0" width="1853" height="1200" />
+    </state>
+    <state x="418" y="257" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1594025556707" />
+    <state x="676" y="1535" width="875" height="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593285308379">
+      <screen x="0" y="1200" width="1920" height="1080" />
+    </state>
+    <state x="676" y="1535" width="875" height="407" key="#com.intellij.fileTypes.FileTypeChooser/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593285308379" />
+    <state x="719" y="354" width="538" height="396" key="#com.intellij.fileTypes.FileTypeChooser/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1590489452128" />
+    <state x="643" y="336" width="624" height="526" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588703612997">
+      <screen x="67" y="0" width="1853" height="1200" />
+    </state>
+    <state x="643" y="336" width="624" height="526" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1588703612997" />
+    <state x="726" y="1501" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593285347160">
+      <screen x="0" y="1200" width="1920" height="1080" />
+    </state>
+    <state x="726" y="1501" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593285347160" />
+    <state width="1897" height="443" key="GridCell.Tab.0.bottom" timestamp="1593898248621">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1830" height="379" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
+    <state width="1897" height="443" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1897" height="443" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
+    <state width="1830" height="379" key="GridCell.Tab.0.bottom/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
+    <state width="1830" height="357" key="GridCell.Tab.0.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151781" />
+    <state width="1830" height="379" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
+    <state width="1830" height="276" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1592839644460" />
+    <state width="1897" height="443" key="GridCell.Tab.0.center" timestamp="1593898248621">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1830" height="379" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
+    <state width="1897" height="443" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1897" height="443" key="GridCell.Tab.0.center/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
+    <state width="1830" height="379" key="GridCell.Tab.0.center/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
+    <state width="1830" height="357" key="GridCell.Tab.0.center/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151781" />
+    <state width="1830" height="379" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
+    <state width="1830" height="276" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1592839644459" />
+    <state width="1897" height="443" key="GridCell.Tab.0.left" timestamp="1593898248621">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1830" height="379" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
+    <state width="1897" height="443" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1897" height="443" key="GridCell.Tab.0.left/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
+    <state width="1830" height="379" key="GridCell.Tab.0.left/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
+    <state width="1830" height="357" key="GridCell.Tab.0.left/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151781" />
+    <state width="1830" height="379" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
+    <state width="1830" height="276" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1592839644459" />
+    <state width="1897" height="443" key="GridCell.Tab.0.right" timestamp="1593898248621">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1830" height="379" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
+    <state width="1897" height="443" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1897" height="443" key="GridCell.Tab.0.right/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
+    <state width="1830" height="379" key="GridCell.Tab.0.right/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
+    <state width="1830" height="357" key="GridCell.Tab.0.right/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151781" />
+    <state width="1830" height="379" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
+    <state width="1830" height="276" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1592839644460" />
+    <state width="1830" height="402" key="GridCell.Tab.1.bottom" timestamp="1593465309150">
+      <screen x="67" y="0" width="1853" height="1080" />
+    </state>
+    <state width="1830" height="402" key="GridCell.Tab.1.bottom/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
+    <state width="1897" height="603" key="GridCell.Tab.1.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1830" height="402" key="GridCell.Tab.1.bottom/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
+    <state width="1830" height="357" key="GridCell.Tab.1.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="1830" height="402" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
+    <state width="1830" height="402" key="GridCell.Tab.1.center" timestamp="1593465309150">
+      <screen x="67" y="0" width="1853" height="1080" />
+    </state>
+    <state width="1830" height="402" key="GridCell.Tab.1.center/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
+    <state width="1897" height="603" key="GridCell.Tab.1.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1830" height="402" key="GridCell.Tab.1.center/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
+    <state width="1830" height="357" key="GridCell.Tab.1.center/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="1830" height="402" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
+    <state width="1830" height="402" key="GridCell.Tab.1.left" timestamp="1593465309150">
+      <screen x="67" y="0" width="1853" height="1080" />
+    </state>
+    <state width="1830" height="402" key="GridCell.Tab.1.left/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
+    <state width="1897" height="603" key="GridCell.Tab.1.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1830" height="402" key="GridCell.Tab.1.left/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
+    <state width="1830" height="357" key="GridCell.Tab.1.left/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="1830" height="402" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
+    <state width="1830" height="402" key="GridCell.Tab.1.right" timestamp="1593465309150">
+      <screen x="67" y="0" width="1853" height="1080" />
+    </state>
+    <state width="1830" height="402" key="GridCell.Tab.1.right/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
+    <state width="1897" height="603" key="GridCell.Tab.1.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1830" height="402" key="GridCell.Tab.1.right/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
+    <state width="1830" height="357" key="GridCell.Tab.1.right/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="1830" height="402" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
+    <state x="214" y="56" width="1316" height="730" key="SettingsEditor" timestamp="1594025873179">
+      <screen x="67" y="0" width="1853" height="1200" />
+    </state>
+    <state x="615" y="1346" key="SettingsEditor/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593341486401" />
+    <state x="214" y="56" width="1316" height="730" key="SettingsEditor/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1594025873179" />
+    <state width="960" height="601" key="XDebugger.FullValuePopup" timestamp="1593888513825">
+      <screen x="67" y="0" width="1853" height="1200" />
+    </state>
+    <state width="960" height="601" key="XDebugger.FullValuePopup/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593888513825" />
+    <state x="607" y="223" width="762" height="658" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590489611598">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="607" y="223" width="762" height="658" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1590489611598" />
+    <state x="642" y="271" width="700" height="530" key="recent.locations.popup" timestamp="1593609487627">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="642" y="271" width="700" height="530" key="recent.locations.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1593609487627" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/covnetOpCijfers.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/covnetOpCijfers.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/smalConvNetCatsDogs.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hondenEnKattenAugmentedGovNet.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/werkt niet goed preTrainedCovNetGedeeltelijkeHertrainingMetAugmentation.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/voorbereidenKattenHondenData.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/voorbereidenTakeOneWelNiet.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/voorbereidenTakeOneWelNiet.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/voorbereidenTakeOneWelNiet.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ControlerenLaatsteModel.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ControlerenLaatsteModel.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
