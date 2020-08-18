@@ -32,6 +32,7 @@ def fill_subdirectory_with_squared_images(subSubDirName, targetDir, sourceDir, f
     source_data_set_dir = os.path.join(sourceDir, subSubDirName)
     target_data_set_dir = os.path.join(targetDir, subSubDirName)
     target_raw_verwerkt_dir = os.path.join(rawVerwerktDir, subSubDirName)
+    subDirNr = 1000
     for file_name in fileNames:
         kale_file_naam, file_extension = os.path.splitext(file_name)
         file_naam_verwerkt_dir = os.path.join(target_raw_verwerkt_dir, file_name)
@@ -41,7 +42,8 @@ def fill_subdirectory_with_squared_images(subSubDirName, targetDir, sourceDir, f
         i = 0
         for im in im_list:
             i = i+1
-            dst = os.path.join(target_data_set_dir, kale_file_naam + str(i) + file_extension)
+            dst = os.path.join(target_data_set_dir, int(subDirNr / 1000), kale_file_naam + str(i) + file_extension)
+            subDirNr = subDirNr + 1
             im = im.convert('RGB')
             im.save(dst)
         shutil.move(file_naam_bron_dir, file_naam_verwerkt_dir)

@@ -31,6 +31,7 @@ from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
 # 18 100 Epochs, 200 Steps                                                                                  loss: 0.0132 - acc: 0.9962 - val_loss: 0.2155 - val_acc: 0.9841
 # 19 nogmaals nadat dataset er op andere manier neergezet is. Zou in principe gelijk moeten zijn            loss: 0.0029 - acc: 0.9991 - val_loss: 133.2310 - val_acc: 0.9919
 # 20 19 met grootte plaatjes 120                                                                            loss: 0.0143 - acc: 0.9954 - val_loss: 6.5726 - val_acc: 0.9865
+# 21 Na zuivering van de basisplaatjes vierkante plaatjes nog niet gezuivered
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')
