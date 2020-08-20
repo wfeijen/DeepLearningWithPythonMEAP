@@ -1,8 +1,7 @@
 import os
-# from tkinter import *
-from tkinter import ttk, Tk
-from PIL import ImageTk, Image
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images
+from generiekeFuncties.viewer import Viewer
+from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
 
 # from generiekeFuncties.viewer import Viewer
 # from generiekeFuncties.plaatjesWindowClass import PlaatjesWindow
@@ -20,97 +19,46 @@ aantal = 25
 # [  1955 180209]]
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-oorspronkelijke_bron_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/volledigeSetVierBijVier'
-train_dir = os.path.join(base_dir, 'train')
-validation_dir = os.path.join(base_dir, 'validation')
-test_dir = os.path.join(base_dir, 'test')
-if directoryNr == 0:
-    onderzoeks_dir = train_dir
-elif directoryNr == 1:
-    onderzoeks_dir = test_dir
-elif directoryNr == 2:
-    onderzoeks_dir = validation_dir
-else:
-    onderzoeks_dir = oorspronkelijke_bron_dir
+onderzoeks_dir = os.path.join(base_dir, 'programmatest')
 
 imageList_P = [os.path.join(onderzoeks_dir, "wel", fileName) for fileName in
                give_list_of_images(subdirName="wel", baseDir=onderzoeks_dir)]
 imageList_geen_P = [os.path.join(onderzoeks_dir, "niet", fileName) for fileName in
                     give_list_of_images(subdirName="niet", baseDir=onderzoeks_dir)]
 
-imageList = imageList_geen_P
+def verwijderGecontroleerdeFiles(fileList):
+    dummy = []
+    for file in fileList:
+        if len(file)<18:
+            dummy.append(file)
+        elif file[:18] == "_gecontroleerd.jpg":
+            dummy.append(file)
 
-index = 0
+imageList_P = verwijderGecontroleerdeFiles(imageList_P)
+imageList_geen_P = verwijderGecontroleerdeFiles(imageList_geen_P)
 
-changeList = []
+viewer = Viewer(imgList=imageList_P, titel="WEL")
 
+print("verwerken Lijst ", str(viewer.lijsVerwerken))
+if viewer.lijsVerwerken:
+    for operatie, filePad in viewer.changeList:
+        print(operatie, " ", filePad)
+        if operatie == "verwijder":
+            os.remove(filePad)
+        elif operatie == "verander":
+            veranderVanKant(filePad)
+        else: # onveranderd maar wel gecontroleerd
+            markeerGecontroleerd(filePad)
 
-# root = Tk()
+viewer = Viewer(imgList=imageList_geen_P, titel="NIET")
 
-# Viewer(root, []).pack(side="top", fill="both", expand=True)
-
-# root.mainloop()
-
-def beeindig():
-    root.destroy()
-
-
-def setImage():
-    if index < len(imageList):
-        im = Image.open(imageList[index])
-        stgImg = ImageTk.PhotoImage(im)
-        label.configure(image=stgImg)
-        label.image = stgImg
-    else:
-        beeindig()
-
-def nextImage():
-    global index
-    index = index + 1
-    setImage()
-
-def overslaan():
-    global changeList
-    changeList.append(("niks doen", imageList[index]))
-    nextImage()
-
-def verwijder():
-    global changeList
-    changeList.append(("verwijder", imageList[index]))
-    nextImage()
-
-
-def verander():
-    global changeList
-    changeList.append(("verander", imageList[index]))
-    nextImage()
-
-
-def undo():
-    global changeList
-    global index
-    if index>0:
-        index = index - 1
-        del changeList[-1]
-    setImage()
-
-
-root = Tk()
-
-root.geometry('1200x1000')
-
-stgImg = ImageTk.PhotoImage(Image.open(imageList[index]))
-label = ttk.Label(root, image=stgImg)
-label.place(x=0, y=0)
-
-overslaanBtn = ttk.Button(root, text="OVERSLAAN", command=overslaan)
-overslaanBtn.place(x=1100, y=0)
-veranderBtn = ttk.Button(root, text="VERANDER", command=verander)
-veranderBtn.place(x=1100, y=30)
-backBtn = ttk.Button(root, text="TERUG", command=undo)
-backBtn.place(x=1100, y=60)
-backBtn = ttk.Button(root, text="KLAAR", command=undo)
-backBtn.place(x=1100, y=120)
-backBtn = ttk.Button(root, text="AFBREKEN", command=undo)
-backBtn.place(x=1100, y=150)
-root.mainloop()
+print("verwerken Lijst ", str(viewer.lijsVerwerken))
+if viewer.lijsVerwerken:
+    for operatie, filePad in viewer.changeList:
+        print(operatie, " ", filePad)
+        if operatie == "verwijder":
+            os.remove(filePad)
+        elif operatie == "verander":
+            veranderVanKant(filePad)
+        else: # onveranderd maar wel gecontroleerd
+            markeerGecontroleerd(filePad)
