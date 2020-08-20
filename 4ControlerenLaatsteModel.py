@@ -1,7 +1,6 @@
 import os
 
 import matplotlib.pyplot as plt
-import numpy
 import numpy as np
 import sklearn.metrics as metrics
 from keras import models
@@ -15,7 +14,8 @@ from datetime import datetime
 # train: 0
 # test: 1
 # validatie: 2
-directoryNr = 3
+# oorspronkelijke bron: 3
+directoryNr = 2
 aantal = 25
 
 #[[ 42397   1483]
@@ -49,7 +49,7 @@ generator = datagen.flow_from_directory(
     batch_size=20,
     class_mode='binary',
     shuffle=False)
-steps_per_epoch = numpy.math.ceil(generator.samples / generator.batch_size)
+steps_per_epoch = np.math.ceil(generator.samples / generator.batch_size)
 
 predictions = classifier.predict(generator, steps=steps_per_epoch)
 # Get most likely class

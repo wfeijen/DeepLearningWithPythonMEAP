@@ -134,5 +134,6 @@ for i in sequences:
 #                                          'BesteModellen/besteModelResnetV2totaalEind'))
 
 tijdVorigePunt = geeftVoortgangsInformatie("Totaal ", startTijd, tijdVorigePunt)
+
 for i in sequences:
     plotLossAndAcc(history=historyList[i])

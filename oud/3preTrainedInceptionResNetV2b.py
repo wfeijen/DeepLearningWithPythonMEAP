@@ -40,7 +40,7 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 # 24 Nu met Exponential decay staircase
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-                                          'BesteModellen/besteModelResnetV2')
+                         '../BesteModellen/besteModelResnetV2')
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')

@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2b.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generiekeFuncties/utilities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3BestaandModelVerderBrengen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OntwikkelenBoordelingsScherm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generiekeFuncties/gebruikersInteractie.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesWindowClass" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generiekeFuncties/viewer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2volledigeSetNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/2volledigeSetNaarWerkset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2b.py" beforeDir="false" afterPath="$PROJECT_DIR$/oud/3preTrainedInceptionResNetV2b.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4ControlerenLaatsteModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/4ControlerenLaatsteModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voorbeelden/tweedeFormExperiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/voorbeelden/tweedeFormExperiment.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +44,13 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/generiekeFuncties" />
+      <recent name="$PROJECT_DIR$/oud" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2b">
-    <configuration name="1plaatjesWiedenEnOverzettenNaarVolledigeSet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.OntwikkelenBoordelingsScherm">
+    <configuration name="4ControlerenLaatsteModel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -53,7 +62,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1plaatjesWiedenEnOverzettenNaarVolledigeSet.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/4ControlerenLaatsteModel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -62,7 +71,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="2volledigeSetNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="OntwikkelenBoordelingsScherm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -74,7 +83,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2volledigeSetNaarWerkset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OntwikkelenBoordelingsScherm.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -83,7 +92,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="3preTrainedInceptionResNetV2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="eerste form experiment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -91,11 +100,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/voorbeelden" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/voorbeelden/eerste form experiment" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -104,7 +113,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="3preTrainedInceptionResNetV2b" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="plaatjesWindowClass" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -112,11 +121,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/generiekeFuncties" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3preTrainedInceptionResNetV2b.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generiekeFuncties/plaatjesWindowClass" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -125,7 +134,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="voorbereidenTakeOneWelNiet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="tweedeFormExperiment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -133,11 +142,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/voorbeelden" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/voorbereidenTakeOneWelNiet.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/voorbeelden/tweedeFormExperiment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,11 +157,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.3preTrainedInceptionResNetV2b" />
-        <item itemvalue="Python.3preTrainedInceptionResNetV2" />
-        <item itemvalue="Python.2volledigeSetNaarWerkset" />
-        <item itemvalue="Python.1plaatjesWiedenEnOverzettenNaarVolledigeSet" />
-        <item itemvalue="Python.voorbereidenTakeOneWelNiet" />
+        <item itemvalue="Python.OntwikkelenBoordelingsScherm" />
+        <item itemvalue="Python.plaatjesWindowClass" />
+        <item itemvalue="Python.tweedeFormExperiment" />
+        <item itemvalue="Python.eerste form experiment" />
+        <item itemvalue="Python.4ControlerenLaatsteModel" />
       </list>
     </recent_temporary>
   </component>
@@ -175,30 +184,45 @@
       <option name="project" value="LOCAL" />
       <updated>1597767913038</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Exponential delay experiment">
+      <created>1597899794114</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1597899794114</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Aanpassingen om tot betere datasets te komen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aanpassingen om tot betere datasets te komen" />
+    <MESSAGE value="Exponential delay experiment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exponential delay experiment" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="667" y="260" width="732" height="637" key="#Inspections" timestamp="1597947513477">
+      <screen x="67" y="0" width="1853" height="1200" />
+    </state>
+    <state x="622" y="1434" width="732" height="637" key="#Inspections/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1597940553548" />
+    <state x="667" y="260" width="732" height="637" key="#Inspections/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597947513477" />
     <state x="418" y="257" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594025556707">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state x="418" y="257" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1594025556707" />
-    <state x="676" y="1535" width="875" height="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593285308379">
-      <screen x="0" y="1200" width="1920" height="1080" />
+    <state x="719" y="340" width="875" height="407" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597937423838">
+      <screen x="67" y="0" width="1853" height="2280" />
     </state>
     <state x="676" y="1535" width="875" height="407" key="#com.intellij.fileTypes.FileTypeChooser/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593285308379" />
     <state x="719" y="354" width="538" height="396" key="#com.intellij.fileTypes.FileTypeChooser/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1590489452128" />
+    <state x="719" y="340" key="#com.intellij.fileTypes.FileTypeChooser/67.0.1853.2280@67.0.1853.2280" timestamp="1597937423838" />
     <state x="726" y="1501" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593285347160">
       <screen x="0" y="1200" width="1920" height="1080" />
     </state>
     <state x="726" y="1501" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593285347160" />
-    <state x="532" y="1300" width="912" height="904" key="CommitChangelistDialog2" timestamp="1597767912932">
-      <screen x="67" y="0" width="1853" height="2280" />
+    <state x="532" y="684" width="912" height="904" key="CommitChangelistDialog2" timestamp="1597899794016">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
+    <state x="532" y="684" key="CommitChangelistDialog2/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597899794016" />
     <state x="532" y="1300" width="912" height="904" key="CommitChangelistDialog2/67.0.1853.2280@67.0.1853.2280" timestamp="1597767912932" />
     <state x="309" y="453" key="Github.ShareDialog" timestamp="1597753599066">
       <screen x="67" y="27" width="1853" height="1053" />
@@ -208,80 +232,80 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="179" y="240" width="693" height="626" key="Github.UntrackedFilesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1597753608044" />
-    <state width="1203" height="337" key="GridCell.Tab.0.bottom" timestamp="1597871124400">
+    <state width="1193" height="287" key="GridCell.Tab.0.bottom" timestamp="1597949264993">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>
-    <state width="1830" height="379" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1203" height="337" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
+    <state width="1155" height="287" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1597940811082" />
+    <state width="1193" height="287" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597949264993" />
     <state width="1897" height="443" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.bottom/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1162" height="288" key="GridCell.Tab.0.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127121" />
+    <state width="915" height="345" key="GridCell.Tab.0.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337959" />
     <state width="1830" height="379" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1203" height="337" key="GridCell.Tab.0.center" timestamp="1597871124400">
+    <state width="1193" height="287" key="GridCell.Tab.0.center" timestamp="1597949264993">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>
-    <state width="1830" height="379" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1203" height="337" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
+    <state width="1155" height="287" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1597940811081" />
+    <state width="1193" height="287" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597949264993" />
     <state width="1897" height="443" key="GridCell.Tab.0.center/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.center/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1162" height="288" key="GridCell.Tab.0.center/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127121" />
+    <state width="915" height="345" key="GridCell.Tab.0.center/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337958" />
     <state width="1830" height="379" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1203" height="337" key="GridCell.Tab.0.left" timestamp="1597871124400">
+    <state width="1193" height="287" key="GridCell.Tab.0.left" timestamp="1597949264992">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>
-    <state width="1830" height="379" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1203" height="337" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
+    <state width="1155" height="287" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1597940811081" />
+    <state width="1193" height="287" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597949264992" />
     <state width="1897" height="443" key="GridCell.Tab.0.left/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.left/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1162" height="288" key="GridCell.Tab.0.left/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127120" />
+    <state width="915" height="345" key="GridCell.Tab.0.left/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337958" />
     <state width="1830" height="379" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1203" height="337" key="GridCell.Tab.0.right" timestamp="1597871124400">
+    <state width="1193" height="287" key="GridCell.Tab.0.right" timestamp="1597949264993">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>
-    <state width="1830" height="379" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1203" height="337" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
+    <state width="1155" height="287" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1597940811081" />
+    <state width="1193" height="287" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597949264993" />
     <state width="1897" height="443" key="GridCell.Tab.0.right/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.right/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1162" height="288" key="GridCell.Tab.0.right/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127121" />
+    <state width="915" height="345" key="GridCell.Tab.0.right/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337958" />
     <state width="1830" height="379" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1830" height="345" key="GridCell.Tab.1.bottom" timestamp="1597754569161">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1578" height="403" key="GridCell.Tab.1.bottom" timestamp="1597948925650">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="402" key="GridCell.Tab.1.bottom/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
-    <state width="1897" height="603" key="GridCell.Tab.1.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1578" height="403" key="GridCell.Tab.1.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597948925650" />
     <state width="1830" height="402" key="GridCell.Tab.1.bottom/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
-    <state width="1830" height="357" key="GridCell.Tab.1.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="915" height="345" key="GridCell.Tab.1.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337959" />
     <state width="1830" height="402" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
     <state width="1830" height="345" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569161" />
-    <state width="1830" height="345" key="GridCell.Tab.1.center" timestamp="1597754569161">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1578" height="403" key="GridCell.Tab.1.center" timestamp="1597948925650">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="402" key="GridCell.Tab.1.center/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
-    <state width="1897" height="603" key="GridCell.Tab.1.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1578" height="403" key="GridCell.Tab.1.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597948925650" />
     <state width="1830" height="402" key="GridCell.Tab.1.center/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
-    <state width="1830" height="357" key="GridCell.Tab.1.center/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="915" height="345" key="GridCell.Tab.1.center/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337959" />
     <state width="1830" height="402" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
     <state width="1830" height="345" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569161" />
-    <state width="1830" height="345" key="GridCell.Tab.1.left" timestamp="1597754569160">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1578" height="403" key="GridCell.Tab.1.left" timestamp="1597948925650">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="402" key="GridCell.Tab.1.left/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
-    <state width="1897" height="603" key="GridCell.Tab.1.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1578" height="403" key="GridCell.Tab.1.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597948925650" />
     <state width="1830" height="402" key="GridCell.Tab.1.left/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
-    <state width="1830" height="357" key="GridCell.Tab.1.left/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="915" height="345" key="GridCell.Tab.1.left/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337959" />
     <state width="1830" height="402" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
     <state width="1830" height="345" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1830" height="345" key="GridCell.Tab.1.right" timestamp="1597754569161">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1578" height="403" key="GridCell.Tab.1.right" timestamp="1597948925650">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="402" key="GridCell.Tab.1.right/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359115" />
-    <state width="1897" height="603" key="GridCell.Tab.1.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593152113422" />
+    <state width="1578" height="403" key="GridCell.Tab.1.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597948925650" />
     <state width="1830" height="402" key="GridCell.Tab.1.right/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309150" />
-    <state width="1830" height="357" key="GridCell.Tab.1.right/67.0.1853.2280@67.0.1853.2280" timestamp="1592861151782" />
+    <state width="915" height="345" key="GridCell.Tab.1.right/67.0.1853.2280@67.0.1853.2280" timestamp="1597940337959" />
     <state width="1830" height="402" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593434615379" />
     <state width="1830" height="345" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569161" />
     <state x="267" y="1080" width="1316" height="1200" key="SettingsEditor" timestamp="1597762095777">
@@ -290,10 +314,11 @@
     <state x="615" y="1346" key="SettingsEditor/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593341486401" />
     <state x="214" y="56" width="1316" height="730" key="SettingsEditor/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1594025873179" />
     <state x="267" y="1080" width="1316" height="1200" key="SettingsEditor/67.0.1853.2280@67.0.1853.2280" timestamp="1597762095777" />
-    <state x="588" y="1488" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1597767920538">
+    <state x="588" y="1488" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1597935023928">
       <screen x="67" y="0" width="1853" height="2280" />
     </state>
-    <state x="588" y="1488" width="800" height="528" key="Vcs.Push.Dialog.v2/67.0.1853.2280@67.0.1853.2280" timestamp="1597767920538" />
+    <state x="588" y="783" key="Vcs.Push.Dialog.v2/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597899800341" />
+    <state x="588" y="1488" width="800" height="528" key="Vcs.Push.Dialog.v2/67.0.1853.2280@67.0.1853.2280" timestamp="1597935023928" />
     <state width="960" height="601" key="XDebugger.FullValuePopup" timestamp="1593888513825">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>
@@ -364,6 +389,21 @@
           <url>file://$PROJECT_DIR$/ControlerenLaatsteModel.py</url>
           <line>70</line>
           <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OntwikkelenBoordelingsScherm.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OntwikkelenBoordelingsScherm.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/OntwikkelenBoordelingsScherm.py</url>
+          <line>94</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

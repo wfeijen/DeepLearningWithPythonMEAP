@@ -11,7 +11,7 @@ def TestLogic():
 
 root = Tk()
 
-root.geometry('1010x740+200+200')
+root.geometry('1010x740+0+200')
 
 stgImg = ImageTk.PhotoImage(Image.open("../plaatje2.jpg"))
 label = ttk.Label(root, image=stgImg)
