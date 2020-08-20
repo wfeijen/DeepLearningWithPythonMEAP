@@ -14,7 +14,7 @@ import math
 percentageTrain = 0.8
 percentageTest = 0.1
 percentageValidation = 0.1
-maximaalVerschilInVerhoudingAantalImages = 3
+maximaalVerschilInVerhoudingAantalImages = 1.1
 
 # The path to the directory where the original
 # data set was uncompressed

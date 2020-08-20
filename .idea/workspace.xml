@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2b.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generiekeFuncties/utilities.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2volledigeSetNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/2volledigeSetNaarWerkset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
     </list>
@@ -37,28 +40,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2">
-    <configuration name="1 preTrainedCovNetGedeeltelijkUnfreeze" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1 preTrainedCovNetGedeeltelijkUnfreeze.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2b">
     <configuration name="1plaatjesWiedenEnOverzettenNaarVolledigeSet" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,6 +54,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1plaatjesWiedenEnOverzettenNaarVolledigeSet.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="2volledigeSetNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2volledigeSetNaarWerkset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -101,7 +104,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ControlerenLaatsteModel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="3preTrainedInceptionResNetV2b" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -113,7 +116,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ControlerenLaatsteModel.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3preTrainedInceptionResNetV2b.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -145,11 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.3preTrainedInceptionResNetV2b" />
         <item itemvalue="Python.3preTrainedInceptionResNetV2" />
+        <item itemvalue="Python.2volledigeSetNaarWerkset" />
         <item itemvalue="Python.1plaatjesWiedenEnOverzettenNaarVolledigeSet" />
         <item itemvalue="Python.voorbereidenTakeOneWelNiet" />
-        <item itemvalue="Python.ControlerenLaatsteModel" />
-        <item itemvalue="Python.1 preTrainedCovNetGedeeltelijkUnfreeze" />
       </list>
     </recent_temporary>
   </component>
@@ -165,7 +168,19 @@
       <option name="presentableId" value="Default" />
       <updated>1588366205415</updated>
     </task>
+    <task id="LOCAL-00001" summary="Aanpassingen om tot betere datasets te komen">
+      <created>1597767913038</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1597767913038</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Aanpassingen om tot betere datasets te komen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aanpassingen om tot betere datasets te komen" />
   </component>
   <component name="WindowStateProjectService">
     <state x="418" y="257" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594025556707">
@@ -181,6 +196,10 @@
       <screen x="0" y="1200" width="1920" height="1080" />
     </state>
     <state x="726" y="1501" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593285347160" />
+    <state x="532" y="1300" width="912" height="904" key="CommitChangelistDialog2" timestamp="1597767912932">
+      <screen x="67" y="0" width="1853" height="2280" />
+    </state>
+    <state x="532" y="1300" width="912" height="904" key="CommitChangelistDialog2/67.0.1853.2280@67.0.1853.2280" timestamp="1597767912932" />
     <state x="309" y="453" key="Github.ShareDialog" timestamp="1597753599066">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -189,44 +208,44 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="179" y="240" width="693" height="626" key="Github.UntrackedFilesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1597753608044" />
-    <state width="1830" height="288" key="GridCell.Tab.0.bottom" timestamp="1597760979940">
-      <screen x="67" y="0" width="1853" height="2280" />
+    <state width="1203" height="337" key="GridCell.Tab.0.bottom" timestamp="1597871124400">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="379" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1897" height="443" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1203" height="337" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
     <state width="1897" height="443" key="GridCell.Tab.0.bottom/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.bottom/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1830" height="288" key="GridCell.Tab.0.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1597760979940" />
+    <state width="1162" height="288" key="GridCell.Tab.0.bottom/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127121" />
     <state width="1830" height="379" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1830" height="288" key="GridCell.Tab.0.center" timestamp="1597760979939">
-      <screen x="67" y="0" width="1853" height="2280" />
+    <state width="1203" height="337" key="GridCell.Tab.0.center" timestamp="1597871124400">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="379" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1897" height="443" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1203" height="337" key="GridCell.Tab.0.center/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
     <state width="1897" height="443" key="GridCell.Tab.0.center/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.center/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1830" height="288" key="GridCell.Tab.0.center/67.0.1853.2280@67.0.1853.2280" timestamp="1597760979939" />
+    <state width="1162" height="288" key="GridCell.Tab.0.center/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127121" />
     <state width="1830" height="379" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1830" height="288" key="GridCell.Tab.0.left" timestamp="1597760979939">
-      <screen x="67" y="0" width="1853" height="2280" />
+    <state width="1203" height="337" key="GridCell.Tab.0.left" timestamp="1597871124400">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="379" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1897" height="443" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1203" height="337" key="GridCell.Tab.0.left/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
     <state width="1897" height="443" key="GridCell.Tab.0.left/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.left/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1830" height="288" key="GridCell.Tab.0.left/67.0.1853.2280@67.0.1853.2280" timestamp="1597760979939" />
+    <state width="1162" height="288" key="GridCell.Tab.0.left/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127120" />
     <state width="1830" height="379" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
-    <state width="1830" height="288" key="GridCell.Tab.0.right" timestamp="1597760979939">
-      <screen x="67" y="0" width="1853" height="2280" />
+    <state width="1203" height="337" key="GridCell.Tab.0.right" timestamp="1597871124400">
+      <screen x="67" y="0" width="1853" height="1200" />
     </state>
     <state width="1830" height="379" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593384359118" />
-    <state width="1897" height="443" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1593878938002" />
+    <state width="1203" height="337" key="GridCell.Tab.0.right/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1597871124400" />
     <state width="1897" height="443" key="GridCell.Tab.0.right/0.1200.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1593898248621" />
     <state width="1830" height="379" key="GridCell.Tab.0.right/67.0.1853.1080/1920.0.1024.768@67.0.1853.1080" timestamp="1593465309154" />
-    <state width="1830" height="288" key="GridCell.Tab.0.right/67.0.1853.2280@67.0.1853.2280" timestamp="1597760979939" />
+    <state width="1162" height="288" key="GridCell.Tab.0.right/67.0.1853.2280@67.0.1853.2280" timestamp="1597769127121" />
     <state width="1830" height="379" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1024.768@67.27.1853.1053" timestamp="1593450357441" />
     <state width="1830" height="345" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1597754569160" />
     <state width="1830" height="345" key="GridCell.Tab.1.bottom" timestamp="1597754569161">
@@ -271,6 +290,10 @@
     <state x="615" y="1346" key="SettingsEditor/0.1200.1920.1080/67.0.1853.1200@0.1200.1920.1080" timestamp="1593341486401" />
     <state x="214" y="56" width="1316" height="730" key="SettingsEditor/0.1200.1920.1080/67.0.1853.1200@67.0.1853.1200" timestamp="1594025873179" />
     <state x="267" y="1080" width="1316" height="1200" key="SettingsEditor/67.0.1853.2280@67.0.1853.2280" timestamp="1597762095777" />
+    <state x="588" y="1488" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1597767920538">
+      <screen x="67" y="0" width="1853" height="2280" />
+    </state>
+    <state x="588" y="1488" width="800" height="528" key="Vcs.Push.Dialog.v2/67.0.1853.2280@67.0.1853.2280" timestamp="1597767920538" />
     <state width="960" height="601" key="XDebugger.FullValuePopup" timestamp="1593888513825">
       <screen x="67" y="0" width="1853" height="1200" />
     </state>

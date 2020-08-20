@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import models
 from tensorflow.keras import layers
@@ -7,6 +8,8 @@ from tensorflow.keras import applications
 from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
 from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
+from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
+
 
 # 0  Uitgangspositie, geen augmentation base frozen                                                         loss: 0.0104 - acc: 0.9966 - val_loss: 0.0609 - val_acc: 0.9895
 # 1  inception_resnet_v2.preprocess_input     (doet nog niet zoveel)                                        loss: 0.0079 - acc: 0.9977 - val_loss: 0.0676 - val_acc: 0.9889
@@ -33,7 +36,8 @@ from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
 # 20 19 met grootte plaatjes 120                                                                            loss: 0.0143 - acc: 0.9954 - val_loss: 6.5726 - val_acc: 0.9865
 # 21 Na zuivering van de basisplaatjes vierkante plaatjes nog niet gezuivered                                                                                        0.96
 # 22 Na zuiveren vierkante plaatjes (zo'n 20000 aan elke kant)                                               ging naar 98.6 einde memory
-
+# 23 Zonder herladen goede oplossing maar met lange run InverseTimeDecay il 0.1, dc 1.0, dr 0.5              loss: 8.8595 - acc: 0.8780 - val_loss: 10.3124 - val_acc: 0.8779
+# 24 Nu met Exponential decay staircase
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')
@@ -44,8 +48,18 @@ test_dir = os.path.join(base_dir, 'test')
 imageSize = getTargetPictureSize()
 batchSize = 64
 sequences = range(3)
-epochs_list = [10, 20, 30]
-start_Learning_rate_list = [0.001, 0.0001, 0.00001]
+#epochs_list = [10, 20, 30]
+epochs = 60
+steps_per_epoch=200
+validation_steps=100
+#start_Learning_rate_list = [0.001, 0.0001, 0.00001]
+initial_learning_rate = 0.005
+decay_rate = 0.45
+decay_steps = 10
+staircase = True
+
+
+startTijd, tijdVorigePunt = initializeerVoortgangsInformatie()
 
 train_datagen = ImageDataGenerator(
     preprocessing_function=applications.inception_resnet_v2.preprocess_input,
@@ -100,28 +114,30 @@ checkpoint = ModelCheckpoint(modelPath, monitor ='val_acc', verbose=1,
                              save_weights_only=False, mode='auto', period=1)
 historyList = []
 
-for i in sequences:
-    epochs = epochs_list[i]
-    learning_rate = start_Learning_rate_list[i]
-    print('##########################################################################')
-    print('sequence: ', str(i), ' epochs: ', epochs, ' start lr: ', str(learning_rate))
+#[0.001, 0.0001, 0.00001]
 
-    model.compile(loss='binary_crossentropy', optimizer=optimizers.RMSprop(learning_rate=learning_rate), metrics=['acc'])
 
-    history = model.fit(
-        train_generator,
-        steps_per_epoch=200,#100,
-        epochs=epochs,#30,
-        validation_data=validation_generator,
-        validation_steps=100, #50,
-        callbacks=[checkpoint])
-    historyList.append(history)
+# learning rate schedule
+learning_rate_fn = optimizers.schedules.ExponentialDecay(initial_learning_rate=initial_learning_rate,
+                                                         decay_steps=decay_steps,
+                                                         decay_rate=decay_rate,
+                                                         staircase=staircase)
 
-    model = models.load_model(modelPath)
-    #model.load_weights(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-    #                                       'BesteModellen/besteModelResnetV2'))
 
-#model.save(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-#                                          'BesteModellen/besteModelResnetV2totaalEind'))
-for i in sequences:
-    plotLossAndAcc(history=historyList[i])
+callbacks_list = [checkpoint]
+
+model.compile(loss='binary_crossentropy', optimizer=optimizers.RMSprop(learning_rate=learning_rate_fn), metrics=['acc'])
+
+tijdVorigePunt = geeftVoortgangsInformatie("Model ingeladen", startTijd, tijdVorigePunt)
+
+history = model.fit(
+    train_generator,
+    steps_per_epoch=steps_per_epoch,#100,
+    epochs=epochs,#30,
+    validation_data=validation_generator,
+    validation_steps=validation_steps, #50,
+    callbacks=callbacks_list)
+
+tijdVorigePunt = geeftVoortgangsInformatie("Na fit", startTijd, tijdVorigePunt)
+
+plotLossAndAcc(history=history)
