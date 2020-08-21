@@ -19,7 +19,7 @@ imageList_geen_P = [os.path.join(onderzoeks_dir, "niet", fileName) for fileName 
 imageList_P = verwijderGecontroleerdeFiles(imageList_P)
 imageList_geen_P = verwijderGecontroleerdeFiles(imageList_geen_P)
 
-viewer = Viewer(imgList=imageList_P, titel="WEL")
+viewer = Viewer(imgList=imageList_geen_P, titel="NIET")
 
 print("verwerken Lijst ", str(viewer.lijsVerwerken))
 if viewer.lijsVerwerken:
@@ -32,7 +32,7 @@ if viewer.lijsVerwerken:
         else: # onveranderd maar wel gecontroleerd
             markeerGecontroleerd(filePad)
 
-viewer = Viewer(imgList=imageList_geen_P, titel="NIET")
+viewer = Viewer(imgList=imageList_P, titel="WEL")
 
 print("verwerken Lijst ", str(viewer.lijsVerwerken))
 if viewer.lijsVerwerken:

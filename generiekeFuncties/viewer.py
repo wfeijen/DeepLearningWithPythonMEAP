@@ -1,4 +1,4 @@
-from tkinter import ttk, Tk
+from tkinter import ttk, Tk, CENTER
 from PIL import ImageTk, Image
 
 class Viewer:
@@ -14,20 +14,20 @@ class Viewer:
             stgImg = ImageTk.PhotoImage(Image.open(self.imageList[self.index]))
             self.root.title(self.titel + "      " + self.imageList[self.index])
             self.label = ttk.Label(self.root, image=stgImg)
-            self.label.place(x=0, y=0)
+            self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
             nietBtn = ttk.Button(self.root, text="NIET", command=self.niet)
-            nietBtn.place(x=400, y=0)
+            nietBtn.place(x=1850, y=0)
             verwijderBtn = ttk.Button(self.root, text="VERWIJDER", command=self.verwijder)
-            verwijderBtn.place(x=400, y=30)
+            verwijderBtn.place(x=1850, y=30)
             welBtn = ttk.Button(self.root, text="WEL", command=self.wel)
-            welBtn.place(x=400, y=60)
+            welBtn.place(x=1850, y=60)
             backBtn = ttk.Button(self.root, text="TERUG", command=self.undo)
-            backBtn.place(x=400, y=90)
+            backBtn.place(x=1850, y=90)
             klaarBtn = ttk.Button(self.root, text="KLAAR", command=self.klaar)
-            klaarBtn.place(x=400, y=150)
+            klaarBtn.place(x=1850, y=150)
             afbrekenBtn = ttk.Button(self.root, text="AFBREKEN", command=self.afbreken)
-            afbrekenBtn.place(x=400, y=180)
+            afbrekenBtn.place(x=1850, y=180)
             self.root.bind("<Key>", self.key)
             self.root.mainloop()
 
@@ -46,9 +46,10 @@ class Viewer:
             stgImg = ImageTk.PhotoImage(im)
             self.label.configure(image=stgImg)
             self.label.image = stgImg
-            self.root.title(self.titel + "      " + self.imageList[self.index])
+            self.root.title(self.titel + " (" + str(self.index) + " van " +
+                            str(len(self.imageList)) + ")    " + self.imageList[self.index])
         else:
-            self.klaar()
+            self.root.title(self.titel + "      Alle images verwerkt")
 
     def nextImage(self):
         self.index = self.index + 1
@@ -77,11 +78,14 @@ class Viewer:
 
     def key(self, event):
         kp = repr(event.keysym)
-        print("pressed", kp)  # repr(event.char))
-        print("-")
+        print(kp)  # repr(event.char))
         if (kp == '\'Left\''):
             self.niet()
         if (kp == '\'Down\''):
             self.verwijder()
         if (kp == '\'Right\''):
             self.wel()
+        if (kp == '\'Up\''):
+            self.undo()
+        if (kp == '\'Control_R\''):
+            self.root.wm_state('iconic')

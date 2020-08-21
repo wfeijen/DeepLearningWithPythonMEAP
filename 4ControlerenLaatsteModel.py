@@ -17,7 +17,7 @@ from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGeco
 # test: 1
 # validatie: 2
 # oorspronkelijke bron: 3
-directoryNr = 0
+directoryNr = 4
 
 #[[ 42397   1483]
 # [  1955 180209]]

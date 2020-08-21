@@ -2,7 +2,6 @@ import os
 import gc
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import models
-from tensorflow.keras import layers
 from tensorflow.keras import optimizers
 from tensorflow.keras import applications
 from tensorflow.keras.callbacks import ModelCheckpoint
@@ -45,11 +44,11 @@ validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
 imageSize = getTargetPictureSize()
 batchSize = 64
-sequences = range(3)
-epochs_list = [10, 20, 30]
+sequences = range(2)
+epochs_list = [20, 30]
 steps_per_epoch=200
 validation_steps=100
-start_Learning_rate_list = [0.001, 0.0001, 0.00001]
+start_Learning_rate_list = [0.0001, 0.00001]
 
 startTijd, tijdVorigePunt = initializeerVoortgangsInformatie()
 train_datagen = ImageDataGenerator(
@@ -74,6 +73,7 @@ train_generator = train_datagen.flow_from_directory(
     # All images will be resized to 150x150
     target_size=(imageSize, imageSize),
     batch_size=batchSize,
+    shuffle=True,
     # Since we use binary_crossentropy loss, we need binary labels
     class_mode='binary')
 
@@ -81,24 +81,9 @@ validation_generator = test_datagen.flow_from_directory(
     validation_dir,
     target_size=(imageSize, imageSize),
     batch_size=batchSize,
+    shuffle=True,
     class_mode='binary')
 
-
-conv_base = applications.InceptionResNetV2(include_top=False,
-                                           weights='imagenet',
-                                           input_shape=(imageSize, imageSize, 3))
-
-model = models.Sequential()
-model.add(conv_base)
-model.add(layers.Flatten())
-model.add(layers.Dense(256, activation='relu'))
-model.add(layers.Dense(1, activation='sigmoid'))
-
-print('This is the number of trainable weights before freezing the conv base:', len(model.trainable_weights))
-conv_base.trainable = False
-#for layer in conv_base.layers[:-2]:
-#    layer.trainable = False
-print('This is the number of trainable weights after freezing the conv base:', len(model.trainable_weights))
 
 checkpoint = ModelCheckpoint(modelPath, monitor ='val_acc', verbose=1,
                              save_best_only=True,
@@ -110,6 +95,7 @@ for i in sequences:
     learning_rate = start_Learning_rate_list[i]
     print('##########################################################################')
     print('sequence: ', str(i), ' epochs: ', epochs, ' start lr: ', str(learning_rate))
+    model = models.load_model(modelPath)
 
     model.compile(loss='binary_crossentropy', optimizer=optimizers.RMSprop(learning_rate=learning_rate), metrics=['acc'])
 
@@ -126,12 +112,6 @@ for i in sequences:
     del(model)
     gc.collect()
 
-    model = models.load_model(modelPath)
-    #model.load_weights(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-    #                                       'BesteModellen/besteModelResnetV2'))
-
-#model.save(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-#                                          'BesteModellen/besteModelResnetV2totaalEind'))
 
 tijdVorigePunt = geeftVoortgangsInformatie("Totaal ", startTijd, tijdVorigePunt)
 

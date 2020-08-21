@@ -44,21 +44,24 @@ def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingI
     # kijken of het plaatje wel groot genoeg is
     if min(sx, sy) < targetSizeIm:
         return antwoord
-    # buitenkanten bij breed of hoog plaatje
+    # links of boven bij breed of hoog plaatje
     if sx >= (sy * minimaalVerschilInVerhoudingImages):
-        left = sx - sy
         antwoord.append(im.crop((0, 0, sy, sy)))
-        antwoord.append(im.crop((left, 0, left + sy, sy)))
     elif (sx * minimaalVerschilInVerhoudingImages)<= sy:
-        top = sy - sx
         antwoord.append(im.crop((0, 0, sx, sx)))
-        antwoord.append(im.crop((0, top, sx, top + sx)))
     # en altijd het centrum omdat daar meestal de meeste inforamtie is
     if sx > sy:
         left = (sx - sy) / 2
         antwoord.append(im.crop((left, 0, left + sy, sy)))
     else:
         top = (sy - sx) / 2
+        antwoord.append(im.crop((0, top, sx, top + sx)))
+    # en rechts of onder bij breed of hoog plaatje
+    if sx >= (sy * minimaalVerschilInVerhoudingImages):
+        left = sx - sy
+        antwoord.append(im.crop((left, 0, left + sy, sy)))
+    elif (sx * minimaalVerschilInVerhoudingImages)<= sy:
+        top = sy - sx
         antwoord.append(im.crop((0, top, sx, top + sx)))
     return antwoord
 
