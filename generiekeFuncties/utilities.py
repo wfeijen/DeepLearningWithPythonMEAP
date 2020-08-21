@@ -11,3 +11,12 @@ def initializeerVoortgangsInformatie():
     tijdVorigePunt = startTijd
     geeftVoortgangsInformatie("Start", startTijd, tijdVorigePunt)
     return startTijd, startTijd
+
+def verwijderGecontroleerdeFiles(fileList):
+    antwoord = []
+    for file in fileList:
+        if len(file)<-18:
+            antwoord.append(file)
+        elif file[-18:] != "_gecontroleerd.jpg":
+            antwoord.append(file)
+    return antwoord

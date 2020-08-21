@@ -34,8 +34,8 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 # 19 nogmaals nadat dataset er op andere manier neergezet is. Zou in principe gelijk moeten zijn            loss: 0.0029 - acc: 0.9991 - val_loss: 133.2310 - val_acc: 0.9919
 # 20 19 met grootte plaatjes 120                                                                            loss: 0.0143 - acc: 0.9954 - val_loss: 6.5726 - val_acc: 0.9865
 # 21 Na zuivering van de basisplaatjes vierkante plaatjes nog niet gezuivered                                                                                        0.96
-# 22 Na zuiveren vierkante plaatjes (zo'n 20000 aan elke kant)                                               ging naar 98.6 einde memory
-
+# 22 Na zuiveren vierkante plaatjes (zo'n 20000 aan elke kant)                                              ging naar 98.6 einde memory
+# 24 (rerun 22 gemist) na veranderen van een paar plaatjes van kant                                         loss: 4.3377e-04 - acc: 0.9999 - val_loss: 0.0823 - val_acc: 0.9877
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')

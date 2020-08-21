@@ -4,19 +4,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sklearn.metrics as metrics
 from keras import models
-from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
 from keras import applications
-from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
 from datetime import datetime
+from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
+from generiekeFuncties.utilities import verwijderGecontroleerdeFiles
+from generiekeFuncties.viewer import Viewer
+from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
 
 # Wat willen we bekijken?
 # train: 0
 # test: 1
 # validatie: 2
 # oorspronkelijke bron: 3
-directoryNr = 2
-aantal = 25
+directoryNr = 0
 
 #[[ 42397   1483]
 # [  1955 180209]]
@@ -80,32 +81,38 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
 
-imageList_onterecht_P      = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
-imageList_onterecht_P.sort(key = lambda x: -x[1])
-imageList_onterecht_geen_P = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] > predicted_classes[i]]
-imageList_onterecht_geen_P.sort(key = lambda x: x[1])
+imageDict_onterecht_P      = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
+imageDict_onterecht_P.sort(key = lambda x: -x[1])
+imageList_onterecht_P = [key for key, waarde in imageDict_onterecht_P]
+imageDict_onterecht_geen_P = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] > predicted_classes[i]]
+imageDict_onterecht_geen_P.sort(key = lambda x: x[1])
+imageList_onterecht_geen_P = [key for key, waarde in imageDict_onterecht_geen_P]
 
-#imageName = predictions.
-for img_path, img_value in imageList_onterecht_P[:min(aantal, len(imageList_onterecht_P))]:
-    print("onterecht P: ", img_value)
-    img = image.load_img(img_path, target_size=(imageSize, imageSize))
-    img_tensor = image.img_to_array(img)
-    img_tensor = np.expand_dims(img_tensor, axis=0)
-    img_tensor /= 255.
-    plt.imshow(img_tensor[0])
-    plt.show()
+imageList_onterecht_P = verwijderGecontroleerdeFiles(imageList_onterecht_P)
+imageList_onterecht_geen_P = verwijderGecontroleerdeFiles(imageList_onterecht_geen_P)
 
-for img_path, img_value in imageList_onterecht_geen_P[:min(aantal, len(imageList_onterecht_geen_P))]:
-    print("onterecht geen P: ", img_value)
-    img = image.load_img(img_path, target_size=(imageSize, imageSize))
-    img_tensor = image.img_to_array(img)
-    img_tensor = np.expand_dims(img_tensor, axis=0)
-    img_tensor /= 255.
-    plt.imshow(img_tensor[0])
-    plt.show()
+viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ")
 
+print("verwerken Lijst ", str(viewer.lijsVerwerken))
+if viewer.lijsVerwerken:
+    for operatie, filePad in viewer.changeList:
+        print(operatie, " ", filePad)
+        if operatie == "verwijder":
+            os.remove(filePad)
+        elif operatie == "wel":
+            veranderVanKant(filePad)
+        else: # onveranderd maar wel gecontroleerd
+            markeerGecontroleerd(filePad)
 
-#layer_outputs = [layer.output for layer in classifier.layers[:12]] # Extracts the outputs of the top 12 layers
-#activation_model = models.Model(inputs=classifier.input, outputs=layer_outputs) # Creates a model that will return these outputs, given the model input
+viewer = Viewer(imgList=imageList_onterecht_geen_P, titel="GEREGISTREERD ALS WEL")
 
-#i=1
+print("verwerken Lijst ", str(viewer.lijsVerwerken))
+if viewer.lijsVerwerken:
+    for operatie, filePad in viewer.changeList:
+        print(operatie, " ", filePad)
+        if operatie == "verwijder":
+            os.remove(filePad)
+        elif operatie == "niet":
+            veranderVanKant(filePad)
+        else: # onveranderd maar wel gecontroleerd
+            markeerGecontroleerd(filePad)

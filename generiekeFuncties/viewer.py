@@ -3,35 +3,33 @@ from PIL import ImageTk, Image
 
 class Viewer:
     def __init__(self, imgList, titel):
+        self.lijsVerwerken = False
         if len(imgList)>0:
             self.index = 0
-            self.lijsVerwerken = False
             self.changeList = []
             self.imageList = imgList
             self.root = Tk()
             self.titel = titel
-
             self.root.geometry('1800x1000')
-
             stgImg = ImageTk.PhotoImage(Image.open(self.imageList[self.index]))
             self.root.title(self.titel + "      " + self.imageList[self.index])
             self.label = ttk.Label(self.root, image=stgImg)
             self.label.place(x=0, y=0)
 
-            overslaanBtn = ttk.Button(self.root, text="OVERSLAAN", command=self.overslaan)
-            overslaanBtn.place(x=400, y=0)
-            veranderBtn = ttk.Button(self.root, text="VERANDER", command=self.verander)
-            veranderBtn.place(x=400, y=30)
-            veranderBtn = ttk.Button(self.root, text="VERWIJDER", command=self.verander)
-            veranderBtn.place(x=400, y=60)
+            nietBtn = ttk.Button(self.root, text="NIET", command=self.niet)
+            nietBtn.place(x=400, y=0)
+            verwijderBtn = ttk.Button(self.root, text="VERWIJDER", command=self.verwijder)
+            verwijderBtn.place(x=400, y=30)
+            welBtn = ttk.Button(self.root, text="WEL", command=self.wel)
+            welBtn.place(x=400, y=60)
             backBtn = ttk.Button(self.root, text="TERUG", command=self.undo)
             backBtn.place(x=400, y=90)
-            backBtn = ttk.Button(self.root, text="KLAAR", command=self.klaar)
-            backBtn.place(x=400, y=150)
-            backBtn = ttk.Button(self.root, text="AFBREKEN", command=self.afbreken)
-            backBtn.place(x=400, y=180)
+            klaarBtn = ttk.Button(self.root, text="KLAAR", command=self.klaar)
+            klaarBtn.place(x=400, y=150)
+            afbrekenBtn = ttk.Button(self.root, text="AFBREKEN", command=self.afbreken)
+            afbrekenBtn.place(x=400, y=180)
+            self.root.bind("<Key>", self.key)
             self.root.mainloop()
-
 
     def klaar(self):
         self.lijsVerwerken = True
@@ -56,8 +54,8 @@ class Viewer:
         self.index = self.index + 1
         self.setImage()
 
-    def overslaan(self):
-        self.changeList.append(("niks doen", self.imageList[self.index]))
+    def niet(self):
+        self.changeList.append(("niet", self.imageList[self.index]))
         self.nextImage()
 
     def verwijder(self):
@@ -65,9 +63,9 @@ class Viewer:
         self.nextImage()
 
 
-    def verander(self):
+    def wel(self):
         global changeList
-        self.changeList.append(("verander", self.imageList[self.index]))
+        self.changeList.append(("wel", self.imageList[self.index]))
         self.nextImage()
 
 
@@ -77,3 +75,13 @@ class Viewer:
             del self.changeList[-1]
         self.setImage()
 
+    def key(self, event):
+        kp = repr(event.keysym)
+        print("pressed", kp)  # repr(event.char))
+        print("-")
+        if (kp == '\'Left\''):
+            self.niet()
+        if (kp == '\'Down\''):
+            self.verwijder()
+        if (kp == '\'Right\''):
+            self.wel()
