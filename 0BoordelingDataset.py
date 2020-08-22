@@ -15,7 +15,6 @@ imageList_P = [os.path.join(onderzoeks_dir, "wel", fileName) for fileName in
 imageList_geen_P = [os.path.join(onderzoeks_dir, "niet", fileName) for fileName in
                     give_list_of_images(subdirName="niet", baseDir=onderzoeks_dir)]
 
-
 imageList_P = verwijderGecontroleerdeFiles(imageList_P)
 imageList_geen_P = verwijderGecontroleerdeFiles(imageList_geen_P)
 

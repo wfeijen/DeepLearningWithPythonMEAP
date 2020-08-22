@@ -36,6 +36,7 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 # 21 Na zuivering van de basisplaatjes vierkante plaatjes nog niet gezuivered                                                                                        0.96
 # 22 Na zuiveren vierkante plaatjes (zo'n 20000 aan elke kant)                                              ging naar 98.6 einde memory
 # 24 (rerun 22 gemist) na veranderen van een paar plaatjes van kant                                         loss: 4.3377e-04 - acc: 0.9999 - val_loss: 0.0823 - val_acc: 0.9877
+# 25 einder memory daarna hervat. Nieuwe plaatjes                                                           loss: 0.0017 - acc: 0.9998 - val_loss: 0.1083 - val_acc: 0.9895
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')
@@ -74,6 +75,7 @@ train_generator = train_datagen.flow_from_directory(
     # All images will be resized to 150x150
     target_size=(imageSize, imageSize),
     batch_size=batchSize,
+    shuffle=True,
     # Since we use binary_crossentropy loss, we need binary labels
     class_mode='binary')
 
@@ -81,6 +83,7 @@ validation_generator = test_datagen.flow_from_directory(
     validation_dir,
     target_size=(imageSize, imageSize),
     batch_size=batchSize,
+    shuffle=True,
     class_mode='binary')
 
 

@@ -34,7 +34,7 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 # 20 19 met grootte plaatjes 120                                                                            loss: 0.0143 - acc: 0.9954 - val_loss: 6.5726 - val_acc: 0.9865
 # 21 Na zuivering van de basisplaatjes vierkante plaatjes nog niet gezuivered                                                                                        0.96
 # 22 Na zuiveren vierkante plaatjes (zo'n 20000 aan elke kant)                                               ging naar 98.6 einde memory
-
+# 23 Na hervatten 22
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')

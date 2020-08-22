@@ -81,7 +81,7 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
 
-imageDict_onterecht_P      = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
+imageDict_onterecht_P = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
 imageDict_onterecht_P.sort(key = lambda x: -x[1])
 imageList_onterecht_P = [key for key, waarde in imageDict_onterecht_P]
 imageDict_onterecht_geen_P = [(os.path.join(onderzoeks_dir, generator.filenames[i]), predictions[i]) for i in range(0, len(true_classes)) if true_classes[i] > predicted_classes[i]]

@@ -151,3 +151,16 @@ def markeerGecontroleerd(file_pad_in):
     nieuw_pad = os.path.join(a, b)
     os.rename(file_pad_in, nieuw_pad)
     return nieuw_pad
+
+def prioriteerGecontroleerd(fileList, aantal):
+    # Verdeel in twee delen
+    gecontroleerdeFiles = []
+    nietGecontroleerdeFiles = []
+    for file in fileList:
+        if file.endswith("gecontroleerd.jpg"):
+            gecontroleerdeFiles.append(file)
+        else:
+            nietGecontroleerdeFiles.append(file)
+    print("Aantal gecontroleerde files: ", str(len(gecontroleerdeFiles)), " van de ", aantal)
+    gecontroleerdeFiles.extend(nietGecontroleerdeFiles[:aantal - len(gecontroleerdeFiles)])
+    return gecontroleerdeFiles[:aantal]

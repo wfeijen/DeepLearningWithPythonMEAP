@@ -7,11 +7,13 @@
 
 import os
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images, maak_doeldirectory_en_verplaats_random_files,\
-    maak_directory_helemaal_leeg
+    maak_directory_helemaal_leeg, prioriteerGecontroleerd
 
 import math
 
+maximumAantalFilesPerKant = 12000
 percentageTrain = 0.8
+maximumAantalFilesPerKant = int(maximumAantalFilesPerKant / percentageTrain)
 percentageTest = 0.1
 percentageValidation = 0.1
 maximaalVerschilInVerhoudingAantalImages = 1.1
@@ -33,8 +35,8 @@ os.mkdir(validation_dir)
 nietFileNames = give_list_of_images(subdirName='niet', baseDir=full_data_set_dir)
 welFileNames = give_list_of_images(subdirName='wel', baseDir=full_data_set_dir)
 
-aantalSamplesWel = len(welFileNames)
-aantalSamplesNiet = len(nietFileNames)
+aantalSamplesWel = min(len(welFileNames), maximumAantalFilesPerKant)
+aantalSamplesNiet = min(len(nietFileNames), maximumAantalFilesPerKant)
 
 if aantalSamplesWel >= aantalSamplesNiet:
     aantalSamplesWel = min(aantalSamplesWel, aantalSamplesNiet * maximaalVerschilInVerhoudingAantalImages)
@@ -49,6 +51,8 @@ aantalSamplesTestNiet = math.floor(percentageTest * aantalSamplesNiet)
 aantalSamplesValidation = min(aantalSamplesNiet - aantalSamplesTrainNiet - aantalSamplesTestNiet,
                               aantalSamplesWel - aantalSamplesTrainWel - aantalSamplesTestWel)
 
+print("############ niet filenames #############")
+nietFileNames = prioriteerGecontroleerd(nietFileNames, aantalSamplesNiet)
 nietFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='niet',
                                                              sourceDir=full_data_set_dir,
                                                              targetDir=train_dir,
@@ -64,6 +68,8 @@ nietFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='niet
                                                              targetDir=validation_dir,
                                                              numberOfFiles=aantalSamplesValidation,
                                                              fileNames=nietFileNames)
+print("############ wel filenames #############")
+welFileNames = prioriteerGecontroleerd(welFileNames, aantalSamplesWel)
 welFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='wel',
                                                              sourceDir=full_data_set_dir,
                                                              targetDir=train_dir,
