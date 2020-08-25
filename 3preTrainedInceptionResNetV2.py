@@ -37,6 +37,8 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 # 22 Na zuiveren vierkante plaatjes (zo'n 20000 aan elke kant)                                              ging naar 98.6 einde memory
 # 24 (rerun 22 gemist) na veranderen van een paar plaatjes van kant                                         loss: 4.3377e-04 - acc: 0.9999 - val_loss: 0.0823 - val_acc: 0.9877
 # 25 einder memory daarna hervat. Nieuwe plaatjes                                                           loss: 0.0017 - acc: 0.9998 - val_loss: 0.1083 - val_acc: 0.9895
+# 26 nieuw plaatjes met gecontroleerde plaatjes allemaal toegevoegd                                                                                          val_acc = 0.96
+# 27 gecontroleerde plaatjes opnieuw           recall 0.99                                                                                                  val_acc = 0.957
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')

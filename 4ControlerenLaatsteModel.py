@@ -10,14 +10,16 @@ from datetime import datetime
 from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
 from generiekeFuncties.utilities import verwijderGecontroleerdeFiles
 from generiekeFuncties.viewer import Viewer
-from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
+
 
 # Wat willen we bekijken?
 # train: 0
 # test: 1
 # validatie: 2
 # oorspronkelijke bron: 3
-directoryNr = 4
+directoryNr = 3
+
+# Ongedaan maken gecontroleerd: find . -type f -exec rename -n 's/gecontroleerd//' {} +
 
 #[[ 42397   1483]
 # [  1955 180209]]
@@ -67,7 +69,7 @@ print(report)
 
 confusion_matrix = metrics.confusion_matrix(y_true=true_classes, y_pred=predicted_classes)  # shape=(12, 12)
 
-labels = ['wel', 'niet']
+labels = ['niet', 'wel']
 
 print(confusion_matrix)
 fig = plt.figure()
@@ -91,28 +93,9 @@ imageList_onterecht_geen_P = [key for key, waarde in imageDict_onterecht_geen_P]
 imageList_onterecht_P = verwijderGecontroleerdeFiles(imageList_onterecht_P)
 imageList_onterecht_geen_P = verwijderGecontroleerdeFiles(imageList_onterecht_geen_P)
 
-viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ")
 
-print("verwerken Lijst ", str(viewer.lijsVerwerken))
-if viewer.lijsVerwerken:
-    for operatie, filePad in viewer.changeList:
-        print(operatie, " ", filePad)
-        if operatie == "verwijder":
-            os.remove(filePad)
-        elif operatie == "wel":
-            veranderVanKant(filePad)
-        else: # onveranderd maar wel gecontroleerd
-            markeerGecontroleerd(filePad)
+viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ", aanleidingTotVeranderen="wel")
 
-viewer = Viewer(imgList=imageList_onterecht_geen_P, titel="GEREGISTREERD ALS WEL")
 
-print("verwerken Lijst ", str(viewer.lijsVerwerken))
-if viewer.lijsVerwerken:
-    for operatie, filePad in viewer.changeList:
-        print(operatie, " ", filePad)
-        if operatie == "verwijder":
-            os.remove(filePad)
-        elif operatie == "niet":
-            veranderVanKant(filePad)
-        else: # onveranderd maar wel gecontroleerd
-            markeerGecontroleerd(filePad)
+viewer = Viewer(imgList=imageList_onterecht_geen_P, titel="GEREGISTREERD ALS WEL", aanleidingTotVeranderen="niet")
+

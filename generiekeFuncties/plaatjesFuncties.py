@@ -39,6 +39,7 @@ def remove_small_images_and_give_list_of_proper_sized_images(subdirName, baseDir
 
 def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingImages):
     # returns a square part of the image sized to target size
+    im = im.convert("RGB")
     sx, sy = im.size
     antwoord = []
     # kijken of het plaatje wel groot genoeg is
@@ -64,6 +65,31 @@ def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingI
         top = sy - sx
         antwoord.append(im.crop((0, top, sx, top + sx)))
     return antwoord
+
+# def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingImages):
+#     # returns a square part of the image sized to target size
+#     sx, sy = im.size
+#     antwoord = []
+#     # kijken of het plaatje wel groot genoeg is
+#     if min(sx, sy) < targetSizeIm:
+#         return antwoord
+#     # buitenkanten bij breed of hoog plaatje
+#     if sx >= (sy * minimaalVerschilInVerhoudingImages):
+#         left = sx - sy
+#         antwoord.append(im.crop((0, 0, sy, sy)))
+#         antwoord.append(im.crop((left, 0, left + sy, sy)))
+#     elif (sx * minimaalVerschilInVerhoudingImages)<= sy:
+#         top = sy - sx
+#         antwoord.append(im.crop((0, 0, sx, sx)))
+#         antwoord.append(im.crop((0, top, sx, top + sx)))
+#     # en altijd het centrum omdat daar meestal de meeste inforamtie is
+#     if sx > sy:
+#         left = (sx - sy) / 2
+#         antwoord.append(im.crop((left, 0, left + sy, sy)))
+#     else:
+#         top = (sy - sx) / 2
+#         antwoord.append(im.crop((0, top, sx, top + sx)))
+#     return antwoord
 
 def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerhoudingImages):
     # returns a square part of the image sized to target size

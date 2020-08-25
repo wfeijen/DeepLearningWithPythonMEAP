@@ -1,15 +1,18 @@
+import os
 from tkinter import ttk, Tk, CENTER
 from PIL import ImageTk, Image
+from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
+
 
 class Viewer:
-    def __init__(self, imgList, titel):
-        self.lijsVerwerken = False
+    def __init__(self, imgList, titel, aanleidingTotVeranderen):
         if len(imgList)>0:
             self.index = 0
             self.changeList = []
             self.imageList = imgList
             self.root = Tk()
             self.titel = titel
+            self.aanleidingTotVranderen = aanleidingTotVeranderen
             self.root.geometry('1800x1000')
             stgImg = ImageTk.PhotoImage(Image.open(self.imageList[self.index]))
             self.root.title(self.titel + "      " + self.imageList[self.index])
@@ -24,15 +27,34 @@ class Viewer:
             welBtn.place(x=1800, y=60)
             backBtn = ttk.Button(self.root, text="TERUG (<)", command=self.undo)
             backBtn.place(x=1800, y=90)
-            klaarBtn = ttk.Button(self.root, text="KLAAR", command=self.klaar)
+            klaarBtn = ttk.Button(self.root, text="VERWERKEN", command=self.verwerken)
             klaarBtn.place(x=1800, y=150)
+            klaarBtn = ttk.Button(self.root, text="KLAAR", command=self.klaar)
+            klaarBtn.place(x=1800, y=210)
             afbrekenBtn = ttk.Button(self.root, text="AFBREKEN", command=self.afbreken)
-            afbrekenBtn.place(x=1800, y=180)
+            afbrekenBtn.place(x=1800, y=240)
             self.root.bind("<Key>", self.key)
             self.root.mainloop()
+        else:
+            print("lijst is leeg")
+
+    def verwerken(self):
+        print("verwerken Lijst ", self.titel)
+        for operatie, filePad in self.changeList:
+            print(operatie, " ", filePad)
+            if operatie == "verwijder":
+                os.remove(filePad)
+            elif operatie == self.aanleidingTotVranderen:
+                veranderVanKant(filePad)
+            else:  # onveranderd maar wel gecontroleerd
+                markeerGecontroleerd(filePad)
+        self.imageList = self.imageList[self.index:]
+        self.index = 0
+        self.changeList = []
+
 
     def klaar(self):
-        self.lijsVerwerken = True
+        self.verwerken()
         self.root.destroy()
 
 
@@ -52,7 +74,9 @@ class Viewer:
             self.root.title(self.titel + "      Alle images verwerkt")
 
     def nextImage(self):
-        if self.index < len(self.imageList):
+        if self.index == len(self.imageList):
+            print("Next had niet gemogen is ongedaan gemaakt.")
+        else:
             self.index = self.index + 1
             self.setImage()
 
@@ -78,6 +102,7 @@ class Viewer:
             self.index = self.index - 1
             del self.changeList[-1]
         self.setImage()
+
 
     def key(self, event):
         kp = repr(event.keysym)

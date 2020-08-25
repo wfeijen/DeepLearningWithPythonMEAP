@@ -9,19 +9,19 @@
 import requests
 import regex
 import os
-from tensorflow.keras import models
+from tensorflow.keras import models, preprocessing
 from PIL import Image
 from io import BytesIO
 import numpy as np
 import random
-from generiekeFuncties.fileHandlingFunctions import lees_file_regels_naar_ontdubbelde_lijst, \
-    write_na_te_lopen_verwijzingen, write_file_regels_naar_lijst, readDictFile, writeDictSavely
+from generiekeFuncties.fileHandlingFunctions import write_na_te_lopen_verwijzingen, readDictFile, writeDict
 from generiekeFuncties.plaatjesFuncties import get_square_images_from_image, getTargetPictureSize
 from datetime import datetime
+from tensorflow.keras import applications
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = getTargetPictureSize()
-percentageRandomFromChosen = 25
+percentageRandomFromChosen = 0
 percentageAdditionalExtraRandom = 0
 minimaalVerschilInVerhoudingImages = 1.1
 # url = 'https://vipergirls.to/threads/557628-Vanessa'
@@ -38,7 +38,7 @@ minimaalVerschilInVerhoudingImages = 1.1
 # volgnummersUrl = range(120, 125)  # later steeds hoger kan in ieder geval van 100 tot 124
 # patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 # patroon_naam_post = r'<div style="text-align: center;"><font size="5"><b>([^\~<>\(]+)<'  # <div style="text-align: center;"><font size="5"><b>#1629 Maria Rya</b></font><br />
-baseUrl = 'ttps://vipergirls.to/threads/3262256-Artistic-Nudes-The-Fine-Art-of-Erotica-Rare-Beauty/page'
+baseUrl = 'https://vipergirls.to/threads/3262256-Artistic-Nudes-The-Fine-Art-of-Erotica-Rare-Beauty/page'
 volgnummersUrl = range(1, 2)  # 1 - 11
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 patroon_naam_post = r'<font size="3"><div style="text-align: center;"><b>([^\~<>\(]+)\('  # <font size="3"><div style="text-align: center;"><b>Jenna - Tropical Desire (x78)<br />
@@ -64,15 +64,22 @@ def poststamp_goedgekeurd(classifier, targetImageSize, url_poststamp):
         print("Image corrupt: ", url_poststamp, " - ", e)
         return -1
     imgs = get_square_images_from_image(img, targetImageSize,
-                                        minimaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
+                                        minimaalVerschilInVerhoudingImages=0)
     if len(imgs) == 0:  # Image is te klein
         print("Image te klein: ", url_poststamp, " afmetingen: ", str(img.size))
         return -1
     for im in imgs:
         im.thumbnail((targetImageSize, targetImageSize), Image.ANTIALIAS)
-    np_imgs = [np.array(im) for im in imgs]
+    print("lengte ", str(len(imgs)))
+    pp_images = [preprocessing.image.img_to_array(image) for image in imgs]
+    np_imgs = np.array(pp_images)
+    if str(np_imgs.shape) == "(3,)":
+        print("Image te corrupt: ", url_poststamp, " shape: ", str(np_imgs.shape))
+        return -1
+    print("shape ", str(np_imgs.shape))
     np_imgs = np.array(np_imgs).astype(float)
     np_imgs /= 255.0
+    #np_imgs = applications.inception_resnet_v2.preprocess_input(np_imgs) lijkt niet te werken
     classifications = classifier.predict(np_imgs)
     maxClassification = np.amax(classifications)
     return maxClassification
@@ -101,6 +108,7 @@ def plunderOverzichtPagina(url, patroon_verwijzing_plaatje, patroon_naam_post):
                                                   na_te_lopen_verwijzingen_klein)
                 if resultaat >= grenswaarde:
                     urls_for_post.append(na_te_lopen_verwijzing_groot)
+                    benaderde_url_administratie[na_te_lopen_verwijzing_groot] = str(datetime.now())
                     randomCounter = randomCounter + random.randint(0, percentageRandomFromChosen * 2)
                 elif resultaat < 0:
                     print("Verwijzing groot: ", na_te_lopen_verwijzing_groot)
@@ -115,13 +123,13 @@ def plunderOverzichtPagina(url, patroon_verwijzing_plaatje, patroon_naam_post):
                     if na_te_lopen_verwijzing_groot not in urls_for_post:
                         randomCounter = randomCounter - 100
                         urls_for_post.append(na_te_lopen_verwijzing_groot)
-                        benaderde_url_administratie.append(na_te_lopen_verwijzing_groot)
+                        benaderde_url_administratie[na_te_lopen_verwijzing_groot] = str(datetime.now())
                         aantalRandomOpgenomen = aantalRandomOpgenomen + 1
             print('Post ', postName, ' heeft ', aantalRandomOpgenomen, ' random verwijzingen')
             for key in urls_for_post:
-                benaderde_url_administratie[key] = str(datetime)
+                benaderde_url_administratie[key] = str(datetime.now())
             write_na_te_lopen_verwijzingen(constVerwijzingDir, url, postName, urls_for_post)
-            writeDictSavely(constBenaderde_url_administratie_pad, urls_for_post)
+            writeDict(benaderde_url_administratie, constBenaderde_url_administratie_pad)
 
 
 for volgnummerUrl in volgnummersUrl:

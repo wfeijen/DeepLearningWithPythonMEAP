@@ -12,34 +12,14 @@ onderzoeks_dir = os.path.join(base_dir, 'programmatest')
 
 imageList_P = [os.path.join(onderzoeks_dir, "wel", fileName) for fileName in
                give_list_of_images(subdirName="wel", baseDir=onderzoeks_dir)]
+imageList_P.sort()
 imageList_geen_P = [os.path.join(onderzoeks_dir, "niet", fileName) for fileName in
                     give_list_of_images(subdirName="niet", baseDir=onderzoeks_dir)]
+imageList_geen_P.sort()
 
 imageList_P = verwijderGecontroleerdeFiles(imageList_P)
 imageList_geen_P = verwijderGecontroleerdeFiles(imageList_geen_P)
 
-viewer = Viewer(imgList=imageList_geen_P, titel="NIET")
+viewer = Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel")
 
-print("verwerken Lijst ", str(viewer.lijsVerwerken))
-if viewer.lijsVerwerken:
-    for operatie, filePad in viewer.changeList:
-        print(operatie, " ", filePad)
-        if operatie == "verwijder":
-            os.remove(filePad)
-        elif operatie == "wel":
-            veranderVanKant(filePad)
-        else: # onveranderd maar wel gecontroleerd
-            markeerGecontroleerd(filePad)
-
-viewer = Viewer(imgList=imageList_P, titel="WEL")
-
-print("verwerken Lijst ", str(viewer.lijsVerwerken))
-if viewer.lijsVerwerken:
-    for operatie, filePad in viewer.changeList:
-        print(operatie, " ", filePad)
-        if operatie == "verwijder":
-            os.remove(filePad)
-        elif operatie == "niet":
-            veranderVanKant(filePad)
-        else: # onveranderd maar wel gecontroleerd
-            markeerGecontroleerd(filePad)
+viewer = Viewer(imgList=imageList_P, titel="WEL", aanleidingTotVeranderen="niet")

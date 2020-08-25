@@ -113,16 +113,16 @@ def write_na_te_lopen_verwijzingen(root, url, postName, verwijzingen):
     write_file_regels_naar_lijst(file_path, verwijzingen)
 
 
-def writeDictSavely(dict, fileName):
-    savePath = fileName + str(datetime.now()) + ".txt"
-    if os.path.exists(fileName):
-        os.rename(fileName, savePath)
+def writeDict(dict, fileName):
     with open(fileName, 'w') as f:
         [f.write('{0},{1}\n'.format(key, value)) for key, value in dict.items()]
 
 
 def readDictFile(path):
     d = defaultdict(str)
+    if not os.path.exists(path):
+        with open(path, 'w') as f:
+            f.write('')
     with open(path, 'r') as r:
         for line in r:
             splitted = line.strip().split(',')
