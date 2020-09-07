@@ -1,3 +1,3 @@
-i = [0, 1, 2, 3,4, 5]
+from PIL import Image, ImageStat
+antwoord = Image.new(mode="RGB", size=(3, 3), color=(0,0,0.4))
 
-print(str(i[2:]))

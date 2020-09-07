@@ -19,6 +19,20 @@ class Viewer:
             self.label = ttk.Label(self.root, image=stgImg)
             self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
 
+
+            # close_up
+            # rear_view
+            # lazy_cat
+            # dominant
+            # overig
+            # geen
+            # _sperm
+            # _caption
+            # _close_up
+
+
+
+
             nietBtn = ttk.Button(self.root, text="NIET (z)", command=self.niet)
             nietBtn.place(x=1800, y=0)
             verwijderBtn = ttk.Button(self.root, text="VERWIJDER (^)", command=self.verwijder)

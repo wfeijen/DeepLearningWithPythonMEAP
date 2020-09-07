@@ -21,7 +21,7 @@ maximaalVerschilInVerhoudingAantalImages = 1.1
 # The path to the directory where the original
 # data set was uncompressed
 root = '/mnt/GroteSchijf/machineLearningPictures/take1'
-full_data_set_dir = os.path.join(root, 'volledigeSetVierBijVier')
+full_data_set_dir = os.path.join(root, 'volledigeSetVierBijVier240')
 target_base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 
 maak_directory_helemaal_leeg(target_base_dir)
@@ -39,15 +39,15 @@ aantalSamplesWel = min(len(welFileNames), maximumAantalFilesPerKant)
 aantalSamplesNiet = min(len(nietFileNames), maximumAantalFilesPerKant)
 
 if aantalSamplesWel >= aantalSamplesNiet:
-    aantalSamplesWel = min(aantalSamplesWel, aantalSamplesNiet * maximaalVerschilInVerhoudingAantalImages)
+    aantalSamplesWel = int(min(aantalSamplesWel, aantalSamplesNiet * maximaalVerschilInVerhoudingAantalImages))
 else:
-    aantalSamplesNiet = min(aantalSamplesNiet, aantalSamplesWel * maximaalVerschilInVerhoudingAantalImages)
+    aantalSamplesNiet = int(min(aantalSamplesNiet, aantalSamplesWel * maximaalVerschilInVerhoudingAantalImages))
 
-aantalSamplesTrainWel = math.floor(percentageTrain * aantalSamplesWel)
-aantalSamplesTestWel = math.floor(percentageTest * aantalSamplesWel)
+aantalSamplesTrainWel = int(percentageTrain * aantalSamplesWel)
+aantalSamplesTestWel = int(percentageTest * aantalSamplesWel)
 
-aantalSamplesTrainNiet = math.floor(percentageTrain * aantalSamplesNiet)
-aantalSamplesTestNiet = math.floor(percentageTest * aantalSamplesNiet)
+aantalSamplesTrainNiet = int(percentageTrain * aantalSamplesNiet)
+aantalSamplesTestNiet = int(percentageTest * aantalSamplesNiet)
 aantalSamplesValidation = min(aantalSamplesNiet - aantalSamplesTrainNiet - aantalSamplesTestNiet,
                               aantalSamplesWel - aantalSamplesTrainWel - aantalSamplesTestWel)
 

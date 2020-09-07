@@ -1,11 +1,10 @@
-from PIL import Image
+from PIL import Image, ImageStat
 from send2trash import send2trash
 import math
 import os
 
 def getTargetPictureSize():
-    return 120
-
+    return 240
 
 def remove_small_images_and_give_list_of_proper_sized_images(subdirName, baseDir, remove_small_files_from_source,
                                                              minimum_size_short_side_image,
@@ -36,6 +35,54 @@ def remove_small_images_and_give_list_of_proper_sized_images(subdirName, baseDir
                 im.save(full_file_name)
     return file_names, verwijderd_vanwege_extentie, verwijderd_vanwege_te_klein, kleiner_gemaakt
 
+def resizeImage(im, sx, sy, vergrotingsfactor):
+    sx = int(sx * vergrotingsfactor)
+    sy = int(sy * vergrotingsfactor)
+    return im.resize(size=(sx, sy), resample= Image.BICUBIC), sx, sy
+
+def convertImageToSquareIm(im, targetSizeIm):
+    im = im.convert("RGB")
+    sx_oorspronkelijk, sy_oorspronkelijk = im.size
+    meanColor = tuple([math.floor(n) for n in ImageStat.Stat(im)._getmean()])
+    antwoord = Image.new(mode="RGB", size=(targetSizeIm, targetSizeIm), color=meanColor)
+    # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de langste
+    # as gelijk is aan targetSizeIm
+    if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk): # Dit gaat toch niks worden
+        return sx_oorspronkelijk, sy_oorspronkelijk, None
+    if min(sx_oorspronkelijk, sy_oorspronkelijk) * 2 < targetSizeIm:
+        return sx_oorspronkelijk, sy_oorspronkelijk, None
+    if max(sx_oorspronkelijk, sy_oorspronkelijk) < targetSizeIm:
+        im, sx, sy = resizeImage(im, sx_oorspronkelijk, sy_oorspronkelijk, targetSizeIm / max(sx_oorspronkelijk, sy_oorspronkelijk))
+        antwoord.paste(im, ((targetSizeIm - sx) // 2, (targetSizeIm - sy) // 2))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # ultra breed plaatje
+    if sx_oorspronkelijk > sy_oorspronkelijk * 2:
+        im, sx, sy = resizeImage(im, sx_oorspronkelijk, sy_oorspronkelijk, targetSizeIm / (sy_oorspronkelijk * 2))
+        im_crop1 = im.crop((0, 0, targetSizeIm, sy))
+        im_crop2 = im.crop((sx - targetSizeIm, 0, sx, sy))
+        antwoord.paste(im_crop1, (0, 0))
+        antwoord.paste(im_crop2, (0, targetSizeIm // 2))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    if sx_oorspronkelijk * 2 < sy_oorspronkelijk:
+        im, sx, sy = resizeImage(im, sx_oorspronkelijk, sy_oorspronkelijk, targetSizeIm / (sx_oorspronkelijk * 2))
+        im_crop1 = im.crop((0, 0, sx, targetSizeIm))
+        im_crop2 = im.crop((0, sy - targetSizeIm, sx, sy))
+        antwoord.paste(im_crop1, (0, 0))
+        antwoord.paste(im_crop2, (targetSizeIm // 2, 0))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    if sx_oorspronkelijk >= sy_oorspronkelijk: # (en sx <= 2* sy)
+        im, sx, sy = resizeImage(im, sx_oorspronkelijk, sy_oorspronkelijk, targetSizeIm / sx_oorspronkelijk)
+        antwoord.paste(im, (0, (targetSizeIm - sy) // 2))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Nu moet wel gelden sx <= sy en 2 * sx >= sy
+    im, sx, sy = resizeImage(im, sx_oorspronkelijk, sy_oorspronkelijk, targetSizeIm / sy_oorspronkelijk)
+    antwoord.paste(im, ((targetSizeIm - sx) // 2, 0))
+    return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+
+def convertImageToSquareIm_from_file(imagePath, targetSizeIm):
+    # returns a square part of the image sized to target size
+    im = Image.open(imagePath)
+    return convertImageToSquareIm(im=im, targetSizeIm=targetSizeIm)
 
 def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingImages):
     # returns a square part of the image sized to target size
@@ -65,31 +112,6 @@ def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingI
         top = sy - sx
         antwoord.append(im.crop((0, top, sx, top + sx)))
     return antwoord
-
-# def get_square_images_from_image(im, targetSizeIm, minimaalVerschilInVerhoudingImages):
-#     # returns a square part of the image sized to target size
-#     sx, sy = im.size
-#     antwoord = []
-#     # kijken of het plaatje wel groot genoeg is
-#     if min(sx, sy) < targetSizeIm:
-#         return antwoord
-#     # buitenkanten bij breed of hoog plaatje
-#     if sx >= (sy * minimaalVerschilInVerhoudingImages):
-#         left = sx - sy
-#         antwoord.append(im.crop((0, 0, sy, sy)))
-#         antwoord.append(im.crop((left, 0, left + sy, sy)))
-#     elif (sx * minimaalVerschilInVerhoudingImages)<= sy:
-#         top = sy - sx
-#         antwoord.append(im.crop((0, 0, sx, sx)))
-#         antwoord.append(im.crop((0, top, sx, top + sx)))
-#     # en altijd het centrum omdat daar meestal de meeste inforamtie is
-#     if sx > sy:
-#         left = (sx - sy) / 2
-#         antwoord.append(im.crop((left, 0, left + sy, sy)))
-#     else:
-#         top = (sy - sx) / 2
-#         antwoord.append(im.crop((0, top, sx, top + sx)))
-#     return antwoord
 
 def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerhoudingImages):
     # returns a square part of the image sized to target size

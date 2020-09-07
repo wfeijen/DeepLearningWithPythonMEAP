@@ -1,7 +1,7 @@
 import os, errno
 import shutil
 import random
-from generiekeFuncties.plaatjesFuncties import get_square_images_from_file
+from generiekeFuncties.plaatjesFuncties import get_square_images_from_file, convertImageToSquareIm_from_file
 import re
 from collections import defaultdict
 from datetime import datetime
@@ -33,28 +33,25 @@ def maak_directory_helemaal_leeg(dir):
 
 def fill_subdirectory_with_squared_images(subSubDirName, targetDir,
                                           sourceDir, fileNames, targetSizeImage,
-                                          minimaalVerschilInVerhoudingImages,
-                                          rawVerwerktDir, subdirSize=500):
+                                          rawVerwerktDir, subdirSize=5000):
     source_data_set_dir = os.path.join(sourceDir, subSubDirName)
     target_data_set_dir = os.path.join(targetDir, subSubDirName)
     target_raw_verwerkt_dir = os.path.join(rawVerwerktDir, subSubDirName)
-    subDirNr = subdirSize
+    sub_dir_nr = subdirSize
     for file_name in fileNames:
-        kale_file_naam, file_extension = os.path.splitext(file_name)
         file_naam_verwerkt_dir = os.path.join(target_raw_verwerkt_dir, file_name)
         file_naam_bron_dir = os.path.join(source_data_set_dir, file_name)
-        im_list = get_square_images_from_file(imagePath=file_naam_bron_dir, targetSizeIm=targetSizeImage,
-                                              minimaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
-        i = 0
-        for im in im_list:
-            i = i + 1
-            dir = os.path.join(target_data_set_dir, str(int(subDirNr / subdirSize)))
+        sx, sy, im = convertImageToSquareIm_from_file(imagePath=file_naam_bron_dir, targetSizeIm=targetSizeImage)
+        if im is None:
+            print("image niet te verwerken. Afmetingen: ", str(sx), "x", str(sy))
+        else:
+            im = im.convert('RGB')
+            dir = os.path.join(target_data_set_dir, str(int(sub_dir_nr / subdirSize)))
             if not os.path.exists(dir):
                 os.mkdir(dir)
-            dst = os.path.join(dir, kale_file_naam + str(i) + file_extension)
-            subDirNr = subDirNr + 1
-            im = im.convert('RGB')
+            dst = os.path.join(dir, file_name)
             im.save(dst)
+            sub_dir_nr = sub_dir_nr + 1
         shutil.move(file_naam_bron_dir, file_naam_verwerkt_dir)
     print(target_data_set_dir, ' 1000 tal images:', len(os.listdir(target_data_set_dir)))
 

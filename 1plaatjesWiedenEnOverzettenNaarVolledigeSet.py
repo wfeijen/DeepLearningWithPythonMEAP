@@ -58,15 +58,13 @@ fill_subdirectory_with_squared_images(subSubDirName='niet',
                                       sourceDir=original_data_set_dir,
                                       fileNames=nietFileNames,
                                       rawVerwerktDir=copie_verwerkte_data_set,
-                                      targetSizeImage=minimumSizeShortSideImage,
-                                      minimaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
+                                      targetSizeImage=minimumSizeShortSideImage)
 fill_subdirectory_with_squared_images(subSubDirName='wel',
                                       targetDir=full_data_set_dir_te_controleren,
                                       sourceDir=original_data_set_dir,
                                       fileNames=welFileNames,
                                       rawVerwerktDir=copie_verwerkte_data_set,
-                                      targetSizeImage=minimumSizeShortSideImage,
-                                      minimaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
+                                      targetSizeImage=minimumSizeShortSideImage)
 
 
 

@@ -15,7 +15,7 @@ from io import BytesIO
 import numpy as np
 import random
 from generiekeFuncties.fileHandlingFunctions import write_na_te_lopen_verwijzingen, readDictFile, writeDict
-from generiekeFuncties.plaatjesFuncties import get_square_images_from_image, getTargetPictureSize
+from generiekeFuncties.plaatjesFuncties import get_square_images_from_image, getTargetPictureSize, getMinimumPictureSize
 from datetime import datetime
 from tensorflow.keras import applications
 
@@ -34,14 +34,14 @@ minimaalVerschilInVerhoudingImages = 1.1
 # volgnummersUrl = range(1, 5)
 # patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 # patroon_naam_post = '<font size="3"><div style="text-align: center;"><b>([^\~<>\(]+)\(' #<div style="text-align: center;"><font size="5"><b>#551 Karlie Montana<
-# baseUrl = 'https://vipergirls.to/threads/3226400-InTheCrack-PHOTO-Collection-in-Chronological-Order/page'
-# volgnummersUrl = range(120, 125)  # later steeds hoger kan in ieder geval van 100 tot 124
-# patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
-# patroon_naam_post = r'<div style="text-align: center;"><font size="5"><b>([^\~<>\(]+)<'  # <div style="text-align: center;"><font size="5"><b>#1629 Maria Rya</b></font><br />
-baseUrl = 'https://vipergirls.to/threads/3262256-Artistic-Nudes-The-Fine-Art-of-Erotica-Rare-Beauty/page'
-volgnummersUrl = range(1, 2)  # 1 - 11
+baseUrl = 'https://vipergirls.to/threads/3226400-InTheCrack-PHOTO-Collection-in-Chronological-Order/page'
+volgnummersUrl = range(120, 125)  # later steeds hoger kan in ieder geval van 100 tot 124
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
-patroon_naam_post = r'<font size="3"><div style="text-align: center;"><b>([^\~<>\(]+)\('  # <font size="3"><div style="text-align: center;"><b>Jenna - Tropical Desire (x78)<br />
+patroon_naam_post = r'<div style="text-align: center;"><font size="5"><b>([^\~<>\(]+)<'  # <div style="text-align: center;"><font size="5"><b>#1629 Maria Rya</b></font><br />
+# baseUrl = 'https://vipergirls.to/threads/3262256-Artistic-Nudes-The-Fine-Art-of-Erotica-Rare-Beauty/page'
+# volgnummersUrl = range(3, 11)  # 1 - 11
+# patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
+# patroon_naam_post = r'<font size="3"><div style="text-align: center;"><b>([^\~<>\(]+)\('  # <font size="3"><div style="text-align: center;"><b>Jenna - Tropical Desire (x78)<br />
 
 # Globale variabelen
 constPlaatjesEnModelDir = '/mnt/GroteSchijf/machineLearningPictures/take1'
@@ -70,13 +70,17 @@ def poststamp_goedgekeurd(classifier, targetImageSize, url_poststamp):
         return -1
     for im in imgs:
         im.thumbnail((targetImageSize, targetImageSize), Image.ANTIALIAS)
-    print("lengte ", str(len(imgs)))
+    #print("lengte ", str(len(imgs)))
     pp_images = [preprocessing.image.img_to_array(image) for image in imgs]
-    np_imgs = np.array(pp_images)
+    try:
+        np_imgs= np.array(pp_images)
+    except ValueError as e:
+        print("Value Error, image te corrupt: ", url_poststamp, " error: ", e)
+        return -1
     if str(np_imgs.shape) == "(3,)":
         print("Image te corrupt: ", url_poststamp, " shape: ", str(np_imgs.shape))
         return -1
-    print("shape ", str(np_imgs.shape))
+    #print("shape ", str(np_imgs.shape))
     np_imgs = np.array(np_imgs).astype(float)
     np_imgs /= 255.0
     #np_imgs = applications.inception_resnet_v2.preprocess_input(np_imgs) lijkt niet te werken

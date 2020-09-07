@@ -1,6 +1,6 @@
 from iptcinfo3 import IPTCInfo
 import sys
-fn = '/mnt/GroteSchijf/machineLearningPictures/tst.jpg'
+fn = '/mnt/GroteSchijf/machineLearningPictures/tst,test.jpg'
 # Create new info object
 info = IPTCInfo(fn)
 print(info)

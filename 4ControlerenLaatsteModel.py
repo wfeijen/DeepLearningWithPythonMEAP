@@ -30,7 +30,7 @@ classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPic
                                             'BesteModellen/besteModelResnetV2'))
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-oorspronkelijke_bron_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/volledigeSetVierBijVier'
+oorspronkelijke_bron_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/volledigeSetVierBijVier240'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
