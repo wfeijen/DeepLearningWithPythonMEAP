@@ -15,12 +15,12 @@ from io import BytesIO
 import numpy as np
 import random
 from generiekeFuncties.fileHandlingFunctions import write_na_te_lopen_verwijzingen, readDictFile, writeDict
-from generiekeFuncties.plaatjesFuncties import get_square_images_from_image, getTargetPictureSize, getMinimumPictureSize
+from generiekeFuncties.plaatjesFuncties import get_square_images_from_image, get_target_picture_size, getMinimumPictureSize
 from datetime import datetime
 from tensorflow.keras import applications
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
-targetImageSize = getTargetPictureSize()
+targetImageSize = get_target_picture_size()
 percentageRandomFromChosen = 0
 percentageAdditionalExtraRandom = 0
 minimaalVerschilInVerhoudingImages = 1.1
@@ -64,7 +64,7 @@ def poststamp_goedgekeurd(classifier, targetImageSize, url_poststamp):
         print("Image corrupt: ", url_poststamp, " - ", e)
         return -1
     imgs = get_square_images_from_image(img, targetImageSize,
-                                        minimaalVerschilInVerhoudingImages=0)
+                                        maximaalVerschilInVerhoudingImages=0)
     if len(imgs) == 0:  # Image is te klein
         print("Image te klein: ", url_poststamp, " afmetingen: ", str(img.size))
         return -1

@@ -3,13 +3,15 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import sklearn.metrics as metrics
-from keras import models
+from tensorflow.keras import models, preprocessing
 from keras.preprocessing.image import ImageDataGenerator
 from keras import applications
 from datetime import datetime
-from generiekeFuncties.plaatjesFuncties import get_target_picture_size
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size, convert_image_to_square
 from generiekeFuncties.utilities import verwijderGecontroleerdeFiles
 from generiekeFuncties.viewer import Viewer
+from generiekeFuncties.fileHandlingFunctions import give_list_of_images
+from PIL import Image
 
 # Wat willen we bekijken?
 # train: 0
@@ -28,21 +30,30 @@ imageSize = get_target_picture_size()
 classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                             'BesteModellen/besteModelResnetV2'))
 
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-oorspronkelijke_bron_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/volledigeSetVierBijVier240'
-train_dir = os.path.join(base_dir, 'train')
-validation_dir = os.path.join(base_dir, 'validation')
-test_dir = os.path.join(base_dir, 'test')
-if directoryNr == 0:
-    onderzoeks_dir = train_dir
-elif directoryNr == 1:
-    onderzoeks_dir = test_dir
-elif directoryNr == 2:
-    onderzoeks_dir = validation_dir
-else:
-    onderzoeks_dir = oorspronkelijke_bron_dir
+def geformatteerd_image_goedgekeurd(classifier, image):
+    pp_image = preprocessing.image.img_to_array(image)
+    try:
+        np_image= np.array(pp_image)
+    except ValueError as e:
+        return -1
+    #print("shape ", str(np_imgs.shape))
+    np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
+    np_image /= 255.0
+    #np_imgs = applications.inception_resnet_v2.preprocess_input(np_imgs) lijkt niet te werken
+    classifications = classifier.predict(np_image)
+    max_classification = np.amax(classifications)
+    return max_classification
 
+
+onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVerkleind'
 print("############### start: ", str(datetime.now()))
+
+files = give_list_of_images(onderzoeks_dir, "niet")
+
+for file in files:
+    img = Image.open(os.path.join(onderzoeks_dir, "niet", file))
+    b, h, img = convert_image_to_square(img, imageSize)
+    geformatteerd_image_goedgekeurd(classifier=classifier, image=img)
 
 image_generator = ImageDataGenerator(preprocessing_function=applications.inception_resnet_v2.preprocess_input)
 image_flow_from_directory = image_generator.flow_from_directory(
@@ -81,6 +92,7 @@ ax.set_yticklabels([''] + labels)
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
+
 
 imageDict_onterecht_P = [(os.path.join(onderzoeks_dir, image_flow_from_directory.filenames[i]), predictions[i]) for i in
                          range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]

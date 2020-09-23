@@ -6,7 +6,7 @@ from tensorflow.keras import optimizers
 from tensorflow.keras import applications
 from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
-from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
 
 # 0  Uitgangspositie, geen augmentation base frozen                                                         loss: 0.0104 - acc: 0.9966 - val_loss: 0.0609 - val_acc: 0.9895
@@ -42,7 +42,7 @@ base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
-imageSize = getTargetPictureSize()
+imageSize = get_target_picture_size()
 batchSize = 64
 sequences = range(2)
 epochs_list = [20, 30]

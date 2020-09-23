@@ -1,16 +1,17 @@
 from datetime import datetime
 
-def geeftVoortgangsInformatie(meldingsText, startTijd, tijdVorigePunt):
+def geeftVoortgangsInformatie(meldingsText, tijden):
+    (startTijd, tijdVorigePunt) = tijden
     nu = datetime.now()
     print("tijd: ", str(nu), " - sinds start: ", str(nu - startTijd), " sinds vorige: ", str(nu - tijdVorigePunt),
           " - ", meldingsText)
-    return nu
+    return (startTijd, nu)
 
-def initializeerVoortgangsInformatie():
+def initializeerVoortgangsInformatie(meldingsText):
     startTijd = datetime.now()
     tijdVorigePunt = startTijd
-    geeftVoortgangsInformatie("Start", startTijd, tijdVorigePunt)
-    return startTijd, startTijd
+    geeftVoortgangsInformatie(meldingsText, (startTijd, tijdVorigePunt))
+    return (startTijd, startTijd)
 
 def verwijderGecontroleerdeFiles(fileList):
     antwoord = []

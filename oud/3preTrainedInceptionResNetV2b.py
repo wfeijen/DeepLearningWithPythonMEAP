@@ -7,7 +7,7 @@ from tensorflow.keras import optimizers
 from tensorflow.keras import applications
 from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
-from generiekeFuncties.plaatjesFuncties import getTargetPictureSize
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
 
 
@@ -45,7 +45,7 @@ base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
-imageSize = getTargetPictureSize()
+imageSize = get_target_picture_size()
 batchSize = 64
 sequences = range(3)
 #epochs_list = [10, 20, 30]

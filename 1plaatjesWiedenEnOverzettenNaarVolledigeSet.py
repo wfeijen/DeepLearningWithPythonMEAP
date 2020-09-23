@@ -8,11 +8,11 @@
 import os
 from generiekeFuncties.fileHandlingFunctions import fill_subdirectory_with_squared_images, give_list_of_images, \
     maak_doeldirectory_en_verplaats_random_files, maak_directory_helemaal_leeg
-from generiekeFuncties.plaatjesFuncties import remove_small_images_and_give_list_of_proper_sized_images, getTargetPictureSize
+from generiekeFuncties.plaatjesFuncties import remove_small_images_and_give_list_of_proper_sized_images, get_target_picture_size
 
 import math
 
-targetSizeImage = getTargetPictureSize()  # Size that the ml engine expects
+targetSizeImage = get_target_picture_size()  # Size that the ml engine expects
 minimumSizeShortSideImage = targetSizeImage
 maximumSizeShortSideImage = 512
 removeSmallFilesFromSource = True
@@ -31,7 +31,7 @@ full_data_set_dir_te_controleren = os.path.join(root, 'volledigeSetVierBijVierTe
 
 nietFileNames, verwijderd_vanwege_extentie, verwijderd_vanwege_te_klein, kleiner_gemaakt = \
     remove_small_images_and_give_list_of_proper_sized_images(
-        subdirName='niet', baseDir=original_data_set_dir,
+        subdir_name='niet', basedir=original_data_set_dir,
         remove_small_files_from_source=removeSmallFilesFromSource,
         minimum_size_short_side_image=minimumSizeShortSideImage,
         maximum_size_short_side_image=maximumSizeShortSideImage)
@@ -39,7 +39,7 @@ print("# niet: " + str(len(nietFileNames)) + "  -ext: " + str(verwijderd_vanwege
     verwijderd_vanwege_te_klein) + " kleiner: " + str(kleiner_gemaakt))
 welFileNames, verwijderd_vanwege_extentie, verwijderd_vanwege_te_klein, kleiner_gemaakt = \
     remove_small_images_and_give_list_of_proper_sized_images(
-        subdirName='wel', baseDir=original_data_set_dir,
+        subdir_name='wel', basedir=original_data_set_dir,
         remove_small_files_from_source=removeSmallFilesFromSource,
         minimum_size_short_side_image=minimumSizeShortSideImage,
         maximum_size_short_side_image=maximumSizeShortSideImage)

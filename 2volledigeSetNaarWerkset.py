@@ -16,7 +16,7 @@ percentageTrain = 0.8
 maximumAantalFilesPerKant = int(maximumAantalFilesPerKant / percentageTrain)
 percentageTest = 0.1
 percentageValidation = 0.1
-maximaalVerschilInVerhoudingAantalImages = 1.1
+maximaalVerschilInVerhoudingAantalImages = 2.0
 
 # The path to the directory where the original
 # data set was uncompressed

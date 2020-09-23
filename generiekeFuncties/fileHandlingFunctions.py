@@ -1,10 +1,10 @@
 import os, errno
 import shutil
 import random
-from generiekeFuncties.plaatjesFuncties import get_square_images_from_file, convertImageToSquareIm_from_file
+from generiekeFuncties.plaatjesFuncties import convertImageToSquareIm_from_file
 import re
 from collections import defaultdict
-from datetime import datetime
+
 
 
 def silentremove(filename):
@@ -15,7 +15,7 @@ def silentremove(filename):
             raise  # re-raise exception if a different error occurred
 
 
-def give_list_of_images(subdirName, baseDir):
+def give_list_of_images(baseDir, subdirName):
     data_set_dir = os.path.join(baseDir, subdirName)
     file_names = [f for f in os.listdir(data_set_dir) if os.path.isfile(os.path.join(data_set_dir, f))]
     return file_names
@@ -76,6 +76,25 @@ def maak_doeldirectory_en_verplaats_random_files(subSubDirName, sourceDir, targe
     print(target_data_set_dir, ' total images:', len(os.listdir(target_data_set_dir)))
     return fileNames
 
+def maak_subdirectory_en_vul_met_random_squared_images(subSubDirName, targetDir,
+                                          sourceDir, numberOfFiles, fileNames, targetSizeImage):
+    source_data_set_dir = os.path.join(sourceDir, subSubDirName)
+    target_data_set_dir = os.path.join(targetDir, subSubDirName)
+    if not os.path.exists(target_data_set_dir):
+        os.mkdir(target_data_set_dir)
+    for j in range(0, numberOfFiles):
+        file_name = random.choice(fileNames)
+        fileNames.remove(file_name)
+        file_naam_bron_dir = os.path.join(source_data_set_dir, file_name)
+        sx, sy, im = convertImageToSquareIm_from_file(imagePath=file_naam_bron_dir, targetSizeIm=targetSizeImage)
+        if im is None:
+            print("image niet te verwerken. Afmetingen: ", str(sx), "x", str(sy))
+        else:
+            im = im.convert('RGB')
+            dst = os.path.join(target_data_set_dir, file_name)
+            im.save(dst)
+    print(target_data_set_dir, ' total images:', len(os.listdir(target_data_set_dir)))
+    return fileNames
 
 def write_file_regels_naar_lijst(file_path, lijst):
     if os.path.exists(file_path):
@@ -161,3 +180,4 @@ def prioriteerGecontroleerd(fileList, aantal):
     print("Aantal gecontroleerde files: ", str(len(gecontroleerdeFiles)), " van de ", aantal)
     gecontroleerdeFiles.extend(nietGecontroleerdeFiles[:aantal - len(gecontroleerdeFiles)])
     return gecontroleerdeFiles[:aantal]
+
