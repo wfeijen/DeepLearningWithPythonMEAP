@@ -5,18 +5,19 @@ import sklearn.metrics as metrics
 from tensorflow.keras import models
 from datetime import datetime
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image
-from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList, combine_lists, initializeerVoortgangsInformatie, geeftVoortgangsInformatie
+from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList, combine_lists, \
+    initializeerVoortgangsInformatie, geeftVoortgangsInformatie
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images
-from PIL import Image
+
 
 imageSize = get_target_picture_size()
 start_tijd, vorige_tijd = initializeerVoortgangsInformatie("start")
 classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                             'BesteModellen/besteModelResnetV2'))
 
-#onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVerkleind'
-onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/testset'
+onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVerkleind'
+# onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/testset'
 print("############### start: ", str(datetime.now()))
 
 def classificeer_volledige_image_lijst(image_lijst, classifier, imageSize):
@@ -82,5 +83,4 @@ imageList_onterecht_P = verwijderGecontroleerdeFilesFromList(imageList_onterecht
 imageList_onterecht_geen_P = verwijderGecontroleerdeFilesFromList(imageList_onterecht_geen_P)
 
 viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ", aanleidingTotVeranderen="wel")
-
 Viewer(imgList=imageList_onterecht_geen_P, titel="GEREGISTREERD ALS WEL", aanleidingTotVeranderen="niet")
