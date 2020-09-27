@@ -1,85 +1,60 @@
 import os
 
 import matplotlib.pyplot as plt
-import numpy as np
 import sklearn.metrics as metrics
-from tensorflow.keras import models, preprocessing
-from keras.preprocessing.image import ImageDataGenerator
-from keras import applications
+from tensorflow.keras import models
 from datetime import datetime
-from generiekeFuncties.plaatjesFuncties import get_target_picture_size, convert_image_to_square
-from generiekeFuncties.utilities import verwijderGecontroleerdeFiles
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image
+from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList, combine_lists, initializeerVoortgangsInformatie, geeftVoortgangsInformatie
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images
 from PIL import Image
 
-# Wat willen we bekijken?
-# train: 0
-# test: 1
-# validatie: 2
-# oorspronkelijke bron: 3
-directoryNr = 3
-
-# Ongedaan maken gecontroleerd: find . -type f -exec rename -n 's/gecontroleerd//' {} +
-
-# [[ 42397   1483]
-# [  1955 180209]]
-
 imageSize = get_target_picture_size()
-
+start_tijd, vorige_tijd = initializeerVoortgangsInformatie("start")
 classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                             'BesteModellen/besteModelResnetV2'))
 
-def geformatteerd_image_goedgekeurd(classifier, image):
-    pp_image = preprocessing.image.img_to_array(image)
-    try:
-        np_image= np.array(pp_image)
-    except ValueError as e:
-        return -1
-    #print("shape ", str(np_imgs.shape))
-    np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
-    np_image /= 255.0
-    #np_imgs = applications.inception_resnet_v2.preprocess_input(np_imgs) lijkt niet te werken
-    classifications = classifier.predict(np_image)
-    max_classification = np.amax(classifications)
-    return max_classification
-
-
-onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVerkleind'
+#onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVerkleind'
+onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/testset'
 print("############### start: ", str(datetime.now()))
 
-files = give_list_of_images(onderzoeks_dir, "niet")
+def classificeer_volledige_image_lijst(image_lijst, classifier, imageSize):
+    goede_image_lijst = []
+    classificatie_lijst = []
+    afgeronde_classificatie_lijst = []
+    for file in image_lijst:
+        classification = classificeer_vollig_image(file, classifier, imageSize)
+        if classification >= 0:
+            goede_image_lijst.append(file)
+            classificatie_lijst.append(classification)
+            if classification > 0.5:
+                afgeronde_classificatie_lijst.append(1)
+            else:
+                afgeronde_classificatie_lijst.append(0)
+    return goede_image_lijst, classificatie_lijst, afgeronde_classificatie_lijst
 
-for file in files:
-    img = Image.open(os.path.join(onderzoeks_dir, "niet", file))
-    b, h, img = convert_image_to_square(img, imageSize)
-    geformatteerd_image_goedgekeurd(classifier=classifier, image=img)
 
-image_generator = ImageDataGenerator(preprocessing_function=applications.inception_resnet_v2.preprocess_input)
-image_flow_from_directory = image_generator.flow_from_directory(
-    onderzoeks_dir,
-    target_size=(imageSize, imageSize),
-    batch_size=20,
-    class_mode='binary',
-    shuffle=False)
-steps_per_epoch = np.math.ceil(image_flow_from_directory.samples / image_flow_from_directory.batch_size)
+nietFiles = [os.path.join(onderzoeks_dir, "niet", file) for file in give_list_of_images(onderzoeks_dir, "niet")]
+nietFiles, nietClassificaties, nietClassificatiesAfgerond = classificeer_volledige_image_lijst(nietFiles, classifier, imageSize)
+welFiles = [os.path.join(onderzoeks_dir, "wel", file) for file in give_list_of_images(onderzoeks_dir, "wel")]
+welFiles, welClassificaties, welClassificatiesAfgerond = classificeer_volledige_image_lijst(welFiles, classifier, imageSize)
 
-predictions = classifier.predict(image_flow_from_directory, steps=steps_per_epoch)
-# Get most likely class
+alleFiles = combine_lists(nietFiles, welFiles)
+alleClassificaties = combine_lists(nietClassificaties, welClassificaties)
+alleClassificatiesAfgerond = combine_lists(nietClassificatiesAfgerond, welClassificatiesAfgerond)
+alleWerkelijkeClasses = combine_lists([0] * len(nietFiles), [1] * len(welFiles))
+alleClassLabels = combine_lists(['niet'] * len(nietFiles), ['wel'] * len(welFiles))
+labels = ['niet', 'wel']
 
-predicted_classes = np.around(predictions).flatten().astype(int)
+vorige_tijd = geeftVoortgangsInformatie("Klaar met voorspellen ", (start_tijd, vorige_tijd))
 
-print("############### klaar met voorspellen: ", str(datetime.now()))
-
-true_classes = image_flow_from_directory.classes
-class_labels = list(image_flow_from_directory.class_indices.keys())
-
-report = metrics.classification_report(true_classes, predicted_classes, target_names=class_labels)
+report = metrics.classification_report(alleWerkelijkeClasses, alleClassificatiesAfgerond, target_names=labels)
 print(report)
 
-confusion_matrix = metrics.confusion_matrix(y_true=true_classes, y_pred=predicted_classes)  # shape=(12, 12)
+confusion_matrix = metrics.confusion_matrix(y_true=alleWerkelijkeClasses, y_pred=alleClassificatiesAfgerond )  # shape=(12, 12)
 
-labels = ['niet', 'wel']
+
 
 print(confusion_matrix)
 fig = plt.figure()
@@ -94,18 +69,17 @@ plt.ylabel('True')
 plt.show()
 
 
-imageDict_onterecht_P = [(os.path.join(onderzoeks_dir, image_flow_from_directory.filenames[i]), predictions[i]) for i in
-                         range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
+imageDict_onterecht_P = [(nietFiles[i], nietClassificaties[i]) for i in
+                         range(0, len(nietClassificaties)) if nietClassificatiesAfgerond[i] == 1]
 imageDict_onterecht_P.sort(key=lambda x: -x[1])
 imageList_onterecht_P = [key for key, waarde in imageDict_onterecht_P]
-imageDict_onterecht_geen_P = [(os.path.join(onderzoeks_dir, image_flow_from_directory.filenames[i]),
-                               predictions[i]) for i in
-                              range(0, len(true_classes)) if true_classes[i] > predicted_classes[i]]
+imageDict_onterecht_geen_P = [(welFiles[i], welClassificaties[i]) for i in
+                              range(0, len(welClassificaties)) if welClassificatiesAfgerond[i] == 0]
 imageDict_onterecht_geen_P.sort(key=lambda x: x[1])
 imageList_onterecht_geen_P = [key for key, waarde in imageDict_onterecht_geen_P]
 
-imageList_onterecht_P = verwijderGecontroleerdeFiles(imageList_onterecht_P)
-imageList_onterecht_geen_P = verwijderGecontroleerdeFiles(imageList_onterecht_geen_P)
+imageList_onterecht_P = verwijderGecontroleerdeFilesFromList(imageList_onterecht_P)
+imageList_onterecht_geen_P = verwijderGecontroleerdeFilesFromList(imageList_onterecht_geen_P)
 
 viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ", aanleidingTotVeranderen="wel")
 

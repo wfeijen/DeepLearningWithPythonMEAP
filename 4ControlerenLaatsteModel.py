@@ -8,7 +8,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras import applications
 from datetime import datetime
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
-from generiekeFuncties.utilities import verwijderGecontroleerdeFiles
+from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList
 from generiekeFuncties.viewer import Viewer
 
 # Wat willen we bekijken?
@@ -92,8 +92,8 @@ imageDict_onterecht_geen_P = [(os.path.join(onderzoeks_dir, image_flow_from_dire
 imageDict_onterecht_geen_P.sort(key=lambda x: x[1])
 imageList_onterecht_geen_P = [key for key, waarde in imageDict_onterecht_geen_P]
 
-imageList_onterecht_P = verwijderGecontroleerdeFiles(imageList_onterecht_P)
-imageList_onterecht_geen_P = verwijderGecontroleerdeFiles(imageList_onterecht_geen_P)
+imageList_onterecht_P = verwijderGecontroleerdeFilesFromList(imageList_onterecht_P)
+imageList_onterecht_geen_P = verwijderGecontroleerdeFilesFromList(imageList_onterecht_geen_P)
 
 viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ", aanleidingTotVeranderen="wel")
 

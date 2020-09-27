@@ -13,7 +13,7 @@ def initializeerVoortgangsInformatie(meldingsText):
     geeftVoortgangsInformatie(meldingsText, (startTijd, tijdVorigePunt))
     return (startTijd, startTijd)
 
-def verwijderGecontroleerdeFiles(fileList):
+def verwijderGecontroleerdeFilesFromList(fileList):
     antwoord = []
     for file in fileList:
         if len(file)<-18:
@@ -21,3 +21,9 @@ def verwijderGecontroleerdeFiles(fileList):
         elif file[-18:] != "_gecontroleerd.jpg":
             antwoord.append(file)
     return antwoord
+
+def combine_lists(a, b):
+    c = []
+    c.extend(a)
+    c.extend(b)
+    return c

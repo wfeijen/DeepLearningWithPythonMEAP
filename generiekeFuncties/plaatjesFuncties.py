@@ -2,6 +2,8 @@ import math
 import os
 from PIL import Image, ImageStat
 from send2trash import send2trash
+from keras import  preprocessing
+import numpy as np
 
 
 def get_target_picture_size():
@@ -48,10 +50,15 @@ def convert_image_to_square(im, targetsize_im):
     antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=mean_color)
     # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de langste
     # as gelijk is aan targetSizeIm
-    if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk): # Dit gaat toch niks worden
-        return sx_oorspronkelijk, sy_oorspronkelijk, None
-    if min(sx_oorspronkelijk, sy_oorspronkelijk) * 2 < targetsize_im:
-        return sx_oorspronkelijk, sy_oorspronkelijk, None
+    if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk): # We knippen de zijkanten er af
+        if sx_oorspronkelijk>sy_oorspronkelijk:
+            nieuwe_breedte = sy_oorspronkelijk * 4
+            im = im.crop(((sx_oorspronkelijk - nieuwe_breedte) / 2, 0, nieuwe_breedte, sy_oorspronkelijk))
+            sx_oorspronkelijk = nieuwe_breedte
+        else:
+            nieuwe_hoogte = sx_oorspronkelijk * 4
+            im = im.crop((0, (sy_oorspronkelijk - nieuwe_hoogte) / 2, sx_oorspronkelijk, nieuwe_hoogte))
+            sy_oorspronkelijk = nieuwe_hoogte
     if max(sx_oorspronkelijk, sy_oorspronkelijk) < targetsize_im:
         im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / max(sx_oorspronkelijk, sy_oorspronkelijk))
         antwoord.paste(im, ((targetsize_im - sx) // 2, (targetsize_im - sy) // 2))
@@ -119,3 +126,16 @@ def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerho
     im = Image.open(imagePath)
     return get_square_images_from_image(im=im, targetSizeIm=targetSizeIm, maximaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
 
+def classificeer_vollig_image(file_name_in, classifier_in, image_size_in):
+    img = Image.open(file_name_in)
+    b, h, img = convert_image_to_square(img, image_size_in)
+    try:
+        pp_image = preprocessing.image.img_to_array(img)
+        np_image = np.array(pp_image)
+        np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
+        np_image /= 255.0
+        classifications = classifier_in.predict(np_image)
+        return classifications[0][0]
+    except ValueError as e:
+        print('###', file_name_in, ' niet goed verwerkt:', e)
+        return -1
