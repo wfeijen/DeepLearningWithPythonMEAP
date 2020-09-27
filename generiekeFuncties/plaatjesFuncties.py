@@ -4,6 +4,8 @@ from PIL import Image, ImageStat
 from send2trash import send2trash
 from keras import  preprocessing
 import numpy as np
+import requests
+from io import BytesIO
 
 
 def get_target_picture_size():
@@ -126,10 +128,9 @@ def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerho
     im = Image.open(imagePath)
     return get_square_images_from_image(im=im, targetSizeIm=targetSizeIm, maximaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
 
-def classificeer_vollig_image(file_name_in, classifier_in, image_size_in):
-    img = Image.open(file_name_in)
-    b, h, img = convert_image_to_square(img, image_size_in)
+def classificeer_vollig_image(img, kenmerk, classifier_in, image_size_in):
     try:
+        b, h, img = convert_image_to_square(img, image_size_in)
         pp_image = preprocessing.image.img_to_array(img)
         np_image = np.array(pp_image)
         np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
@@ -137,5 +138,24 @@ def classificeer_vollig_image(file_name_in, classifier_in, image_size_in):
         classifications = classifier_in.predict(np_image)
         return classifications[0][0]
     except ValueError as e:
-        print('###', file_name_in, ' niet goed verwerkt:', e)
+        print('###', kenmerk, ' niet goed verwerkt:', e)
         return -1
+
+
+def classificeer_vollig_image_from_file(file_name_in, classifier_in, image_size_in):
+    img = Image.open(file_name_in)
+    return classificeer_vollig_image(img, file_name_in, classifier_in, image_size_in)
+
+
+def classificeer_vollig_image_from_url(url_in, classifier_in, image_size_in):
+    try:
+        response = requests.get(url_in)
+    except requests.exceptions.ConnectionError as e:
+        print("Communicatie fout in: ", url_in, " - ", e)
+        return -1
+    try:
+        img = Image.open(BytesIO(response.content))
+    except IOError as e:
+        print("Image corrupt: ", url_in, " - ", e)
+        return -1
+    return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
 from tensorflow.keras import models
 from datetime import datetime
-from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image_from_file
 from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList, combine_lists, \
     initializeerVoortgangsInformatie, geeftVoortgangsInformatie
 from generiekeFuncties.viewer import Viewer
@@ -25,7 +25,7 @@ def classificeer_volledige_image_lijst(image_lijst, classifier, imageSize):
     classificatie_lijst = []
     afgeronde_classificatie_lijst = []
     for file in image_lijst:
-        classification = classificeer_vollig_image(file, classifier, imageSize)
+        classification = classificeer_vollig_image_from_file(file, classifier, imageSize)
         if classification >= 0:
             goede_image_lijst.append(file)
             classificatie_lijst.append(classification)

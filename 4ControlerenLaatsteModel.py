@@ -15,13 +15,8 @@ from generiekeFuncties.viewer import Viewer
 # train: 0
 # test: 1
 # validatie: 2
-# oorspronkelijke bron: 3
 directoryNr = 3
 
-# Ongedaan maken gecontroleerd: find . -type f -exec rename -n 's/gecontroleerd//' {} +
-
-# [[ 42397   1483]
-# [  1955 180209]]
 
 imageSize = get_target_picture_size()
 
@@ -29,7 +24,6 @@ classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPic
                                             'BesteModellen/besteModelResnetV2'))
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-oorspronkelijke_bron_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/volledigeSetVierBijVier240'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
@@ -37,10 +31,8 @@ if directoryNr == 0:
     onderzoeks_dir = train_dir
 elif directoryNr == 1:
     onderzoeks_dir = test_dir
-elif directoryNr == 2:
-    onderzoeks_dir = validation_dir
 else:
-    onderzoeks_dir = oorspronkelijke_bron_dir
+    onderzoeks_dir = validation_dir
 
 print("############### start: ", str(datetime.now()))
 

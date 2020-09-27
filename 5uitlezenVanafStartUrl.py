@@ -9,15 +9,12 @@
 import requests
 import regex
 import os
-from tensorflow.keras import models, preprocessing
-from PIL import Image
-from io import BytesIO
-import numpy as np
+from tensorflow.keras import models
 import random
 from generiekeFuncties.fileHandlingFunctions import write_na_te_lopen_verwijzingen, readDictFile, writeDict
-from generiekeFuncties.plaatjesFuncties import get_square_images_from_image, get_target_picture_size, getMinimumPictureSize
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image_from_url
 from datetime import datetime
-from tensorflow.keras import applications
+
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
@@ -51,44 +48,6 @@ constClassifier = models.load_model(os.path.join(constPlaatjesEnModelDir, 'Beste
 
 benaderde_url_administratie = readDictFile(constBenaderde_url_administratie_pad)
 
-
-def poststamp_goedgekeurd(classifier, targetImageSize, url_poststamp):
-    try:
-        response = requests.get(url_poststamp)
-    except requests.exceptions.ConnectionError as e:
-        print("Communicatie fout in: ", url_poststamp, " - ", e)
-        return -1
-    try:
-        img = Image.open(BytesIO(response.content))
-    except IOError as e:
-        print("Image corrupt: ", url_poststamp, " - ", e)
-        return -1
-    imgs = get_square_images_from_image(img, targetImageSize,
-                                        maximaalVerschilInVerhoudingImages=0)
-    if len(imgs) == 0:  # Image is te klein
-        print("Image te klein: ", url_poststamp, " afmetingen: ", str(img.size))
-        return -1
-    for im in imgs:
-        im.thumbnail((targetImageSize, targetImageSize), Image.ANTIALIAS)
-    #print("lengte ", str(len(imgs)))
-    pp_images = [preprocessing.image.img_to_array(image) for image in imgs]
-    try:
-        np_imgs= np.array(pp_images)
-    except ValueError as e:
-        print("Value Error, image te corrupt: ", url_poststamp, " error: ", e)
-        return -1
-    if str(np_imgs.shape) == "(3,)":
-        print("Image te corrupt: ", url_poststamp, " shape: ", str(np_imgs.shape))
-        return -1
-    #print("shape ", str(np_imgs.shape))
-    np_imgs = np.array(np_imgs).astype(float)
-    np_imgs /= 255.0
-    #np_imgs = applications.inception_resnet_v2.preprocess_input(np_imgs) lijkt niet te werken
-    classifications = classifier.predict(np_imgs)
-    maxClassification = np.amax(classifications)
-    return maxClassification
-
-
 def plunderOverzichtPagina(url, patroon_verwijzing_plaatje, patroon_naam_post):
     randomCounter = 0
     page_text = requests.get(url).text
@@ -108,8 +67,9 @@ def plunderOverzichtPagina(url, patroon_verwijzing_plaatje, patroon_naam_post):
         for na_te_lopen_verwijzing_groot, na_te_lopen_verwijzingen_klein in na_te_lopen_verwijzingen:
             if na_te_lopen_verwijzing_groot not in benaderde_url_administratie:
                 randomCounter = randomCounter + random.randint(0, percentageAdditionalExtraRandom * 2)
-                resultaat = poststamp_goedgekeurd(constClassifier, targetImageSize,
-                                                  na_te_lopen_verwijzingen_klein)
+                resultaat = classificeer_vollig_image_from_url(na_te_lopen_verwijzingen_klein,
+                                                               constClassifier,
+                                                               targetImageSize)
                 if resultaat >= grenswaarde:
                     urls_for_post.append(na_te_lopen_verwijzing_groot)
                     benaderde_url_administratie[na_te_lopen_verwijzing_groot] = str(datetime.now())
