@@ -6,7 +6,22 @@ from keras import  preprocessing
 import numpy as np
 import requests
 from io import BytesIO
+import imagehash
 
+constHash_size = 8
+constBigHash_size = constHash_size * 2
+
+def hashPicture(img):
+    return str(imagehash.phash(img, hash_size=constHash_size))
+
+def bigHashPicture(img):
+    return str(imagehash.phash(img, hash_size=constBigHash_size))
+
+def hash_size():
+    return constHash_size
+
+def bigHash_size():
+    return constBigHash_size
 
 def get_target_picture_size():
     return 240
@@ -50,9 +65,8 @@ def convert_image_to_square(im, targetsize_im):
     sx_oorspronkelijk, sy_oorspronkelijk = im.size
     mean_color = tuple([math.floor(n) for n in ImageStat.Stat(im)._getmean()])
     antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=mean_color)
-    # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de langste
-    # as gelijk is aan targetSizeIm
-    if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk): # We knippen de zijkanten er af
+    # Als plaatje idioot breed is knippen we de zijkanten er af
+    if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk):
         if sx_oorspronkelijk>sy_oorspronkelijk:
             nieuwe_breedte = sy_oorspronkelijk * 4
             im = im.crop(((sx_oorspronkelijk - nieuwe_breedte) / 2, 0, nieuwe_breedte, sy_oorspronkelijk))
@@ -61,11 +75,13 @@ def convert_image_to_square(im, targetsize_im):
             nieuwe_hoogte = sx_oorspronkelijk * 4
             im = im.crop((0, (sy_oorspronkelijk - nieuwe_hoogte) / 2, sx_oorspronkelijk, nieuwe_hoogte))
             sy_oorspronkelijk = nieuwe_hoogte
+    # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de langste
+    # as gelijk is aan targetSizeIm
     if max(sx_oorspronkelijk, sy_oorspronkelijk) < targetsize_im:
         im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / max(sx_oorspronkelijk, sy_oorspronkelijk))
         antwoord.paste(im, ((targetsize_im - sx) // 2, (targetsize_im - sy) // 2))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-    # ultra breed plaatje
+    # Breed plaatje knippen we in twee stukken en plaatsen onder elkaar
     if sx_oorspronkelijk > sy_oorspronkelijk * 2:
         im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sy_oorspronkelijk * 2))
         im_crop1 = im.crop((0, 0, targetsize_im, sy))
@@ -73,6 +89,7 @@ def convert_image_to_square(im, targetsize_im):
         antwoord.paste(im_crop1, (0, 0))
         antwoord.paste(im_crop2, (0, targetsize_im // 2))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Hoog plaatje knippen we in twee stukken en plaatsen naast elkaar
     if sx_oorspronkelijk * 2 < sy_oorspronkelijk:
         im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sx_oorspronkelijk * 2))
         im_crop1 = im.crop((0, 0, sx, targetsize_im))
@@ -80,11 +97,12 @@ def convert_image_to_square(im, targetsize_im):
         antwoord.paste(im_crop1, (0, 0))
         antwoord.paste(im_crop2, (targetsize_im // 2, 0))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Beetje breder of vierkant voegen we in de breedte  in het frame
     if sx_oorspronkelijk >= sy_oorspronkelijk: # (en sx <= 2* sy)
         im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sx_oorspronkelijk)
         antwoord.paste(im, (0, (targetsize_im - sy) // 2))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-    # Nu moet wel gelden sx <= sy en 2 * sx >= sy
+    # Blijft nog over: beetje hoger voegen we in de hoogte in het frame
     im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sy_oorspronkelijk)
     antwoord.paste(im, ((targetsize_im - sx) // 2, 0))
     return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
@@ -148,14 +166,28 @@ def classificeer_vollig_image_from_file(file_name_in, classifier_in, image_size_
 
 
 def classificeer_vollig_image_from_url(url_in, classifier_in, image_size_in):
+    img = download_image_naar_memory(url_in)
+    if img is None:
+        return -1
+    return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
+
+def sla_image_op(img, doellocatie):
+    try:
+        img.save(doellocatie)
+    except IOError as e:
+        print("Image niet op te slaan: ", doellocatie, " - ", e)
+
+
+def download_image_naar_memory(url_in):
     try:
         response = requests.get(url_in)
     except requests.exceptions.ConnectionError as e:
         print("Communicatie fout in: ", url_in, " - ", e)
-        return -1
+        return None
     try:
         img = Image.open(BytesIO(response.content))
     except IOError as e:
         print("Image corrupt: ", url_in, " - ", e)
-        return -1
-    return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
+        return None
+    return img
+

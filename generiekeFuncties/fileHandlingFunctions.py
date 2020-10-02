@@ -4,6 +4,8 @@ import random
 from generiekeFuncties.plaatjesFuncties import convertImageToSquareIm_from_file
 import re
 from collections import defaultdict
+import requests
+from io import BytesIO
 
 
 
@@ -180,4 +182,7 @@ def prioriteerGecontroleerd(fileList, aantal):
     print("Aantal gecontroleerde files: ", str(len(gecontroleerdeFiles)), " van de ", aantal)
     gecontroleerdeFiles.extend(nietGecontroleerdeFiles[:aantal - len(gecontroleerdeFiles)])
     return gecontroleerdeFiles[:aantal]
+
+
+
 

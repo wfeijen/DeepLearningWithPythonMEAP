@@ -9,6 +9,9 @@ import os
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images,  \
     maak_directory_helemaal_leeg, prioriteerGecontroleerd, maak_subdirectory_en_vul_met_random_squared_images
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
+from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
+
+voortgangs_informatie = initializeerVoortgangsInformatie("start overklein en verplaats")
 
 maximumAantalFilesPerKant = 12000
 percentageTrain = 0.8
@@ -23,14 +26,6 @@ root = '/mnt/GroteSchijf/machineLearningPictures/take1'
 full_data_set_dir = os.path.join(root, 'ontdubbeldEnVerkleind')
 target_base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 targetSizeImage = get_target_picture_size()
-
-maak_directory_helemaal_leeg(target_base_dir)
-train_dir = os.path.join(target_base_dir, 'train')
-os.mkdir(train_dir)
-test_dir = os.path.join(target_base_dir, 'test')
-os.mkdir(test_dir)
-validation_dir = os.path.join(target_base_dir, 'validation')
-os.mkdir(validation_dir)
 
 nietFileNames = give_list_of_images(subdirName='niet', baseDir=full_data_set_dir)
 welFileNames = give_list_of_images(subdirName='wel', baseDir=full_data_set_dir)
@@ -51,7 +46,17 @@ aantalSamplesTestNiet = int(percentageTest * aantalSamplesNiet)
 aantalSamplesValidation = min(aantalSamplesNiet - aantalSamplesTrainNiet - aantalSamplesTestNiet,
                               aantalSamplesWel - aantalSamplesTrainWel - aantalSamplesTestWel)
 
-print("############ niet filenames #############")
+voortgangs_informatie = geeftVoortgangsInformatie("Start leegmaken dirs", voortgangs_informatie)
+
+maak_directory_helemaal_leeg(target_base_dir)
+train_dir = os.path.join(target_base_dir, 'train')
+os.mkdir(train_dir)
+test_dir = os.path.join(target_base_dir, 'test')
+os.mkdir(test_dir)
+validation_dir = os.path.join(target_base_dir, 'validation')
+os.mkdir(validation_dir)
+
+voortgangs_informatie = geeftVoortgangsInformatie("Start niet files", voortgangs_informatie)
 
 nietFileNames = prioriteerGecontroleerd(nietFileNames, aantalSamplesNiet)
 nietFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='niet',
@@ -72,7 +77,9 @@ nietFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName
                                                                    numberOfFiles=aantalSamplesValidation,
                                                                    fileNames=nietFileNames,
                                                                    targetSizeImage=targetSizeImage)
-print("############ wel filenames #############")
+
+voortgangs_informatie = geeftVoortgangsInformatie("Start wel files", voortgangs_informatie)
+
 welFileNames = prioriteerGecontroleerd(welFileNames, aantalSamplesWel)
 welFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='wel',
                                                                   sourceDir=full_data_set_dir,
@@ -92,3 +99,5 @@ welFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName=
                                                                   numberOfFiles=aantalSamplesValidation,
                                                                   fileNames=welFileNames,
                                                                   targetSizeImage=targetSizeImage)
+
+voortgangs_informatie = geeftVoortgangsInformatie("Klaar", voortgangs_informatie)

@@ -21,10 +21,19 @@ onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVer
 print("############### start: ", str(datetime.now()))
 
 def classificeer_volledige_image_lijst(image_lijst, classifier, imageSize):
+    tijden = initializeerVoortgangsInformatie("start classificeren volledige lijst")
     goede_image_lijst = []
     classificatie_lijst = []
     afgeronde_classificatie_lijst = []
+    procent = int(len(image_lijst) / 100)
+    i = 0
+    j = 0
     for file in image_lijst:
+        i = i + 1
+        if i >= procent:
+            j = j + 1
+            i = 0
+            tijden = geeftVoortgangsInformatie("We zijn op:" + str(j) + "% ", tijden)
         classification = classificeer_vollig_image_from_file(file, classifier, imageSize)
         if classification >= 0:
             goede_image_lijst.append(file)

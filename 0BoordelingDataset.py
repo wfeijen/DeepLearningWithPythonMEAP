@@ -7,8 +7,7 @@ from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList
 directoryNr = 2
 aantal = 25
 
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-onderzoeks_dir = os.path.join(base_dir, 'programmatest')
+onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/rawInput'
 
 imageList_P = [os.path.join(onderzoeks_dir, "wel", fileName) for fileName in
                give_list_of_images(subdirName="wel", baseDir=onderzoeks_dir)]

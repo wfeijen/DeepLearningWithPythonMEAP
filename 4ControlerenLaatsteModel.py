@@ -15,7 +15,7 @@ from generiekeFuncties.viewer import Viewer
 # train: 0
 # test: 1
 # validatie: 2
-directoryNr = 3
+directoryNr = 2
 
 
 imageSize = get_target_picture_size()

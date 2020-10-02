@@ -27,18 +27,18 @@ validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
 imageSize = get_target_picture_size()
 batchSize = 16
-sequences = range(3)
+sequences = range(4)
 #epochs_list = [20, 20, 30]
 epochs_list = [20, 20, 20, 20]
 images_per_epoch_list = [2000, 2000, 3000, 5000]
 #images_per_epoch_list = [4000, 8000, 12000]
-start_Learning_rate_factor_list = [1, 0.5, 0.2, 0.1]
-initial_start_learning_rate = 0.01
+start_Learning_rate_factor_list = [1, 0.5, 0.35, 0.2]
+initial_start_learning_rate = 0.005
 validation_images = 1000
 
 start_Learning_rate_list = [initial_start_learning_rate * i for i in start_Learning_rate_factor_list]
 validation_steps = validation_images // batchSize + 1
-startTijd, tijdVorigePunt = initializeerVoortgangsInformatie()
+tijdenVorigePunt = initializeerVoortgangsInformatie("start")
 train_datagen = ImageDataGenerator(
     preprocessing_function=applications.inception_resnet_v2.preprocess_input,
     #rotation_range=40,
@@ -107,7 +107,7 @@ for i in sequences:
                   optimizer=optimizers.SGD(learning_rate=learning_rate, momentum=0.9),
                   metrics=['acc'])
 
-    tijdVorigePunt = geeftVoortgangsInformatie("Model ingeladen", startTijd, tijdVorigePunt)
+    tijdenVorigePunt = geeftVoortgangsInformatie("Model ingeladen", tijdenVorigePunt)
     history = model.fit(
         train_generator,
         steps_per_epoch=steps_per_epoch,
@@ -116,11 +116,11 @@ for i in sequences:
         validation_steps=validation_steps,
         callbacks=[checkpoint])
     historyList.append(history)
-    tijdVorigePunt = geeftVoortgangsInformatie("Na fit", startTijd, tijdVorigePunt)
+    tijdenVorigePunt = geeftVoortgangsInformatie("Na fit", tijdenVorigePunt)
     del(model)
     gc.collect()
     model = models.load_model(modelPath)
 
-tijdVorigePunt = geeftVoortgangsInformatie("Totaal ", startTijd, tijdVorigePunt)
+tijdenVorigePunt = geeftVoortgangsInformatie("Totaal ", tijdenVorigePunt)
 for i in sequences:
     plotLossAndAcc(history=historyList[i])

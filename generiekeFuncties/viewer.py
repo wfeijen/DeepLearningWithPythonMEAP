@@ -1,6 +1,6 @@
 import os
 from tkinter import ttk, Tk, CENTER
-from PIL import ImageTk, Image
+from PIL import ImageTk, Image, UnidentifiedImageError
 from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
 
 
@@ -14,11 +14,13 @@ class Viewer:
             self.titel = titel
             self.aanleidingTotVranderen = aanleidingTotVeranderen
             self.root.geometry('1800x1000')
-            stgImg = ImageTk.PhotoImage(Image.open(self.imageList[self.index]))
-            self.root.title(self.titel + "      " + self.imageList[self.index])
-            self.label = ttk.Label(self.root, image=stgImg)
-            self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
-
+            try:
+                stgImg = ImageTk.PhotoImage(Image.open(self.imageList[self.index]))
+                self.root.title(self.titel + "      " + self.imageList[self.index])
+                self.label = ttk.Label(self.root, image=stgImg)
+                self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
+            except UnidentifiedImageError as e:
+                print("Image niet te openen: ", self.imageList[self.index], " - ", e)
 
             # close_up
             # rear_view
