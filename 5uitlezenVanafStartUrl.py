@@ -21,8 +21,8 @@ from datetime import datetime
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
-percentageRandomFromChosen = 5
-percentageAdditionalExtraRandom = 5
+percentageRandomFromChosen = 10
+percentageAdditionalExtraRandom = 10
 minimaalVerschilInVerhoudingImages = 1.1
 # url = 'https://vipergirls.to/threads/557628-Vanessa/page1-13'
 # baseUrl = 'https://vipergirls.to/threads/3262256-Artistic-Nudes-The-Fine-Art-of-Erotica-Rare-Beauty/page'
@@ -35,14 +35,27 @@ minimaalVerschilInVerhoudingImages = 1.1
 # volgnummersUrl = range(5,6)
 # patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 # patroon_naam_post = '<font size="3"><div style="text-align: center;"><b>([^\~<>\(]+)\(' #<div style="text-align: center;"><font size="5"><b>#551 Karlie Montana<
-baseUrl = 'https://vipergirls.to/threads/3226400-InTheCrack-PHOTO-Collection-in-Chronological-Order/page'
-volgnummersUrl = range(125, 126)  # later steeds hoger kan in ieder geval van 100 tot 124
-patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
-patroon_naam_post = r'<div style="text-align: center;"><font size="5"><b>([^\~<>\(]+)<'  # <div style="text-align: center;"><font size="5"><b>#1629 Maria Rya</b></font><br />
+# baseUrl = 'https://vipergirls.to/threads/3226400-InTheCrack-PHOTO-Collection-in-Chronological-Order/page'
+# volgnummersUrl = range(125, 126)  # later steeds hoger kan in ieder geval van 100 tot 124
+# patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
+# patroon_naam_post = r'<div style="text-align: center;"><font size="5"><b>([^\~<>\(]+)<'  # <div style="text-align: center;"><font size="5"><b>#1629 Maria Rya</b></font><br />
 # baseUrl = 'https://vipergirls.to/threads/3262256-Artistic-Nudes-The-Fine-Art-of-Erotica-Rare-Beauty/page'
-# volgnummersUrl = range(3, 11)  # 1 - 11
+# volgnummersUrl = range(11, 12)  # 1 - 11
 # patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 # patroon_naam_post = r'<font size="3"><div style="text-align: center;"><b>([^\~<>\(]+)\('  # <font size="3"><div style="text-align: center;"><b>Jenna - Tropical Desire (x78)<br />
+# baseUrl = 'https://vipergirls.to/threads/4371605-Ruthless-Mistress-Femdom/page'
+# volgnummersUrl = range(1, 147)  # 1 - 146
+# patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
+# patroon_naam_post = r'([^<]+)<br />'  # <h2 class="title icon">\nMia Li is Gia Dimarco's Hot Lesbian Foot Toy\n</h2>
+baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
+volgnummersUrl = range(1, 47)  # 1 - 146
+
+
+
+
+patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
+patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
+
 
 # Globale variabelen
 constPlaatjesEnModelDir = '/mnt/GroteSchijf/machineLearningPictures/take1'
@@ -60,15 +73,15 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
     for post in posts:
         urls_for_post = []
         postname = regex.findall(patroon_naam_post_in, post, regex.IGNORECASE)
-        print('Nieuwe Post: ', postname)
         gevonden_verwijzingen = regex.findall(patroon_verwijzing_plaatje_in, post, regex.IGNORECASE)
-        # even de troep er uit
-        na_te_lopen_verwijzingen = [(groot, klein) for (groot, klein) in gevonden_verwijzingen if
-                                    groot[:4] == 'http' and klein[:4] == 'http']
         if len(postname) > 0:
             postname = postname[0].strip()  # van list naar postname zelf
         else:
             postname = ""
+        # even de troep er uit
+        na_te_lopen_verwijzingen = [(groot, klein) for (groot, klein) in gevonden_verwijzingen if
+                                    groot[:4] == 'http' and klein[:4] == 'http']
+        print('Nieuwe Post: ', postname, ' met ', str(len(na_te_lopen_verwijzingen)), ' gevonden verwijzingen.')
         for na_te_lopen_verwijzing_groot, na_te_lopen_verwijzingen_klein in na_te_lopen_verwijzingen:
             random_counter = random_counter + random.randint(0, percentageAdditionalExtraRandom * 2)
             img = download_image_naar_memory(na_te_lopen_verwijzingen_klein)
@@ -95,14 +108,14 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
                 na_te_lopen_verwijzingen.remove(na_te_lopen_verwijzing)
                 na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein = na_te_lopen_verwijzing
                 img = download_image_naar_memory(na_te_lopen_verwijzingen_klein)
-                hash = bigHashPicture(img)
-                if hash not in hash_administratie:
-                    if na_te_lopen_verwijzing_groot not in urls_for_post:
-                        random_counter = random_counter - 100
-                        urls_for_post.append(na_te_lopen_verwijzing_groot)
-                        hash_administratie[hash] = str(datetime.now())
-                        sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash + ".jpg"))
-                        aantalRandomOpgenomen = aantalRandomOpgenomen + 1
+                if img is not None:
+                    hash = bigHashPicture(img)
+                    if hash not in hash_administratie:
+                        if na_te_lopen_verwijzing_groot not in urls_for_post:
+                            random_counter = random_counter - 100
+                            hash_administratie[hash] = str(datetime.now())
+                            sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash + ".jpg"))
+                            aantalRandomOpgenomen = aantalRandomOpgenomen + 1
             print('Post ', postname, ' heeft ', aantalRandomOpgenomen, ' random verwijzingen')
             for key in urls_for_post:
                 hash_administratie[key] = str(datetime.now())
@@ -114,3 +127,20 @@ for volgnummerUrl in volgnummersUrl:
     print("#### volgnummer: ", volgnummerUrl)
     url = baseUrl + str(volgnummerUrl)
     plunder_overzicht_pagina(url, patroon_verwijzing_plaatje, patroon_naam_post)
+
+
+# https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/pag
+# https://vipergirls.to/threads/103533-Watch4Beauty/page67
+# https://vipergirls.to/threads/1633619-Met-amp-Fem-gt-gt-gt-Nude-Erotic-Model-Collection-lt-lt-lt-2014-2015/page8
+# https://vipergirls.to/threads/602689-All-Sexy-Shaved-Danish-Amateur-Models-(Collection)/page18
+# https://vipergirls.to/threads/600140-Artistic-gt-gt-Tasteful-gt-gt-Nude-gt-gt-Erotic-gt-gt-Full-Sets-gt-gt-gt-(Collection)/page79
+# https://vipergirls.to/threads/624686-NextDoor-Models-Various-Sets/page2
+# https://vipergirls.to/threads/2156553-Twistys-lt-lt-lt-lt-Shaved-Pretty-Pornstars-amp-Nude-Babes-lt-lt-lt-Solo-Full-Sets-gt-gt-gt-(Collection)-Alphabetic/page10
+# https://vipergirls.to/threads/2809525-ATK-Natural-Hairy-Felix/page7
+# https://vipergirls.to/threads/3663081-Artistic-Nude-2017-amp-2018-20-Beautiful-Site-Updates-High-Resolution-File-Archive-NEW/page4
+# https://vipergirls.to/threads/3539087-(((-MetArt-)))-2017-amp-2018-High-Resolution-File-Archive-NEW/page15
+#
+# Zonder namen
+# https://vipergirls.to/threads/1267445-Mature-MILF-sofcore-amp-hardcore-images-collection/page8
+# https://vipergirls.to/threads/661683-ITC-Best-of-pose-for-close-ups-PornStars-(Collection-amp-Updates)/page2
+# https://vipergirls.to/threads/644877-66Models-(-The-Best-of-Collection-amp-Updates-2014-)-NEW/page4
