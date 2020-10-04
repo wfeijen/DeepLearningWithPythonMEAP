@@ -120,13 +120,17 @@ def lees_file_regels_naar_ontdubbelde_lijst(fileName):
     return list(set(content))
 
 
-def write_na_te_lopen_verwijzingen(root, url, postName, verwijzingen):
+def write_voorbereiding_na_te_lopen_verwijzingen(root, url, postName, url_verwijzingen_en_lokale_file_hash):
     # first we create a filename
-    dir_name = os.path.join(root, re.sub('[\W_]', '_', str(url.split('/')[4]) + '_' + postName))
+    file_path = os.path.join(root, re.sub('[\W_]', '_', str(url.split('/')[4]) + '_' + postName) + '.txt')
+    regels = [key + "," + value for key, value in url_verwijzingen_en_lokale_file_hash.items()]
+    write_file_regels_naar_lijst(file_path, regels)
+
+def write_na_te_lopen_verwijzingen_directorie(dir_name, verwijzingen):
     try:
         os.mkdir(dir_name)
-    except:
-        print("Directory ", dir_name, ' niet gemaakt. Bestond waarschijnlijk al.')
+    except Exception as e:
+        print("Directory ", dir_name, ' niet gemaakt. Bestond waarschijnlijk al.', str(e))
     file_path = os.path.join(dir_name, 'verwijzingen.txt')
     write_file_regels_naar_lijst(file_path, verwijzingen)
 
@@ -182,6 +186,8 @@ def prioriteerGecontroleerd(fileList, aantal):
     print("Aantal gecontroleerde files: ", str(len(gecontroleerdeFiles)), " van de ", aantal)
     gecontroleerdeFiles.extend(nietGecontroleerdeFiles[:aantal - len(gecontroleerdeFiles)])
     return gecontroleerdeFiles[:aantal]
+
+
 
 
 

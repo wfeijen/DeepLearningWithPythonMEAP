@@ -24,6 +24,7 @@ def ontdubbel_en_verklein_dir(input_dir, output_dir, subdir,
                               minimum_grootte_Lange_zijde_image, maximum_size_short_side_image,
                               hash_size):
     hashes = set([strHash for strHash in gevonden_hashcodes_onder_dir(output_dir, hash_size)])
+    aantal_verplaatste_files = 0
     for file in give_list_of_images(input_dir, subdir):
         oude_file_naam = os.path.join(input_dir, subdir, file)
         im = Image.open(oude_file_naam)
@@ -43,11 +44,14 @@ def ontdubbel_en_verklein_dir(input_dir, output_dir, subdir,
                 else:
                     nieuwe_file_naam = os.path.join(output_dir, subdir, str_hash + ".jpg")
                 shutil.move(oude_file_naam, nieuwe_file_naam)
+                aantal_verplaatste_files = aantal_verplaatste_files + 1
             else:
                 shutil.move(oude_file_naam, oude_file_naam + ".bestaatAl.jpg")
         else:
             shutil.move(oude_file_naam, oude_file_naam + ".teKlein.jpg")
+    return aantal_verplaatste_files
 
+Eerst checken of er nog .csv files in verwijzingen staan, verder lengte gelezen hashes checken
 voortgangs_informatie = initializeerVoortgangsInformatie("start ontdubbel en verklein")
 ontdubbel_en_verklein_dir(input_directory, output_directory, "niet",
                           minimumSizeLongSideImage, maximumSizeShortSideImage, hash_size())
