@@ -16,17 +16,17 @@ def smooth_curve(points, factor=0.8):
 def plotLossAndAcc(history):
     acc = history.history['acc']
     val_acc = history.history['val_acc']
-    loss = history.history['loss']
-    val_loss = history.history['val_loss']
+    recall_m = history.history['recall_m']
+    val_recall_m = history.history['val_recall_m']
     epochs = range(1, len(acc) + 1)
     plt.plot(epochs, acc, 'bo', label='Training acc')
     plt.plot(epochs, val_acc, 'b', label='Validation acc')
     plt.title('Training and validation accuracy')
     plt.legend()
     plt.figure()
-    plt.plot(epochs, loss, 'bo', label='Training loss')
-    plt.plot(epochs, val_loss, 'b', label='Validation loss')
-    plt.title('Training and validation loss')
+    plt.plot(epochs, recall_m, 'bo', label='Training recall_m')
+    plt.plot(epochs, val_recall_m, 'b', label='Validation recall_m')
+    plt.title('Training and validation recall_m')
     plt.legend()
     plt.show()
 

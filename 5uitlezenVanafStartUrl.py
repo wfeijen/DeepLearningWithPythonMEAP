@@ -18,18 +18,18 @@ from generiekeFuncties.fileHandlingFunctions import write_voorbereiding_na_te_lo
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture
 from datetime import datetime
 from generiekeFuncties.utilities import initializeerVoortgangsInformatie, geeftVoortgangsInformatie
-
+from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
-percentageRandomFromChosen = 10
-percentageAdditionalExtraRandom = 10
+percentageRandomFromChosen = 0
+percentageAdditionalExtraRandom = 8
 minimaalVerschilInVerhoudingImages = 1.1
 
 
-
+###########################################################################################
 baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
-volgnummersUrl = range(14, 47)  # 1 - 146
+volgnummersUrl = range(22, 23)  #   1 - 146
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 
@@ -39,7 +39,8 @@ constPlaatjesEnModelDir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 constVoorberVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/verwijzingen'
 constBenaderde_url_administratie_pad = '/mnt/GroteSchijf/machineLearningPictures/verwijzingenBoekhouding/benaderde_hash.txt'
 constNieuwePlaatjesLocatie = '/mnt/GroteSchijf/machineLearningPictures/take1/rawInput'
-constClassifier = models.load_model(os.path.join(constPlaatjesEnModelDir, 'BesteModellen/besteModelResnetV2'))
+constClassifier = models.load_model(os.path.join(constPlaatjesEnModelDir, 'BesteModellen/besteModelResnetV2'),
+                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 
 hash_administratie = readDictFile(constBenaderde_url_administratie_pad)
 
@@ -59,24 +60,24 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
         na_te_lopen_verwijzingen = [(groot, klein) for (groot, klein) in gevonden_verwijzingen if
                                     groot[:4] == 'http' and klein[:4] == 'http']
         vgi = geeftVoortgangsInformatie(
-            'Post ' + postname + ' hmet ' + str(len(na_te_lopen_verwijzingen)) + ' gevonden verwijzingen',
+            'Post ' + postname + ' met ' + str(len(na_te_lopen_verwijzingen)) + ' gevonden verwijzingen',
             vgi)
-        for na_te_lopen_verwijzing_groot, na_te_lopen_verwijzingen_klein in na_te_lopen_verwijzingen:
-            random_counter = random_counter + random.randint(0, percentageAdditionalExtraRandom * 2)
+        for na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein in na_te_lopen_verwijzingen:
+            random_counter = random_counter + percentageAdditionalExtraRandom #random.randint(0, percentageAdditionalExtraRandom * 2)
             if na_te_lopen_verwijzing_groot not in na_te_lopen_verwijzingen:
-                img = download_image_naar_memory(na_te_lopen_verwijzingen_klein)
+                img = download_image_naar_memory(na_te_lopen_verwijzing_klein)
                 if img is None:
                     resultaat = -1
                 else:
                     hash = bigHashPicture(img)
                     if hash not in hash_administratie:
-                        resultaat = classificeer_vollig_image(img, na_te_lopen_verwijzingen_klein,
+                        resultaat = classificeer_vollig_image(img, na_te_lopen_verwijzing_klein,
                                                                        constClassifier,
                                                                        targetImageSize)
                         if resultaat >= grenswaarde:
                             hashes_voor_lokale_filenaam_en_url_groot[hash] = na_te_lopen_verwijzing_groot
                             hash_administratie[hash] = str(datetime.now())
-                            random_counter = random_counter + random.randint(0, percentageRandomFromChosen * 2)
+                            random_counter = random_counter + percentageRandomFromChosen #random.randint(0, percentageRandomFromChosen * 2)
                             sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "wel", hash + ".jpg"))
                         elif resultaat < 0:
                             print("Negatieve score: ", na_te_lopen_verwijzing_groot)
@@ -84,21 +85,20 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
             'Post ' + postname + ' heeft ' + str(len(hashes_voor_lokale_filenaam_en_url_groot)) + ' echte verwijzingen',
             vgi)
         aantalRandomOpgenomen = 0
-        if len(hashes_voor_lokale_filenaam_en_url_groot) > 0:
-            while random_counter > 0 and len(na_te_lopen_verwijzingen) > 0:
-                na_te_lopen_verwijzing = na_te_lopen_verwijzingen[random.randint(0, len(na_te_lopen_verwijzingen) - 1)]
-                na_te_lopen_verwijzingen.remove(na_te_lopen_verwijzing)
-                na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein = na_te_lopen_verwijzing
-                img = download_image_naar_memory(na_te_lopen_verwijzingen_klein)
-                if img is not None:
-                    hash = bigHashPicture(img)
-                    if hash not in hash_administratie:
-                        if na_te_lopen_verwijzing_groot not in hashes_voor_lokale_filenaam_en_url_groot:
-                            random_counter = random_counter - 100
-                            hash_administratie[hash] = str(datetime.now())
-                            sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash + ".jpg"))
-                            hashes_voor_lokale_filenaam_en_url_groot[hash] = na_te_lopen_verwijzing_groot
-                            aantalRandomOpgenomen = aantalRandomOpgenomen + 1
+        while random_counter > 0 and len(na_te_lopen_verwijzingen) > 0:
+            na_te_lopen_verwijzing = na_te_lopen_verwijzingen[random.randint(0, len(na_te_lopen_verwijzingen) - 1)]
+            na_te_lopen_verwijzingen.remove(na_te_lopen_verwijzing)
+            na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein = na_te_lopen_verwijzing
+            img = download_image_naar_memory(na_te_lopen_verwijzing_klein)
+            if img is not None:
+                hash = bigHashPicture(img)
+                if hash not in hash_administratie:
+                    if na_te_lopen_verwijzing_groot not in hashes_voor_lokale_filenaam_en_url_groot:
+                        random_counter = random_counter - 100
+                        hash_administratie[hash] = str(datetime.now())
+                        sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash + ".jpg"))
+                        hashes_voor_lokale_filenaam_en_url_groot[hash] = na_te_lopen_verwijzing_groot
+                        aantalRandomOpgenomen = aantalRandomOpgenomen + 1
         vgi = geeftVoortgangsInformatie(
             'Post ' + postname + ' heeft ' + str(aantalRandomOpgenomen) + ' random verwijzingen'
             , vgi)
@@ -106,11 +106,13 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
         write_voorbereiding_na_te_lopen_verwijzingen(constVoorberVerwijzingDir, url_in, postname, hashes_voor_lokale_filenaam_en_url_groot)
         writeDict(hash_administratie, constBenaderde_url_administratie_pad)
 
+
 voortgangs_informatie = initializeerVoortgangsInformatie("Uitlezen urls")
 for volgnummerUrl in volgnummersUrl:
     voortgangs_informatie = geeftVoortgangsInformatie("#### volgnummer: " + str(volgnummerUrl), voortgangs_informatie)
     url = baseUrl + str(volgnummerUrl)
     plunder_overzicht_pagina(url, patroon_verwijzing_plaatje, patroon_naam_post, voortgangs_informatie)
+
 
 #################################### nog doen
 # https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/pag

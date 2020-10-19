@@ -112,39 +112,39 @@ def convertImageToSquareIm_from_file(imagePath, targetSizeIm):
     im = Image.open(imagePath)
     return convert_image_to_square(im=im, targetsize_im=targetSizeIm)
 
-def get_square_images_from_image(im, targetSizeIm, maximaalVerschilInVerhoudingImages):
-    # returns a square part of the image sized to target size
-    im = im.convert("RGB")
-    sx, sy = im.size
-    antwoord = []
-    # kijken of het plaatje wel groot genoeg is
-    if min(sx, sy) < targetSizeIm:
-        return antwoord
-    # links of boven bij breed of hoog plaatje
-    if sx >= (sy * maximaalVerschilInVerhoudingImages):
-        antwoord.append(im.crop((0, 0, sy, sy)))
-    elif (sx * maximaalVerschilInVerhoudingImages)<= sy:
-        antwoord.append(im.crop((0, 0, sx, sx)))
-    # en altijd het centrum omdat daar meestal de meeste inforamtie is
-    if sx > sy:
-        left = (sx - sy) / 2
-        antwoord.append(im.crop((left, 0, left + sy, sy)))
-    else:
-        top = (sy - sx) / 2
-        antwoord.append(im.crop((0, top, sx, top + sx)))
-    # en rechts of onder bij breed of hoog plaatje
-    if sx >= (sy * maximaalVerschilInVerhoudingImages):
-        left = sx - sy
-        antwoord.append(im.crop((left, 0, left + sy, sy)))
-    elif (sx * maximaalVerschilInVerhoudingImages)<= sy:
-        top = sy - sx
-        antwoord.append(im.crop((0, top, sx, top + sx)))
-    return antwoord
+# def get_square_images_from_image(im, targetSizeIm, maximaalVerschilInVerhoudingImages):
+#     # returns a square part of the image sized to target size
+#     im = im.convert("RGB")
+#     sx, sy = im.size
+#     antwoord = []
+#     # kijken of het plaatje wel groot genoeg is
+#     if min(sx, sy) < targetSizeIm:
+#         return antwoord
+#     # links of boven bij breed of hoog plaatje
+#     if sx >= (sy * maximaalVerschilInVerhoudingImages):
+#         antwoord.append(im.crop((0, 0, sy, sy)))
+#     elif (sx * maximaalVerschilInVerhoudingImages)<= sy:
+#         antwoord.append(im.crop((0, 0, sx, sx)))
+#     # en altijd het centrum omdat daar meestal de meeste inforamtie is
+#     if sx > sy:
+#         left = (sx - sy) / 2
+#         antwoord.append(im.crop((left, 0, left + sy, sy)))
+#     else:
+#         top = (sy - sx) / 2
+#         antwoord.append(im.crop((0, top, sx, top + sx)))
+#     # en rechts of onder bij breed of hoog plaatje
+#     if sx >= (sy * maximaalVerschilInVerhoudingImages):
+#         left = sx - sy
+#         antwoord.append(im.crop((left, 0, left + sy, sy)))
+#     elif (sx * maximaalVerschilInVerhoudingImages)<= sy:
+#         top = sy - sx
+#         antwoord.append(im.crop((0, top, sx, top + sx)))
+#     return antwoord
 
-def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerhoudingImages):
-    # returns a square part of the image sized to target size
-    im = Image.open(imagePath)
-    return get_square_images_from_image(im=im, targetSizeIm=targetSizeIm, maximaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
+# def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerhoudingImages):
+#     # returns a square part of the image sized to target size
+#     im = Image.open(imagePath)
+#     return get_square_images_from_image(im=im, targetSizeIm=targetSizeIm, maximaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
 
 def classificeer_vollig_image(img, kenmerk, classifier_in, image_size_in):
     try:
@@ -165,11 +165,11 @@ def classificeer_vollig_image_from_file(file_name_in, classifier_in, image_size_
     return classificeer_vollig_image(img, file_name_in, classifier_in, image_size_in)
 
 
-def classificeer_vollig_image_from_url(url_in, classifier_in, image_size_in):
-    img = download_image_naar_memory(url_in)
-    if img is None:
-        return -1
-    return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
+# def classificeer_vollig_image_from_url(url_in, classifier_in, image_size_in):
+    # img = download_image_naar_memory(url_in)
+    # if img is None:
+    #     return -1
+    # return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
 
 def sla_image_op(img, doellocatie):
     try:

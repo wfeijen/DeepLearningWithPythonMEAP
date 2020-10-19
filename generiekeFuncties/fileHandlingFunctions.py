@@ -3,9 +3,8 @@ import shutil
 import random
 from generiekeFuncties.plaatjesFuncties import convertImageToSquareIm_from_file
 import re
-from collections import defaultdict
-import requests
-from io import BytesIO
+from collections import defaultdict, OrderedDict
+
 
 
 
@@ -153,39 +152,96 @@ def readDictFile(path):
             d[name] = value
     return d
 
+# 80772dca3644b9e7gecontroleerd.jpg
+def get_hash_from_filename(file_naam_in):
+    loc = file_naam_in.find("_gecontroleerd")
+    if loc == -1:
+        return file_naam_in[:-4] # alleen .jpg er af
+    else:
+        return file_naam_in[:loc]
 
-def veranderVanKant(file_pad_in):
+
+def get_controle_aantal_reeks(char, filenaam_in):
+    f = filenaam_in[:-4]
+    i = -1
+    while f[i] == char:
+        i = i - 1
+    antwoord = -(1 + i)
+    return antwoord
+
+
+
+def markeerControleResultaat(file_naam_in, operatie):
+    # Voegt de eerste letter van de operatie toe (n/w)
+    filenaam_kort = file_naam_in[:-4]
+    if "_gecontroleerd_" in file_naam_in:
+        return filenaam_kort + operatie[0] + ".jpg"
+    else:
+        return get_hash_from_filename(file_naam_in) + "_gecontroleerd_" + operatie[0] + ".jpg"
+
+
+def veranderVanKant(file_pad_in, operatie_in):
     pad_delen = os.path.split(file_pad_in)
     if pad_delen[0][-4:] == "niet":
         a = pad_delen[0][:-4] + "wel"
     else:
         a = pad_delen[0][:-3] + "niet"
-    b = pad_delen[1][:-4] + "_gecontroleerd.jpg"
+    b = markeerControleResultaat(pad_delen[1], operatie_in)
     nieuw_pad = os.path.join(a, b)
     os.rename(file_pad_in, nieuw_pad)
     return nieuw_pad
 
 
-def markeerGecontroleerd(file_pad_in):
+def markeerGecontroleerd(file_pad_in, operatie_in):
     pad_delen = os.path.split(file_pad_in)
     a = pad_delen[0]
-    b = pad_delen[1][:-4] + "_gecontroleerd.jpg"
+    b = markeerControleResultaat(pad_delen[1], operatie_in)
     nieuw_pad = os.path.join(a, b)
     os.rename(file_pad_in, nieuw_pad)
     return nieuw_pad
 
-def prioriteerGecontroleerd(fileList, aantal):
+
+def prioriteerGecontroleerd(fileList, aantal, controle_char):
     # Verdeel in twee delen
-    gecontroleerdeFiles = []
-    nietGecontroleerdeFiles = []
+    antwoord = []
+    fileGroepen = {}
     for file in fileList:
-        if file.endswith("gecontroleerd.jpg"):
-            gecontroleerdeFiles.append(file)
-        else:
-            nietGecontroleerdeFiles.append(file)
-    print("Aantal gecontroleerde files: ", str(len(gecontroleerdeFiles)), " van de ", aantal)
-    gecontroleerdeFiles.extend(nietGecontroleerdeFiles[:aantal - len(gecontroleerdeFiles)])
-    return gecontroleerdeFiles[:aantal]
+        aantal_eenduidige_controles = get_controle_aantal_reeks(controle_char, file)
+        if aantal_eenduidige_controles not in fileGroepen:
+            fileGroepen[aantal_eenduidige_controles] = []
+        fileGroepen[aantal_eenduidige_controles].append(file)
+    fileGroepen = OrderedDict(reversed(sorted(fileGroepen.items())))
+
+    i = 0
+    for nr, fileGroep in fileGroepen.items():
+        j = 0
+        while i < aantal and len(fileGroep) > 0:
+            i = i + 1
+            j = j + 1
+            file_name = fileGroep[random.randint(0, len(fileGroep) - 1)]
+            fileGroep.remove(file_name)
+            antwoord.append(file_name)
+        print(str(j), " files rang ", nr , " toegevoegd ")
+    print("totaal ", i, " files toegevoegd")
+    return antwoord
+
+
+def verwijderGecontroleerdeFilesBovenNummerFromList(fileList, aantal_bevestigingen):
+    antwoord = []
+    pad = os.path.split(fileList[0])[0]
+    if pad[-3:] == "wel":
+        char = "w"
+    elif pad[-4:] == "niet":
+        char = "n"
+    else:
+        print("pad eindigt raar: ", pad)
+        return antwoord
+
+    for file in fileList:
+        image_name = os.path.split(file)[1]
+        if get_controle_aantal_reeks(char, image_name) <= aantal_bevestigingen:
+            antwoord.append(file)
+    return antwoord
 
 
 

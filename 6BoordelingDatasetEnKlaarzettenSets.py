@@ -1,8 +1,8 @@
 import os
-from generiekeFuncties.fileHandlingFunctions import give_list_of_images, readDictFile, write_na_te_lopen_verwijzingen_directorie, silentremove
+from generiekeFuncties.fileHandlingFunctions import give_list_of_images, readDictFile, \
+    write_na_te_lopen_verwijzingen_directorie, silentremove, verwijderGecontroleerdeFilesBovenNummerFromList
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.plaatjesFuncties import bigHash_size
-from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList
 
 directoryNr = 2
 aantal = 25
@@ -20,12 +20,12 @@ imageList_geen_P = [os.path.join(constNietDir, fileName) for fileName in
                     give_list_of_images(subdirName="niet", baseDir=onderzoeks_dir)]
 imageList_geen_P.sort()
 
-imageList_P = verwijderGecontroleerdeFilesFromList(imageList_P)
-imageList_geen_P = verwijderGecontroleerdeFilesFromList(imageList_geen_P)
+imageList_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_P, 1)
+imageList_geen_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_geen_P, 1)
 
-viewer = Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel")
+Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel")
 
-viewer = Viewer(imgList=imageList_P, titel="WEL", aanleidingTotVeranderen="niet")
+Viewer(imgList=imageList_P, titel="WEL", aanleidingTotVeranderen="niet")
 
 # Testen of er nog files niet gecontroleerd zijn
 lijst_niet_gecontroleerd = [f for f in os.listdir(constWelDir) if "gecontroleerd" not in f]
@@ -48,6 +48,7 @@ if len(lijst_niet_gecontroleerd) == 0:
             dir_naam = voorbereiding_verwijzingen_file[:-4]
             write_na_te_lopen_verwijzingen_directorie(dir_naam, verwijzing_lijst)
         silentremove(voorbereiding_verwijzingen_file)
+    print("lijsten klaargezet")
 
 
 

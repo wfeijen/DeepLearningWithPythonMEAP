@@ -15,25 +15,16 @@ class Viewer:
             self.aanleidingTotVranderen = aanleidingTotVeranderen
             self.root.geometry('1800x1000')
             try:
-                stgImg = ImageTk.PhotoImage(Image.open(self.imageList[self.index]))
+                img = Image.open(self.imageList[self.index])
+                vergroting = 600 / max(img.size)
+                nieuweGrootte = (int(img.size[0] * vergroting), int(img.size[1] * vergroting))
+                img = img.resize(nieuweGrootte, Image.BICUBIC)
+                stgImg = ImageTk.PhotoImage(img)
                 self.root.title(self.titel + "      " + self.imageList[self.index])
                 self.label = ttk.Label(self.root, image=stgImg)
                 self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
             except UnidentifiedImageError as e:
                 print("Image niet te openen: ", self.imageList[self.index], " - ", e)
-
-            # close_up
-            # rear_view
-            # lazy_cat
-            # dominant
-            # overig
-            # geen
-            # _sperm
-            # _caption
-            # _close_up
-
-
-
 
             nietBtn = ttk.Button(self.root, text="NIET (z)", command=self.niet)
             nietBtn.place(x=1800, y=0)
@@ -61,9 +52,9 @@ class Viewer:
             if operatie == "verwijder":
                 os.remove(filePad)
             elif operatie == self.aanleidingTotVranderen:
-                veranderVanKant(filePad)
+                print(veranderVanKant(filePad, operatie))
             else:  # onveranderd maar wel gecontroleerd
-                markeerGecontroleerd(filePad)
+                print(markeerGecontroleerd(filePad, operatie))
         self.imageList = self.imageList[self.index:]
         self.index = 0
         self.changeList = []
@@ -80,12 +71,16 @@ class Viewer:
 
     def setImage(self):
         if self.index < len(self.imageList):
-            im = Image.open(self.imageList[self.index])
+            image_path = self.imageList[self.index]
+            im = Image.open(image_path)
+            vergroting = 600 / max(im.size)
+            nieuweGrootte = (int(im.size[0] * vergroting), int(im.size[1] * vergroting))
+            im = im.resize(nieuweGrootte, Image.BICUBIC)
             stgImg = ImageTk.PhotoImage(im)
             self.label.configure(image=stgImg)
             self.label.image = stgImg
             self.root.title(self.titel + " (" + str(self.index) + " van " +
-                            str(len(self.imageList)) + ")    " + self.imageList[self.index])
+                            str(len(self.imageList)) + ")    " + image_path)
         else:
             self.root.title(self.titel + "      Alle images verwerkt")
 

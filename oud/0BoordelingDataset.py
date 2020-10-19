@@ -2,7 +2,7 @@ import os
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
-from generiekeFuncties.utilities import verwijderGecontroleerdeFilesFromList
+from generiekeFuncties.utilities import verwijderGecontroleerdeFilesBovenNummerFromList
 
 directoryNr = 2
 aantal = 25
@@ -16,8 +16,8 @@ imageList_geen_P = [os.path.join(onderzoeks_dir, "niet", fileName) for fileName 
                     give_list_of_images(subdirName="niet", baseDir=onderzoeks_dir)]
 imageList_geen_P.sort()
 
-imageList_P = verwijderGecontroleerdeFilesFromList(imageList_P)
-imageList_geen_P = verwijderGecontroleerdeFilesFromList(imageList_geen_P)
+imageList_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_P)
+imageList_geen_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_geen_P)
 
 viewer = Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel")
 

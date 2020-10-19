@@ -13,15 +13,6 @@ def initializeerVoortgangsInformatie(meldingsText):
     geeftVoortgangsInformatie(meldingsText, (startTijd, tijdVorigePunt))
     return (startTijd, startTijd)
 
-def checkGecontroleerd(str_in):
-    return "gecontroleerd" in str_in
-
-def verwijderGecontroleerdeFilesFromList(fileList):
-    antwoord = []
-    for file in fileList:
-        if not checkGecontroleerd(file):
-            antwoord.append(file)
-    return antwoord
 
 def combine_lists(a, b):
     c = []

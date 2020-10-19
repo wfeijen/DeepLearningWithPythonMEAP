@@ -9,28 +9,24 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
-from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
-
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
                                           'BesteModellen/besteModelResnetV2')
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
-#test_dir = os.path.join(base_dir, 'test')
+test_dir = os.path.join(base_dir, 'test')
 imageSize = get_target_picture_size()
-batchSize = 32
+batchSize = 16
 sequences = range(3)
 epochs_list = [20, 20, 20]
 images_per_epoch_list = [3000, 4000, 3000]
-aantal_lerende_lagen_conv_base_list = [30, 30, 30]
-
-validation_images = 3000
-#images_per_epoch_list = [4000, 8000, 12000]
+aantal_lerende_lagen_conv_base_list = [0, 10, 20]
+validation_images = 1500
 start_Learning_rate_factor_list = [1, 0.7, 0.5]
-initial_start_learning_rate = 0.0040
+initial_start_learning_rate = 0.0035
 
-bestaandmodel_verder_brengen = True
+bestaandmodel_verder_brengen = False
 
 start_Learning_rate_list = [initial_start_learning_rate * i for i in start_Learning_rate_factor_list]
 validation_steps = validation_images // batchSize + 1
@@ -61,9 +57,24 @@ validation_generator = test_datagen.flow_from_directory(
     class_mode='binary')
 
 
+def zet_lagen_open_van_conv_base(model_in, aantal):
+    print('trainable weights van: ', len(model_in.trainable_weights))
+    if aantal == 0:
+        model_in.layers[0].trainable = False
+        print('naar: ', len(model_in.trainable_weights))
+        return model_in
+    for layer in model_in.layers:
+        layer.trainable = True
+    for layer in model_in.layers[0].layers[:-aantal]:
+        layer.trainable = False
+    for layer in model_in.layers[0].layers[-aantal:]:
+        layer.trainable = True
+    print('naar: ', len(model.trainable_weights))
+    return model_in
+
 
 if bestaandmodel_verder_brengen:
-    model = models.load_model(modelPath, custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+    model = models.load_model(modelPath)
     print("bestaand model geladen. Trainable weights = ", str(len(model.trainable_weights)))
 else:
     conv_base = applications.InceptionResNetV2(include_top=False,
@@ -80,29 +91,23 @@ else:
     #    layer.trainable = False
     print('This is the number of trainable weights after freezing the conv base:', len(model.trainable_weights))
 
-print(model.summary())
-print(model.layers)
 
 
-
-checkpoint = ModelCheckpoint(modelPath, monitor='val_f2_m', verbose=1,
+checkpoint = ModelCheckpoint(modelPath, monitor='val_acc', verbose=1,
                              save_best_only=True,
-                             save_weights_only=False, mode='max', period=1)
+                             save_weights_only=False, mode='auto', period=1)
 historyList = []
 
 for i in sequences:
     steps_per_epoch = images_per_epoch_list[i] // batchSize + 1
     epochs = epochs_list[i]
     learning_rate = start_Learning_rate_list[i]
-    aantal_lerende_lagen_conv_base = aantal_lerende_lagen_conv_base_list[i]
-    tijdenVorigePunt = geeftVoortgangsInformatie("##########################################################################", tijdenVorigePunt)
-    model = zet_random_lagen_open_van_conv_base(model, aantal_lerende_lagen_conv_base)
-    tijdenVorigePunt = geeftVoortgangsInformatie(str(aantal_lerende_lagen_conv_base) + "lagen opgengezet. ", tijdenVorigePunt)
-    print('sequence: ', str(i), ' epochs: ', epochs, ' start lr: ', str(learning_rate), ' trainable weights:', len(model.trainable_weights))
+    print('##########################################################################')
+    print('sequence: ', str(i), ' epochs: ', epochs, ' start lr: ', str(learning_rate))
 
     model.compile(loss='binary_crossentropy',
                   optimizer=optimizers.SGD(learning_rate=learning_rate, momentum=0.9),
-                  metrics=['acc', recall_m, f2_m])
+                  metrics=['acc'])
 
     tijdenVorigePunt = geeftVoortgangsInformatie("Model ingeladen", tijdenVorigePunt)
     history = model.fit(
@@ -116,7 +121,7 @@ for i in sequences:
     tijdenVorigePunt = geeftVoortgangsInformatie("Na fit", tijdenVorigePunt)
     del(model)
     gc.collect()
-    model = models.load_model(modelPath, custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+    model = models.load_model(modelPath)
 
 tijdenVorigePunt = geeftVoortgangsInformatie("Totaal ", tijdenVorigePunt)
 for i in sequences:

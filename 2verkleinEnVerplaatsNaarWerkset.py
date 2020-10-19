@@ -11,9 +11,9 @@ from generiekeFuncties.fileHandlingFunctions import give_list_of_images,  \
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
 
-voortgangs_informatie = initializeerVoortgangsInformatie("start overklein en verplaats")
+voortgangs_informatie = initializeerVoortgangsInformatie("start verklein en verplaats")
 
-maximumAantalFilesPerKant = 12000
+maximumAantalFilesPerKant = 30000
 percentageTrain = 0.8
 maximumAantalFilesPerKant = int(maximumAantalFilesPerKant / percentageTrain)
 percentageTest = 0.1
@@ -58,7 +58,7 @@ os.mkdir(validation_dir)
 
 voortgangs_informatie = geeftVoortgangsInformatie("Start niet files", voortgangs_informatie)
 
-nietFileNames = prioriteerGecontroleerd(nietFileNames, aantalSamplesNiet)
+nietFileNames = prioriteerGecontroleerd(nietFileNames, aantalSamplesNiet, "n")
 nietFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='niet',
                                                                    sourceDir=full_data_set_dir,
                                                                    targetDir=train_dir,
@@ -80,7 +80,7 @@ nietFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName
 
 voortgangs_informatie = geeftVoortgangsInformatie("Start wel files", voortgangs_informatie)
 
-welFileNames = prioriteerGecontroleerd(welFileNames, aantalSamplesWel)
+welFileNames = prioriteerGecontroleerd(welFileNames, aantalSamplesWel, "w")
 welFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='wel',
                                                                   sourceDir=full_data_set_dir,
                                                                   targetDir=train_dir,

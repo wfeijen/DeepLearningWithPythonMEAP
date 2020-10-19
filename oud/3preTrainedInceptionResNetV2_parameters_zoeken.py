@@ -9,8 +9,8 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
-from sklearn.model_selection import GridSearchCV
-from keras.wrappers.scikit_learn import KerasClassifier
+from keras import backend as K
+
 
 # 0                                                                                                    loss: 0.0033 - acc: 0.9992 - val_loss: 1.0476 - val_acc: 0.9831
 # 1 Adam lr[0.01, 0.0001, 0.00001] epsilon = 0.1 slecht
@@ -22,7 +22,7 @@ from keras.wrappers.scikit_learn import KerasClassifier
 # 6 Metrics = Recall
 
 modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-                                          'BesteModellen/besteModelResnetV2')
+                         '../BesteModellen/besteModelResnetV2')
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
@@ -30,9 +30,12 @@ test_dir = os.path.join(base_dir, 'test')
 imageSize = get_target_picture_size()
 batchSize = 16
 sequences = range(3)
-#epochs_list = [20, 20, 30]
 epochs_list = [20, 20, 20, 20]
 images_per_epoch_list = [2000, 2000, 3000, 5000]
+
+sequences = range(1)
+epochs_list = [3, 20, 20, 20]
+images_per_epoch_list = [200, 2000, 3000, 5000]
 #images_per_epoch_list = [4000, 8000, 12000]
 start_Learning_rate_factor_list = [1, 0.5, 0.2, 0.1]
 validation_images = 1000
@@ -77,7 +80,14 @@ conv_base = applications.InceptionResNetV2(include_top=False,
                                            input_shape=(imageSize, imageSize, 3))
 
 
-checkpoint = ModelCheckpoint(modelPath, monitor='val_acc', verbose=1,
+def recall_m(y_true, y_pred):
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+    recall = true_positives / (possible_positives + K.epsilon())
+    return recall
+
+
+checkpoint = ModelCheckpoint(modelPath, monitor='recall_m_acc', verbose=1,
                              save_best_only=True,
                              save_weights_only=False, mode='auto', period=1)
 
@@ -103,7 +113,7 @@ def runModel(model, init_start_learning_rate, strt_Learning_rate_factor_list):
 
         model.compile(loss='binary_crossentropy',
                       optimizer=optimizers.SGD(learning_rate=learning_rate, momentum=0.9),
-                      metrics=['acc'])
+                      metrics=['acc', recall_m])
 
         tijd_vorige_punt = geeftVoortgangsInformatie("Model ingeladen", startTijd, tijd_vorige_punt)
         history = model.fit(
@@ -121,5 +131,6 @@ def runModel(model, init_start_learning_rate, strt_Learning_rate_factor_list):
 
     tijdVorigePunt = geeftVoortgangsInformatie("Totaal ", startTijd, tijdVorigePunt)
 for i in sequences:
+    print(i)
     plotLossAndAcc(history=historyList[i])
 
