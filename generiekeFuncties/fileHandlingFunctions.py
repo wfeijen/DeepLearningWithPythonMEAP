@@ -162,6 +162,8 @@ def get_hash_from_filename(file_naam_in):
 
 
 def get_controle_aantal_reeks(char, filenaam_in):
+    if "_gecontroleer" not in filenaam_in:
+        return 0
     f = filenaam_in[:-4]
     i = -1
     while f[i] == char:

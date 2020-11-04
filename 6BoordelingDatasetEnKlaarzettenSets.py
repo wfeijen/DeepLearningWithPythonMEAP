@@ -20,8 +20,8 @@ imageList_geen_P = [os.path.join(constNietDir, fileName) for fileName in
                     give_list_of_images(subdirName="niet", baseDir=onderzoeks_dir)]
 imageList_geen_P.sort()
 
-imageList_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_P, 1)
-imageList_geen_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_geen_P, 1)
+imageList_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_P, 0)
+imageList_geen_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_geen_P, 0)
 
 Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel")
 

@@ -17,7 +17,6 @@ modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
-#test_dir = os.path.join(base_dir, 'test')
 imageSize = get_target_picture_size()
 batchSize = 32
 sequences = range(3)
@@ -35,22 +34,22 @@ bestaandmodel_verder_brengen = True
 start_Learning_rate_list = [initial_start_learning_rate * i for i in start_Learning_rate_factor_list]
 validation_steps = validation_images // batchSize + 1
 tijdenVorigePunt = initializeerVoortgangsInformatie("start")
+
 train_datagen = ImageDataGenerator(
     preprocessing_function=applications.inception_resnet_v2.preprocess_input,
     horizontal_flip=True
 )
 
 # Note that the validation data should not be augmented!
-test_datagen = ImageDataGenerator(preprocessing_function=applications.inception_resnet_v2.preprocess_input)
+test_datagen = ImageDataGenerator(
+    preprocessing_function=applications.inception_resnet_v2.preprocess_input
+)
 
 train_generator = train_datagen.flow_from_directory(
-    # This is the target directory
     train_dir,
-    # All images will be resized to 150x150
     target_size=(imageSize, imageSize),
     batch_size=batchSize,
     shuffle=True,
-    # Since we use binary_crossentropy loss, we need binary labels
     class_mode='binary')
 
 validation_generator = test_datagen.flow_from_directory(
@@ -59,8 +58,6 @@ validation_generator = test_datagen.flow_from_directory(
     batch_size=batchSize,
     shuffle=True,
     class_mode='binary')
-
-
 
 if bestaandmodel_verder_brengen:
     model = models.load_model(modelPath, custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})

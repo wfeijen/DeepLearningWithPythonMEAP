@@ -18,18 +18,18 @@ from generiekeFuncties.fileHandlingFunctions import write_voorbereiding_na_te_lo
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture
 from datetime import datetime
 from generiekeFuncties.utilities import initializeerVoortgangsInformatie, geeftVoortgangsInformatie
-from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
+from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
 percentageRandomFromChosen = 0
-percentageAdditionalExtraRandom = 8
+percentageAdditionalExtraRandom = 10
 minimaalVerschilInVerhoudingImages = 1.1
 
 
 ###########################################################################################
 baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
-volgnummersUrl = range(22, 23)  #   1 - 146
+volgnummersUrl = range(31, 41)  #   1 - 146
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 
