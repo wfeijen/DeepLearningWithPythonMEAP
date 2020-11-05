@@ -5,6 +5,31 @@ from generiekeFuncties.plaatjesFuncties import download_image_naar_memory
 
 patroon_verwijzing_plaatje = r'href=\"(https[^\"]*)\" title'
 
+# Te benaderen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 browser = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 browser.get("https://imx.to/i/20dl8j")
 time.sleep(2)
