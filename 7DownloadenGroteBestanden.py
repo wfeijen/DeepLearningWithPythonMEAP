@@ -88,3 +88,4 @@ for verwijzingsDir in opTePakkenVerwijzingDirs:
     else:
         shutil.move(os.path.join(constVerwijzingDir, verwijzingsDir),
                     os.path.join(constVerwerkteVerwijzingDir, verwijzingsDir))
+
