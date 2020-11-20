@@ -5,9 +5,6 @@ from generiekeFuncties.plaatjesFuncties import convertImageToSquareIm_from_file
 import re
 from collections import defaultdict, OrderedDict
 
-
-
-
 def silentremove(filename):
     try:
         os.remove(filename)
@@ -97,7 +94,7 @@ def maak_subdirectory_en_vul_met_random_squared_images(subSubDirName, targetDir,
     print(target_data_set_dir, ' total images:', len(os.listdir(target_data_set_dir)))
     return fileNames
 
-def write_file_regels_naar_lijst(file_path, lijst):
+def write_lijst_regels_naar_file(file_path, lijst):
     if os.path.exists(file_path):
         append_write = 'a'
     else:
@@ -109,7 +106,7 @@ def write_file_regels_naar_lijst(file_path, lijst):
 
 
 def lees_file_regels_naar_ontdubbelde_lijst(fileName):
-    write_file_regels_naar_lijst(fileName,
+    write_lijst_regels_naar_file(fileName,
                                  [])  # We schrijven een lege regel zodat de file gemaakt wordt als hij nog niet bestaat
     with open(fileName, 'r') as f:
         content = f.readlines()
@@ -123,7 +120,7 @@ def write_voorbereiding_na_te_lopen_verwijzingen(root, url, postName, url_verwij
     # first we create a filename
     file_path = os.path.join(root, re.sub('[\W_]', '_', str(url.split('/')[4]) + '_' + postName) + '.txt')
     regels = [key + "," + value for key, value in url_verwijzingen_en_lokale_file_hash.items()]
-    write_file_regels_naar_lijst(file_path, regels)
+    write_lijst_regels_naar_file(file_path, regels)
 
 def write_na_te_lopen_verwijzingen_directorie(dir_name, verwijzingen):
     try:
@@ -131,7 +128,7 @@ def write_na_te_lopen_verwijzingen_directorie(dir_name, verwijzingen):
     except Exception as e:
         print("Directory ", dir_name, ' niet gemaakt. Bestond waarschijnlijk al.', str(e))
     file_path = os.path.join(dir_name, 'verwijzingen.txt')
-    write_file_regels_naar_lijst(file_path, verwijzingen)
+    write_lijst_regels_naar_file(file_path, verwijzingen)
 
 
 def writeDict(dict, fileName):

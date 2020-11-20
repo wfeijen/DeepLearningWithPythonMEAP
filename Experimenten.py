@@ -1,7 +1,11 @@
-a =[1,2,3,4,5,6,7,8]
+import os
+import regex
 
-print(a[-2:])
-print(a[:-2])
-print(a[-1])
+a = "https://imx.to/i/20bygb"
 
+print(os.path.basename(a))
+print(os.path.split(a))
 
+match = regex.findall('//([^\.]+)\.', a, regex.IGNORECASE)
+
+print(match)
