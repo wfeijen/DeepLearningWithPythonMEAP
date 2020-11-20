@@ -28,7 +28,7 @@ def getActualImageUrlFromImx(driver):
     return None
 
 
-def plaatje_gedownload(url, doelDir):
+def plaatje_gedownload(url, doelDir, template):
     result = False
     options = Options()
     options.add_argument('--headless')
@@ -46,12 +46,27 @@ def plaatje_gedownload(url, doelDir):
         if img_url is not None:
             img = download_image_naar_memory(img_url)
             if img is not None:
-                fileName = os.path.basename(img_url)
-                sla_image_op(img, os.path.join(doelDir, fileName + ".jpg"))
+                file_name = os.path.join(doelDir, os.path.basename(img_url) + ".jpg")
+                sla_image_op(img, file_name)
+                breedte, hoogte = img.size
+                factor = 16 / 9
+                if breedte > hoogte * factor:
+                    breedte = hoogte * factor
+                else:
+                    hoogte = int(breedte / factor)
+                inhoud_pp3 = template.replace("teVervangenBreedte",
+                                              str(breedte)).replace("teVervangenHoogte",
+                                              str(hoogte))
+                pp3_file_naam = file_name + ".pp3"
+                pp3_file = open(pp3_file_naam, "w")
+                pp3_file.write(inhoud_pp3)
                 result = True
     browser.quit()
     return result
 
+templateFile = open("rawtherapeeTemplate.pp3")
+template = templateFile.read()
+templateFile.close()
 
 # webBrowser = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 tijdenVorigePunt = initializeerVoortgangsInformatie("start")
@@ -63,7 +78,7 @@ for verwijzingsDir in opTePakkenVerwijzingDirs:
     verwijzingen = lees_file_regels_naar_ontdubbelde_lijst(verwijzingsFile)
     tijdenVorigePunt = geeftVoortgangsInformatie("VerwijzingsDir: " + verwijzingsDir + " met " + str(len(verwijzingen)) + " verwijzingen. ", tijdenVorigePunt)
     for verwijzing in verwijzingen:
-        if not plaatje_gedownload(verwijzing, os.path.join(constVerwijzingDir, verwijzingsDir)):
+        if not plaatje_gedownload(verwijzing, os.path.join(constVerwijzingDir, verwijzingsDir), template):
             lijstMislukteUrls.append(verwijzing)
             print(verwijzing, " mislukt")
         else:
