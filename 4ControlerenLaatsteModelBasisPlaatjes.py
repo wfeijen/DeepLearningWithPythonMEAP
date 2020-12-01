@@ -10,16 +10,18 @@ from generiekeFuncties.utilities import combine_lists, \
     initializeerVoortgangsInformatie, geeftVoortgangsInformatie
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images, verwijderGecontroleerdeFilesBovenNummerFromList
-from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
+from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 
-imageSize = get_target_picture_size()
-start_tijd, vorige_tijd = initializeerVoortgangsInformatie("start")
-classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-                                            'BesteModellen/besteModelResnetV2'),
-                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+onderzoeks_dir = os.path.join(base_dir, 'OntdubbeldEnVerkleind')
 
-onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/ontdubbeldEnVerkleind'
 # onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/testset'
+
+start_tijd, vorige_tijd = initializeerVoortgangsInformatie("start")
+classifier = models.load_model(modelPath,
+                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+imageSize = get_target_picture_size()
 print("############### start: ", str(datetime.now()))
 
 

@@ -11,12 +11,11 @@ from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
 
-
-modelPath = os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-                                          'BesteModellen/besteModelResnetV2')
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-train_dir = os.path.join(base_dir, 'train')
-validation_dir = os.path.join(base_dir, 'validation')
+base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+base_picture_dir = os.path.join(base_dir, 'Werkplaats')
+train_dir = os.path.join(base_picture_dir, 'train')
+validation_dir = os.path.join(base_picture_dir, 'validation')
 imageSize = get_target_picture_size()
 batchSize = 32
 sequences = range(3)

@@ -8,8 +8,9 @@ directoryNr = 2
 aantal = 25
 hash_size = bigHash_size()
 
-onderzoeks_dir = '/mnt/GroteSchijf/machineLearningPictures/take1/rawInput'
-constVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/verwijzingen'
+base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+onderzoeks_dir = os.path.join(base_dir, 'RawInput')
+constVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
 constWelDir = os.path.join(onderzoeks_dir, "wel")
 constNietDir = os.path.join(onderzoeks_dir, "niet")
 

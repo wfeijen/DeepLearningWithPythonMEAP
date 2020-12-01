@@ -29,17 +29,18 @@ minimaalVerschilInVerhoudingImages = 1.1
 
 ###########################################################################################
 baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
-volgnummersUrl = range(31, 41)  #   1 - 146
+volgnummersUrl = range(41, 51)  #   1 - 146
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 
 
 # Globale variabelen
-constPlaatjesEnModelDir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-constVoorberVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/verwijzingen'
-constBenaderde_url_administratie_pad = '/mnt/GroteSchijf/machineLearningPictures/verwijzingenBoekhouding/benaderde_hash.txt'
-constNieuwePlaatjesLocatie = '/mnt/GroteSchijf/machineLearningPictures/take1/rawInput'
-constClassifier = models.load_model(os.path.join(constPlaatjesEnModelDir, 'BesteModellen/besteModelResnetV2'),
+base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+constVoorberVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
+constBenaderde_url_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
+constNieuwePlaatjesLocatie = os.path.join(base_dir, 'RawInput')
+constClassifier = models.load_model(modelPath,
                                custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 
 hash_administratie = readDictFile(constBenaderde_url_administratie_pad)

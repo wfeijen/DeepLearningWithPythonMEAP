@@ -21,8 +21,8 @@ percentageValidation = 0.2
 # The path to the directory where the original
 # data set was uncompressed
 root = '/mnt/GroteSchijf/machineLearningPictures/take1'
-full_data_set_dir = os.path.join(root, 'ontdubbeldEnVerkleind')
-target_base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
+full_data_set_dir = os.path.join(root, 'OntdubbeldEnVerkleind')
+target_base_dir = os.path.join(root, 'Werkplaats')
 targetSizeImage = get_target_picture_size()
 
 nietFileNames = give_list_of_images(subdirName='niet', baseDir=full_data_set_dir)

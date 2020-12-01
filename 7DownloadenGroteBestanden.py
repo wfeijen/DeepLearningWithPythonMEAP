@@ -11,7 +11,8 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 from numpy.random import exponential
 
 # noinspection SpellCheckingInspection
-constVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/take1/Verwijzingen'
+base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+constVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
 constVerwerkteVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/take1/Verwerkteverwijzingen'
 patroon_verwijzing_plaatje = r'href=\"(https[^\"]*)\" title'
 # https://imx.to/i/20bygb

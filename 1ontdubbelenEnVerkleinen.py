@@ -13,9 +13,9 @@ maximumSizeShortSideImage = 512
 
 
 root = '/mnt/GroteSchijf/machineLearningPictures/take1'
-input_directory = os.path.join(root, 'rawInput')
-output_directory = os.path.join(root, 'ontdubbeldEnVerkleind')
-constVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/verwijzingen'
+input_directory = os.path.join(root, 'RawInput')
+output_directory = os.path.join(root, 'OntdubbeldEnVerkleind')
+constVerwijzingDir = os.path.join(root, 'Verwijzingen')
 
 def gevonden_hashcodes_onder_dir(onderzoeksDir, hash_size):
     result = [f[:hash_size * 2] for dp, dn, filenames in os.walk(onderzoeksDir) for f in filenames]

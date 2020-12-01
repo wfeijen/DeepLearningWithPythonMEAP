@@ -10,6 +10,7 @@ from datetime import datetime
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.fileHandlingFunctions import verwijderGecontroleerdeFilesBovenNummerFromList
 from generiekeFuncties.viewer import Viewer
+from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 
 # Wat willen we bekijken?
 # train: 0
@@ -20,13 +21,15 @@ directoryNr = 2
 
 imageSize = get_target_picture_size()
 
-classifier = models.load_model(os.path.join('/mnt/GroteSchijf/machineLearningPictures/take1',
-                                            'BesteModellen/besteModelResnetV2'))
+base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+base_picture_dir = os.path.join(base_dir, 'Werkplaats')
+train_dir = os.path.join(base_picture_dir, 'train')
+validation_dir = os.path.join(base_picture_dir, 'validation')
+test_dir = os.path.join(base_picture_dir, 'test')
 
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/werkplaats'
-train_dir = os.path.join(base_dir, 'train')
-validation_dir = os.path.join(base_dir, 'validation')
-test_dir = os.path.join(base_dir, 'test')
+classifier = models.load_model(modelPath,
+                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 if directoryNr == 0:
     onderzoeks_dir = train_dir
 elif directoryNr == 1:
