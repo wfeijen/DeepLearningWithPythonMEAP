@@ -28,10 +28,10 @@ minimaalVerschilInVerhoudingImages = 1.1
 
 
 ###########################################################################################
-baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
-volgnummersUrl = range(41, 51)  #   1 - 146
+baseUrl = 'https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/page'
+volgnummersUrl = range(1, 11)  #   1 - 11
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
-patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
+patroon_naam_post = r'([0-9]{4}-[0-9]{2}-[0-9]{2}[^\<]+)<'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 
 
 # Globale variabelen
@@ -116,7 +116,6 @@ for volgnummerUrl in volgnummersUrl:
 
 
 #################################### nog doen
-# https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/pag
 # https://vipergirls.to/threads/103533-Watch4Beauty/page67
 # https://vipergirls.to/threads/1633619-Met-amp-Fem-gt-gt-gt-Nude-Erotic-Model-Collection-lt-lt-lt-2014-2015/page8
 # https://vipergirls.to/threads/602689-All-Sexy-Shaved-Danish-Amateur-Models-(Collection)/page18
@@ -150,3 +149,8 @@ for volgnummerUrl in volgnummersUrl:
 # volgnummersUrl = range(2, 14)
 # patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 # patroon_naam_post = '<b>([^\~<>]+)\~' #<b>Leggy Bombshell ~
+###########################################################################################
+baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
+volgnummersUrl = range(51, 61)  #   1 - 46
+patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
+patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />

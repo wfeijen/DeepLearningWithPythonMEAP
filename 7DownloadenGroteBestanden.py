@@ -22,7 +22,7 @@ def getActualImageUrlFromImx(driver):
     if len(doc) > 0:
         doc = doc[0]
         doc.click()
-        time.sleep(2 + exponential(0.3) + exponential(0.4))
+        time.sleep(1 + exponential(0.3) + exponential(0.2))
         match = regex.findall(patroon_verwijzing_plaatje, driver.page_source, regex.IGNORECASE)
         if len(match) > 0:
             return (match[0])
@@ -37,7 +37,7 @@ def plaatje_gedownload(url, doelDir, template):
     browser = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver", options=options)
     browser.minimize_window()
     browser.get(url)
-    time.sleep(2 + exponential(0.2) + exponential(0.3))
+    time.sleep(1 + exponential(0.2) + exponential(0.1))
     # hier strategie bepalen en meegeven
     organisatie = regex.findall('//([^\.]+)\.', url, regex.IGNORECASE)
     if len(organisatie) == 1:

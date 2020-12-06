@@ -126,5 +126,5 @@ class Viewer:
             self.wel()
         if (kp == '\'Left\''):
             self.undo()
-        if (kp == '\'Control_R\''):
+        if (kp == '\'Shift_R\''):
             self.root.wm_state('iconic')

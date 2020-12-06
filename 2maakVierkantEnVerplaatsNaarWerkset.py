@@ -13,8 +13,8 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 
 voortgangs_informatie = initializeerVoortgangsInformatie("start verklein en verplaats")
 
-aantalSamplesWel = 20000
-aantalSamplesNiet = 10000
+aantalSamplesWel = 30000
+aantalSamplesNiet = 15000
 percentageTrain = 0.8
 percentageValidation = 0.2
 
