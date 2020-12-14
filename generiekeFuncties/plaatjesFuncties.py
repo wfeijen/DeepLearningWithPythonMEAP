@@ -7,6 +7,7 @@ import numpy as np
 import requests
 from io import BytesIO
 import imagehash
+from tensorflow.keras import applications
 
 constHash_size = 8
 constBigHash_size = constHash_size * 2
@@ -152,7 +153,8 @@ def classificeer_vollig_image(img, kenmerk, classifier_in, image_size_in):
         pp_image = preprocessing.image.img_to_array(img)
         np_image = np.array(pp_image)
         np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
-        np_image /= 255.0
+        #np_image /= 255.0
+        np_image = applications.inception_resnet_v2.preprocess_input(np_image)
         classifications = classifier_in.predict(np_image)
         return classifications[0][0]
     except ValueError as e:

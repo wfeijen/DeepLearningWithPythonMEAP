@@ -29,7 +29,7 @@ minimaalVerschilInVerhoudingImages = 1.1
 
 ###########################################################################################
 baseUrl = 'https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/page'
-volgnummersUrl = range(1, 11)  #   1 - 11
+volgnummersUrl = range(11, 21)  #   1 - 46
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 patroon_naam_post = r'([0-9]{4}-[0-9]{2}-[0-9]{2}[^\<]+)<'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 

@@ -13,10 +13,10 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 
 voortgangs_informatie = initializeerVoortgangsInformatie("start verklein en verplaats")
 
-aantalSamplesWel = 30000
-aantalSamplesNiet = 15000
-percentageTrain = 0.8
-percentageValidation = 0.2
+aantalSamplesWel = 31000
+aantalSamplesNiet = 16000
+percentageTrain = 0.9
+percentageValidation = 0.1
 
 # The path to the directory where the original
 # data set was uncompressed

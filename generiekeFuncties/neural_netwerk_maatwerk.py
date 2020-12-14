@@ -31,7 +31,8 @@ def zet_random_lagen_open_van_conv_base(model_in, aantal):
     for layer in model_in.layers[0].layers:
         layer.trainable = False
     for i in range(aantal):
-        layerNr = maxLayerNr - int(random() * random() * maxLayerNr)
+        dobbelsteen = random()
+        layerNr = maxLayerNr - int(dobbelsteen * dobbelsteen * maxLayerNr)
         print("Layer open: ", str(layerNr))
         model_in.layers[0].layers[layerNr].trainable = True
     print('naar: ', len(model_in.trainable_weights))

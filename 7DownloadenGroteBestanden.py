@@ -14,7 +14,8 @@ from numpy.random import exponential
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 constVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
 constVerwerkteVerwijzingDir = '/mnt/GroteSchijf/machineLearningPictures/take1/Verwerkteverwijzingen'
-patroon_verwijzing_plaatje = r'href=\"(https[^\"]*)\" title'
+patroon_src_verwijzing_plaatje = r'src=\"(https[^\"]*)\" alt'
+patroon_href_verwijzing_plaatje = r'href=\"(https[^\"]*)\" title'
 # https://imx.to/i/20bygb
 
 def getActualImageUrlFromImx(driver):
@@ -23,11 +24,19 @@ def getActualImageUrlFromImx(driver):
         doc = doc[0]
         doc.click()
         time.sleep(1 + exponential(0.3) + exponential(0.2))
-        match = regex.findall(patroon_verwijzing_plaatje, driver.page_source, regex.IGNORECASE)
+        match = regex.findall(patroon_href_verwijzing_plaatje, driver.page_source, regex.IGNORECASE)
         if len(match) > 0:
             return (match[0])
     return None
 
+def getActualImageUrlFromTurboimagehost(driver):
+    doc = driver.find_elements_by_xpath('//body/div/img')
+    if len(doc) > 0:
+        doc = doc[0]
+        match = regex.findall(patroon_src_verwijzing_plaatje, driver.page_source, regex.IGNORECASE)
+        if len(match) > 0:
+            return (match[0])
+    return None
 
 def plaatje_gedownload(url, doelDir, template):
     result = False
@@ -39,11 +48,12 @@ def plaatje_gedownload(url, doelDir, template):
     browser.get(url)
     time.sleep(1 + exponential(0.2) + exponential(0.1))
     # hier strategie bepalen en meegeven
-    organisatie = regex.findall('//([^\.]+)\.', url, regex.IGNORECASE)
+    organisatie = regex.findall('//(?:www\.)?([^\.]+)\.', url, regex.IGNORECASE)
     if len(organisatie) == 1:
         organisatie = organisatie[0]
         img_url = None
         if organisatie == "imx": img_url = getActualImageUrlFromImx(browser)
+        if organisatie == "turboimagehost": img_url = getActualImageUrlFromTurboimagehost(browser)
         if img_url is not None:
             img = download_image_naar_memory(img_url)
             if img is not None:

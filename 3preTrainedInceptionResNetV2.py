@@ -26,7 +26,7 @@ aantal_lerende_lagen_conv_base_list = [30, 30, 30]
 validation_images = 3000
 #images_per_epoch_list = [4000, 8000, 12000]
 start_Learning_rate_factor_list = [1, 0.7, 0.5]
-initial_start_learning_rate = 0.0040
+initial_start_learning_rate = 0.0050
 
 bestaandmodel_verder_brengen = True
 
@@ -40,8 +40,10 @@ train_datagen = ImageDataGenerator(
 )
 
 # Note that the validation data should not be augmented!
+# Maar een horizontale flip levert een plaatje op dat niet fout kan zijn dus dat doen we wel.
 test_datagen = ImageDataGenerator(
-    preprocessing_function=applications.inception_resnet_v2.preprocess_input
+    preprocessing_function=applications.inception_resnet_v2.preprocess_input,
+    horizontal_flip = True
 )
 
 train_generator = train_datagen.flow_from_directory(
