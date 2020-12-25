@@ -22,14 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="paden gezet naar take1">
-      <change afterPath="$PROJECT_DIR$/8DownloadenVanYandex.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/8DownloadenVanYandexLogicaOntwikkeling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5uitlezenVanafStartUrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/5uitlezenVanafStartUrl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/7DownloadenGroteBestanden.py" beforeDir="false" afterPath="$PROJECT_DIR$/7DownloadenGroteBestanden.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="eerste serieuze poging yandex">
+      <change beforePath="$PROJECT_DIR$/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/8DownloadenVanYandex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +63,7 @@
       <recent name="$PROJECT_DIR$/oud" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.8DownloadenVanYandexLogicaOntwikkeling">
+  <component name="RunManager" selected="Python.8DownloadenVanYandex">
     <configuration name="2maakVierkantEnVerplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -177,8 +171,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.8DownloadenVanYandexLogicaOntwikkeling" />
         <item itemvalue="Python.8DownloadenVanYandex" />
+        <item itemvalue="Python.8DownloadenVanYandexLogicaOntwikkeling" />
         <item itemvalue="Python.4ControlerenLaatsteModelBasisPlaatjes" />
         <item itemvalue="Python.3preTrainedInceptionResNetV2" />
         <item itemvalue="Python.2maakVierkantEnVerplaatsNaarWerkset" />
@@ -386,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607266661410</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="eerste serieuze poging yandex">
+      <created>1608933520874</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1608933520874</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -426,7 +427,8 @@
     <MESSAGE value="template voor RawTherapee toevoegen ook bij downloaden laatste nog niet" />
     <MESSAGE value="template voor RawTherapee toevoegen ook bij downloaden laatste nog niet x" />
     <MESSAGE value="paden gezet naar take1" />
-    <option name="LAST_COMMIT_MESSAGE" value="paden gezet naar take1" />
+    <MESSAGE value="eerste serieuze poging yandex" />
+    <option name="LAST_COMMIT_MESSAGE" value="eerste serieuze poging yandex" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

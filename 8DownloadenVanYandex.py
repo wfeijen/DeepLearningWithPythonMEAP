@@ -60,11 +60,11 @@ for urlWordPermutation in urlWordPermutations:
         userAgent = ua.random
         print(userAgent)
         options.add_argument(f'user-agent={userAgent}')
-        driver = webdriver.Chrome(chrome_options=options,
+        driver = webdriver.Chrome(options=options,
                                   executable_path="/usr/lib/chromium-browser/chromedriver")
-        driver.set_window_size(random.choice(screenSizes), random.choice(screenSizes))
+#        driver.set_window_size(random.choice(screenSizes), random.choice(screenSizes))
         driver.minimize_window()
-        zoekUrl = urlStart + urlWordPermutation + urlEnd #+ str(i)
+        zoekUrl = urlStart + urlWordPermutation + urlEnd + str(i)
         nog_wachten = max(0, constBasisWachttijd - (datetime.now() - vorigeClick).total_seconds())
         time.sleep(nog_wachten + exponential(0.3) + exponential(0.2))
         driver.get(zoekUrl)
@@ -81,7 +81,7 @@ for urlWordPermutation in urlWordPermutations:
 
         # Zoeken naar plaatjes voorbeeld: {"url":"https://wallpapercave.com/wp/wp6828079.jpg"
         gevonden_verwijzingen = regex.findall(regexPlaatje, page_text, regex.IGNORECASE)
-        if len(gevonden_verwijzingen) == 0:
+        if True: #(gevonden_verwijzingen) == 0:
             einde = True
         else:
             i += i
