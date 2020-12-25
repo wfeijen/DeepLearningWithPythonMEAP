@@ -1,4 +1,5 @@
 import time
+from numpy.random import exponential
 import regex
 import os
 import shutil
@@ -8,7 +9,7 @@ from generiekeFuncties.plaatjesFuncties import download_image_naar_memory, sla_i
 from generiekeFuncties.fileHandlingFunctions import lees_file_regels_naar_ontdubbelde_lijst, \
     write_lijst_regels_naar_file
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
-from numpy.random import exponential
+
 
 # noinspection SpellCheckingInspection
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'

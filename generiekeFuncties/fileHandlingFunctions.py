@@ -1,4 +1,5 @@
 import os, errno
+import regex
 import shutil
 import random
 from generiekeFuncties.plaatjesFuncties import convertImageToSquareIm_from_file
@@ -158,6 +159,33 @@ def get_hash_from_filename(file_naam_in):
         return file_naam_in[:loc]
 
 
+def get_zekerheid_goede_classe(char, filenaam_in):
+    # We zoeken naar een reeks van 0 naar 100
+    # We pakken de reeks
+    match = regex.findall('_gecontroleerd_([wn]+).jpg', filenaam_in, regex.IGNORECASE)
+    if len(match) == 0:
+        # Nog nooit gecontroleerd
+        # Ongecontroleerd waarderen we op de helft
+        return 50
+    reeks = match[0]
+    if len(reeks) == 0:
+        return 51
+    totaal_waarde = 0
+    char_waarde = 0
+    for i in range(0, len(reeks)):
+        totaal_waarde += i + 1
+        if reeks[i] == char:
+            char_waarde += i + 1
+    return (100 * (char_waarde + char_waarde - totaal_waarde) / totaal_waarde)
+
+
+    f = filenaam_in[:-4]
+    i = -1
+    while f[i] == char:
+        i = i - 1
+    antwoord = -(1 + i)
+    return antwoord
+
 def get_controle_aantal_reeks(char, filenaam_in):
     if "_gecontroleer" not in filenaam_in:
         return 0
@@ -167,8 +195,6 @@ def get_controle_aantal_reeks(char, filenaam_in):
         i = i - 1
     antwoord = -(1 + i)
     return antwoord
-
-
 
 def markeerControleResultaat(file_naam_in, operatie):
     # Voegt de eerste letter van de operatie toe (n/w)
@@ -205,10 +231,10 @@ def prioriteerGecontroleerd(fileList, aantal, controle_char):
     antwoord = []
     fileGroepen = {}
     for file in fileList:
-        aantal_eenduidige_controles = get_controle_aantal_reeks(controle_char, file)
-        if aantal_eenduidige_controles not in fileGroepen:
-            fileGroepen[aantal_eenduidige_controles] = []
-        fileGroepen[aantal_eenduidige_controles].append(file)
+        waarschijnlijkheid_goede_classe = round(get_zekerheid_goede_classe(controle_char, file))
+        if waarschijnlijkheid_goede_classe not in fileGroepen:
+            fileGroepen[waarschijnlijkheid_goede_classe] = []
+        fileGroepen[waarschijnlijkheid_goede_classe].append(file)
     fileGroepen = OrderedDict(reversed(sorted(fileGroepen.items())))
 
     i = 0

@@ -38,12 +38,12 @@ patroon_naam_post = r'([0-9]{4}-[0-9]{2}-[0-9]{2}[^\<]+)<'  # 2019-06-19 - Monik
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 modelPath = os.path.join(base_dir, 'BesteModellen/m_')
 constVoorberVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
-constBenaderde_url_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
+constBenaderde_hash_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
 constNieuwePlaatjesLocatie = os.path.join(base_dir, 'RawInput')
 constClassifier = models.load_model(modelPath,
                                custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 
-hash_administratie = readDictFile(constBenaderde_url_administratie_pad)
+hash_administratie = readDictFile(constBenaderde_hash_administratie_pad)
 
 def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam_post_in, vgi):
     random_counter = 0
@@ -70,16 +70,16 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
                 if img is None:
                     resultaat = -1
                 else:
-                    hash = bigHashPicture(img)
-                    if hash not in hash_administratie:
+                    hash_groot = bigHashPicture(img)
+                    if hash_groot not in hash_administratie:
                         resultaat = classificeer_vollig_image(img, na_te_lopen_verwijzing_klein,
                                                                        constClassifier,
                                                                        targetImageSize)
                         if resultaat >= grenswaarde:
-                            hashes_voor_lokale_filenaam_en_url_groot[hash] = na_te_lopen_verwijzing_groot
-                            hash_administratie[hash] = str(datetime.now())
+                            hashes_voor_lokale_filenaam_en_url_groot[hash_groot] = na_te_lopen_verwijzing_groot
+                            hash_administratie[hash_groot] = str(datetime.now())
                             random_counter = random_counter + percentageRandomFromChosen #random.randint(0, percentageRandomFromChosen * 2)
-                            sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "wel", hash + ".jpg"))
+                            sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "wel", hash_groot + ".jpg"))
                         elif resultaat < 0:
                             print("Negatieve score: ", na_te_lopen_verwijzing_groot)
         vgi = geeftVoortgangsInformatie(
@@ -92,20 +92,20 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
             na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein = na_te_lopen_verwijzing
             img = download_image_naar_memory(na_te_lopen_verwijzing_klein)
             if img is not None:
-                hash = bigHashPicture(img)
-                if hash not in hash_administratie:
+                hash_groot = bigHashPicture(img)
+                if hash_groot not in hash_administratie:
                     if na_te_lopen_verwijzing_groot not in hashes_voor_lokale_filenaam_en_url_groot:
                         random_counter = random_counter - 100
-                        hash_administratie[hash] = str(datetime.now())
-                        sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash + ".jpg"))
-                        hashes_voor_lokale_filenaam_en_url_groot[hash] = na_te_lopen_verwijzing_groot
+                        hash_administratie[hash_groot] = str(datetime.now())
+                        sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash_groot + ".jpg"))
+                        hashes_voor_lokale_filenaam_en_url_groot[hash_groot] = na_te_lopen_verwijzing_groot
                         aantalRandomOpgenomen = aantalRandomOpgenomen + 1
         vgi = geeftVoortgangsInformatie(
             'Post ' + postname + ' heeft ' + str(aantalRandomOpgenomen) + ' random verwijzingen'
             , vgi)
 
         write_voorbereiding_na_te_lopen_verwijzingen(constVoorberVerwijzingDir, url_in, postname, hashes_voor_lokale_filenaam_en_url_groot)
-        writeDict(hash_administratie, constBenaderde_url_administratie_pad)
+        writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
 
 
 voortgangs_informatie = initializeerVoortgangsInformatie("Uitlezen urls")

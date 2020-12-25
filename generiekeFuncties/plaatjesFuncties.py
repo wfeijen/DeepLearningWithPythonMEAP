@@ -2,7 +2,7 @@ import math
 import os
 from PIL import Image, ImageStat
 from send2trash import send2trash
-from keras import  preprocessing
+from keras import preprocessing
 import numpy as np
 import requests
 from io import BytesIO
@@ -12,24 +12,46 @@ from tensorflow.keras import applications
 constHash_size = 8
 constBigHash_size = constHash_size * 2
 
+
 def hashPicture(img):
     return str(imagehash.phash(img, hash_size=constHash_size))
+
 
 def bigHashPicture(img):
     return str(imagehash.phash(img, hash_size=constBigHash_size))
 
+
 def hash_size():
     return constHash_size
+
 
 def bigHash_size():
     return constBigHash_size
 
+
 def get_target_picture_size():
     return 240
 
-def remove_small_images_and_give_list_of_proper_sized_images(subdir_name, basedir, remove_small_files_from_source,
-                                                             minimum_size_short_side_image,
-                                                             maximum_size_short_side_image):
+
+def get_minimum_size_short_side_image():
+    return get_target_picture_size()
+
+
+def get_maximum_size_short_side_image():
+    return 512
+
+
+def size_image_proper(img):
+    size = img.size
+    if min(size) < get_minimum_size_short_side_image():
+        return None
+    size = math.ceil(get_maximum_size_short_side_image() * max(size) / min(size))
+    img.thumbnail((size, size), Image.ANTIALIAS)
+    im = img.convert('RGB')
+    return im
+
+
+def remove_small_images_and_give_list_of_proper_sized_images(subdir_name, basedir, remove_small_files_from_source):
     data_set_dir = os.path.join(basedir, subdir_name)
     file_names = [f for f in os.listdir(data_set_dir) if os.path.isfile(os.path.join(data_set_dir, f))]
     verwijderd_vanwege_extentie = 0
@@ -44,22 +66,22 @@ def remove_small_images_and_give_list_of_proper_sized_images(subdir_name, basedi
         else:
             im = Image.open(full_file_name)
             size = im.size
-            if min(size) < minimum_size_short_side_image:
+            if min(size) < get_minimum_size_short_side_image():
                 if remove_small_files_from_source:
                     send2trash(full_file_name)
                 file_names.remove(file_name)
-            elif min(size) > maximum_size_short_side_image:
-                size = math.ceil(maximum_size_short_side_image * max(size) / min(size))
-                im.thumbnail((size, size), Image.ANTIALIAS)
-                im = im.convert('RGB')
+            elif min(size) > get_maximum_size_short_side_image():
+                im = size_image_proper(im)
                 send2trash(full_file_name)
                 im.save(full_file_name)
     return file_names, verwijderd_vanwege_extentie, verwijderd_vanwege_te_klein, kleiner_gemaakt
+
 
 def resize_image(im, sx, sy, vergrotingsfactor):
     sx = int(sx * vergrotingsfactor)
     sy = int(sy * vergrotingsfactor)
     return im.resize(size=(sx, sy), resample=Image.BICUBIC), sx, sy
+
 
 def convert_image_to_square(im, targetsize_im):
     im = im.convert("RGB")
@@ -68,7 +90,7 @@ def convert_image_to_square(im, targetsize_im):
     antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=mean_color)
     # Als plaatje idioot breed is knippen we de zijkanten er af
     if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk):
-        if sx_oorspronkelijk>sy_oorspronkelijk:
+        if sx_oorspronkelijk > sy_oorspronkelijk:
             nieuwe_breedte = sy_oorspronkelijk * 4
             im = im.crop(((sx_oorspronkelijk - nieuwe_breedte) / 2, 0, nieuwe_breedte, sy_oorspronkelijk))
             sx_oorspronkelijk = nieuwe_breedte
@@ -79,7 +101,8 @@ def convert_image_to_square(im, targetsize_im):
     # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de langste
     # as gelijk is aan targetSizeIm
     if max(sx_oorspronkelijk, sy_oorspronkelijk) < targetsize_im:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / max(sx_oorspronkelijk, sy_oorspronkelijk))
+        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk,
+                                  targetsize_im / max(sx_oorspronkelijk, sy_oorspronkelijk))
         antwoord.paste(im, ((targetsize_im - sx) // 2, (targetsize_im - sy) // 2))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
     # Breed plaatje knippen we in twee stukken en plaatsen onder elkaar
@@ -99,7 +122,7 @@ def convert_image_to_square(im, targetsize_im):
         antwoord.paste(im_crop2, (targetsize_im // 2, 0))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
     # Beetje breder of vierkant voegen we in de breedte  in het frame
-    if sx_oorspronkelijk >= sy_oorspronkelijk: # (en sx <= 2* sy)
+    if sx_oorspronkelijk >= sy_oorspronkelijk:  # (en sx <= 2* sy)
         im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sx_oorspronkelijk)
         antwoord.paste(im, (0, (targetsize_im - sy) // 2))
         return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
@@ -108,10 +131,12 @@ def convert_image_to_square(im, targetsize_im):
     antwoord.paste(im, ((targetsize_im - sx) // 2, 0))
     return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
 
+
 def convertImageToSquareIm_from_file(imagePath, targetSizeIm):
     # returns a square part of the image sized to target size
     im = Image.open(imagePath)
     return convert_image_to_square(im=im, targetsize_im=targetSizeIm)
+
 
 # def get_square_images_from_image(im, targetSizeIm, maximaalVerschilInVerhoudingImages):
 #     # returns a square part of the image sized to target size
@@ -153,7 +178,7 @@ def classificeer_vollig_image(img, kenmerk, classifier_in, image_size_in):
         pp_image = preprocessing.image.img_to_array(img)
         np_image = np.array(pp_image)
         np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
-        #np_image /= 255.0
+        # np_image /= 255.0
         np_image = applications.inception_resnet_v2.preprocess_input(np_image)
         classifications = classifier_in.predict(np_image)
         return classifications[0][0]
@@ -168,10 +193,10 @@ def classificeer_vollig_image_from_file(file_name_in, classifier_in, image_size_
 
 
 # def classificeer_vollig_image_from_url(url_in, classifier_in, image_size_in):
-    # img = download_image_naar_memory(url_in)
-    # if img is None:
-    #     return -1
-    # return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
+# img = download_image_naar_memory(url_in)
+# if img is None:
+#     return -1
+# return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
 
 def sla_image_op(img, doellocatie):
     try:
@@ -192,4 +217,3 @@ def download_image_naar_memory(url_in):
         print("Image corrupt: ", url_in, " - ", e)
         return None
     return img
-
