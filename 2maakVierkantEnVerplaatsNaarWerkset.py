@@ -27,10 +27,17 @@ targetSizeImage = get_target_picture_size()
 
 nietFileNames = give_list_of_images(subdirName='niet', baseDir=full_data_set_dir)
 welFileNames = give_list_of_images(subdirName='wel', baseDir=full_data_set_dir)
-print("aantal Niet:", len(nietFileNames), " aantal Wel:", len(welFileNames))
+print("aantal Niet totaal:", len(nietFileNames), " aantal Wel totaal:", len(welFileNames))
 
-aantalSamplesWel = min(len(welFileNames), aantalSamplesWel )
-aantalSamplesNiet = min(len(nietFileNames), aantalSamplesNiet)
+# Zorgen voor een zekere balans in de samples
+aantalSamplesWel = len(welFileNames) // 2
+aantalSamplesNiet = len(nietFileNames) // 2
+if aantalSamplesWel < aantalSamplesNiet // 2:
+    aantalSamplesNiet = 2 * aantalSamplesWel
+elif aantalSamplesNiet < aantalSamplesWel // 2:
+    aantalSamplesWel = 2 * aantalSamplesNiet
+
+print("aantal Niet geselecteerd:", aantalSamplesNiet, " aantal Wel geselecteerd:", aantalSamplesWel)
 aantalSamplesTrainWel = int(percentageTrain * aantalSamplesWel)
 aantalSamplesTrainNiet = int(percentageTrain * aantalSamplesNiet)
 aantalSamplesValidation = min(aantalSamplesNiet - aantalSamplesTrainNiet, aantalSamplesWel - aantalSamplesTrainWel)

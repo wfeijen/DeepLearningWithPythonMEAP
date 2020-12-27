@@ -12,7 +12,8 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+model_dir = 'inceptionResnetV2'
+modelPath = os.path.join(base_dir, 'BesteModellen', model_dir, 'm_')
 base_picture_dir = os.path.join(base_dir, 'Werkplaats')
 train_dir = os.path.join(base_picture_dir, 'train')
 validation_dir = os.path.join(base_picture_dir, 'validation')

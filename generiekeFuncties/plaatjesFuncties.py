@@ -14,11 +14,19 @@ constBigHash_size = constHash_size * 2
 
 
 def hashPicture(img):
-    return str(imagehash.phash(img, hash_size=constHash_size))
-
+    try:
+        return str(imagehash.phash(img, hash_size=constHash_size))
+    except OSError as err:
+        print('probleem met hashen: ', err)
+        return ''
 
 def bigHashPicture(img):
-    return str(imagehash.phash(img, hash_size=constBigHash_size))
+    try:
+        return str(imagehash.phash(img, hash_size=constBigHash_size))
+    except OSError as err:
+        print('probleem met big hashen: ', err)
+        return ''
+
 
 
 def hash_size():
@@ -137,6 +145,55 @@ def convertImageToSquareIm_from_file(imagePath, targetSizeIm):
     im = Image.open(imagePath)
     return convert_image_to_square(im=im, targetsize_im=targetSizeIm)
 
+def convert_image_to_centre_square(im, targetsize_im):
+    im = im.convert("RGB")
+    sx_oorspronkelijk, sy_oorspronkelijk = im.size
+    # we pakken het middelste vierkant
+    if sx_oorspronkelijk > sy_oorspronkelijk:
+        randBreedte = (sx_oorspronkelijk - sy_oorspronkelijk) // 2
+        im = im.crop(randBreedte, 0, sy_oorspronkelijk, sy_oorspronkelijk)
+    elif sx_oorspronkelijk < sy_oorspronkelijk:
+        randBreedte = (sy_oorspronkelijk - sx_oorspronkelijk) // 2
+        im = im.crop(0, randBreedte, sx_oorspronkelijk, sx_oorspronkelijk)
+    # En vervolgens resizen we het
+
+    # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de kortste
+    # as gelijk is aan targetSizeIm
+    if min(sx_oorspronkelijk, sy_oorspronkelijk) < targetsize_im:
+        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk,
+                                  targetsize_im / min(sx_oorspronkelijk, sy_oorspronkelijk))
+        antwoord.paste(im, ((targetsize_im - sx) // 2, (targetsize_im - sy) // 2))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Breed plaatje knippen we in twee stukken en plaatsen onder elkaar
+    if sx_oorspronkelijk > sy_oorspronkelijk * 2:
+        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sy_oorspronkelijk * 2))
+        im_crop1 = im.crop((0, 0, targetsize_im, sy))
+        im_crop2 = im.crop((sx - targetsize_im, 0, sx, sy))
+        antwoord.paste(im_crop1, (0, 0))
+        antwoord.paste(im_crop2, (0, targetsize_im // 2))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Hoog plaatje knippen we in twee stukken en plaatsen naast elkaar
+    if sx_oorspronkelijk * 2 < sy_oorspronkelijk:
+        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sx_oorspronkelijk * 2))
+        im_crop1 = im.crop((0, 0, sx, targetsize_im))
+        im_crop2 = im.crop((0, sy - targetsize_im, sx, sy))
+        antwoord.paste(im_crop1, (0, 0))
+        antwoord.paste(im_crop2, (targetsize_im // 2, 0))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Beetje breder of vierkant voegen we in de breedte  in het frame
+    if sx_oorspronkelijk >= sy_oorspronkelijk:  # (en sx <= 2* sy)
+        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sx_oorspronkelijk)
+        antwoord.paste(im, (0, (targetsize_im - sy) // 2))
+        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    # Blijft nog over: beetje hoger voegen we in de hoogte in het frame
+    im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sy_oorspronkelijk)
+    antwoord.paste(im, ((targetsize_im - sx) // 2, 0))
+    return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+
+def convertImageToCentreSquareIm_from_file(imagePath, targetSizeIm):
+    # returns a square part of the image sized to target size
+    im = Image.open(imagePath)
+    return convert_image_to_square(im=im, targetsize_im=targetSizeIm)
 
 # def get_square_images_from_image(im, targetSizeIm, maximaalVerschilInVerhoudingImages):
 #     # returns a square part of the image sized to target size

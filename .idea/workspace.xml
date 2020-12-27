@@ -23,7 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="eerste serieuze poging yandex">
+      <change afterPath="$PROJECT_DIR$/data/model.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/8DownloadenVanYandex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +53,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -63,7 +70,28 @@
       <recent name="$PROJECT_DIR$/oud" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.8DownloadenVanYandex">
+  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2">
+    <configuration name="1ontdubbelenEnVerkleinen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1ontdubbelenEnVerkleinen.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="2maakVierkantEnVerplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,7 +134,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="4ControlerenLaatsteModelBasisPlaatjes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="6BoordelingDatasetEnKlaarzettenSets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -118,7 +146,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/4ControlerenLaatsteModelBasisPlaatjes.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/6BoordelingDatasetEnKlaarzettenSets.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,34 +176,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="8DownloadenVanYandexLogicaOntwikkeling" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/8DownloadenVanYandexLogicaOntwikkeling.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.8DownloadenVanYandex" />
-        <item itemvalue="Python.8DownloadenVanYandexLogicaOntwikkeling" />
-        <item itemvalue="Python.4ControlerenLaatsteModelBasisPlaatjes" />
         <item itemvalue="Python.3preTrainedInceptionResNetV2" />
         <item itemvalue="Python.2maakVierkantEnVerplaatsNaarWerkset" />
+        <item itemvalue="Python.8DownloadenVanYandex" />
+        <item itemvalue="Python.1ontdubbelenEnVerkleinen" />
+        <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
       </list>
     </recent_temporary>
   </component>
@@ -387,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608933520874</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="xxxx">
+      <created>1608934995840</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1608934995841</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -403,7 +417,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Aanpassingen om tot betere datasets te komen" />
     <MESSAGE value="Exponential delay experiment" />
     <MESSAGE value="Op weg naar beoordelingsscherm" />
     <MESSAGE value="Irene naar bed" />
@@ -428,7 +441,8 @@
     <MESSAGE value="template voor RawTherapee toevoegen ook bij downloaden laatste nog niet x" />
     <MESSAGE value="paden gezet naar take1" />
     <MESSAGE value="eerste serieuze poging yandex" />
-    <option name="LAST_COMMIT_MESSAGE" value="eerste serieuze poging yandex" />
+    <MESSAGE value="xxxx" />
+    <option name="LAST_COMMIT_MESSAGE" value="xxxx" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -585,12 +599,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/3preTrainedInceptionResNetV2.py</url>
-          <line>85</line>
+          <line>86</line>
           <option name="timeStamp" value="151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/3preTrainedInceptionResNetV2.py</url>
-          <line>74</line>
+          <line>75</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -650,18 +664,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/8DownloadenVanYandex.py</url>
-          <line>84</line>
+          <line>94</line>
           <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/8DownloadenVanYandex.py</url>
-          <line>86</line>
-          <option name="timeStamp" value="193" />
+          <line>41</line>
+          <option name="timeStamp" value="196" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/8DownloadenVanYandex.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="196" />
+          <url>file://$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="197" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
