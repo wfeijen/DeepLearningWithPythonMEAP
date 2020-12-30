@@ -16,7 +16,7 @@ validFileExtensions = [".jpg", ".jpeg", ".tif", ".tiff", ".bmp", ".gif", ".png"]
 
 factor = 16/9
 
-for root, directories, filenames in os.walk(rt):
+for root, dummy_directories, filenames in os.walk(rt):
      for filename in filenames:
              fileNames.append((root, filename))
 

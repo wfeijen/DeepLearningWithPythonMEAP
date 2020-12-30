@@ -41,50 +41,6 @@ def get_target_picture_size():
     return 299
 
 
-def get_minimum_size_short_side_image():
-    return get_target_picture_size()
-
-
-def get_maximum_size_short_side_image():
-    return 512
-
-
-def size_image_proper(img):
-    size = img.size
-    if min(size) < get_minimum_size_short_side_image():
-        return None
-    size = math.ceil(get_maximum_size_short_side_image() * max(size) / min(size))
-    img.thumbnail((size, size), Image.ANTIALIAS)
-    im = img.convert('RGB')
-    return im
-
-
-def remove_small_images_and_give_list_of_proper_sized_images(subdir_name, basedir, remove_small_files_from_source):
-    data_set_dir = os.path.join(basedir, subdir_name)
-    file_names = [f for f in os.listdir(data_set_dir) if os.path.isfile(os.path.join(data_set_dir, f))]
-    verwijderd_vanwege_extentie = 0
-    verwijderd_vanwege_te_klein = 0
-    kleiner_gemaakt = 0
-    for file_name in file_names:
-        dummy, file_extension = os.path.splitext(file_name)
-        full_file_name = os.path.join(data_set_dir, file_name)
-        if file_extension != '.jpg' and file_extension != '.jpeg':
-            send2trash(full_file_name)
-            file_names.remove(file_name)
-        else:
-            im = Image.open(full_file_name)
-            size = im.size
-            if min(size) < get_minimum_size_short_side_image():
-                if remove_small_files_from_source:
-                    send2trash(full_file_name)
-                file_names.remove(file_name)
-            elif min(size) > get_maximum_size_short_side_image():
-                im = size_image_proper(im)
-                send2trash(full_file_name)
-                im.save(full_file_name)
-    return file_names, verwijderd_vanwege_extentie, verwijderd_vanwege_te_klein, kleiner_gemaakt
-
-
 def resize_image(im, vergrotingsfactor):
     sx, sy = im.size
     sx = int(sx * vergrotingsfactor)
@@ -145,49 +101,9 @@ def convert_image_to_square(im, targetsize_im):
     return antwoord
 
 
-def convertImageToSquareIm_from_file(imagePath, targetSizeIm):
-    # returns a square part of the image sized to target size
-    im = Image.open(imagePath)
-    x, y = im.size
-    return x, y, convert_image_to_square(im=im, targetsize_im=targetSizeIm)
-
-# def get_square_images_from_image(im, targetSizeIm, maximaalVerschilInVerhoudingImages):
-#     # returns a square part of the image sized to target size
-#     im = im.convert("RGB")
-#     sx, sy = im.size
-#     antwoord = []
-#     # kijken of het plaatje wel groot genoeg is
-#     if min(sx, sy) < targetSizeIm:
-#         return antwoord
-#     # links of boven bij breed of hoog plaatje
-#     if sx >= (sy * maximaalVerschilInVerhoudingImages):
-#         antwoord.append(im.crop((0, 0, sy, sy)))
-#     elif (sx * maximaalVerschilInVerhoudingImages)<= sy:
-#         antwoord.append(im.crop((0, 0, sx, sx)))
-#     # en altijd het centrum omdat daar meestal de meeste inforamtie is
-#     if sx > sy:
-#         left = (sx - sy) / 2
-#         antwoord.append(im.crop((left, 0, left + sy, sy)))
-#     else:
-#         top = (sy - sx) / 2
-#         antwoord.append(im.crop((0, top, sx, top + sx)))
-#     # en rechts of onder bij breed of hoog plaatje
-#     if sx >= (sy * maximaalVerschilInVerhoudingImages):
-#         left = sx - sy
-#         antwoord.append(im.crop((left, 0, left + sy, sy)))
-#     elif (sx * maximaalVerschilInVerhoudingImages)<= sy:
-#         top = sy - sx
-#         antwoord.append(im.crop((0, top, sx, top + sx)))
-#     return antwoord
-
-# def get_square_images_from_file(imagePath, targetSizeIm, minimaalVerschilInVerhoudingImages):
-#     # returns a square part of the image sized to target size
-#     im = Image.open(imagePath)
-#     return get_square_images_from_image(im=im, targetSizeIm=targetSizeIm, maximaalVerschilInVerhoudingImages=minimaalVerschilInVerhoudingImages)
-
 def classificeer_vollig_image(img, kenmerk, classifier_in, image_size_in):
     try:
-        b, h, img = convert_image_to_square(img, image_size_in)
+        img = convert_image_to_square(img, image_size_in)
         pp_image = preprocessing.image.img_to_array(img)
         np_image = np.array(pp_image)
         np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
@@ -204,12 +120,6 @@ def classificeer_vollig_image_from_file(file_name_in, classifier_in, image_size_
     img = Image.open(file_name_in)
     return classificeer_vollig_image(img, file_name_in, classifier_in, image_size_in)
 
-
-# def classificeer_vollig_image_from_url(url_in, classifier_in, image_size_in):
-# img = download_image_naar_memory(url_in)
-# if img is None:
-#     return -1
-# return classificeer_vollig_image(img, url_in, classifier_in, image_size_in)
 
 def sla_image_op(img, doellocatie):
     try:

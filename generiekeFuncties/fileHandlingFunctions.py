@@ -2,7 +2,6 @@ import os, errno
 import regex
 import shutil
 import random
-from generiekeFuncties.plaatjesFuncties import convertImageToSquareIm_from_file
 import re
 from collections import defaultdict, OrderedDict
 
@@ -20,46 +19,9 @@ def give_list_of_images(baseDir, subdirName):
     return file_names
 
 
-def make_subdirectory(subSubDirName, targetDir):
-    target_sub_dir = os.path.join(targetDir, subSubDirName)
-    os.mkdir(target_sub_dir)
-
-
 def maak_directory_helemaal_leeg(dir):
     shutil.rmtree(dir)
     os.mkdir(dir)
-
-
-def fill_subdirectory_with_squared_images(subSubDirName, targetDir,
-                                          sourceDir, fileNames, targetSizeImage,
-                                          rawVerwerktDir, subdirSize=5000):
-    source_data_set_dir = os.path.join(sourceDir, subSubDirName)
-    target_data_set_dir = os.path.join(targetDir, subSubDirName)
-    target_raw_verwerkt_dir = os.path.join(rawVerwerktDir, subSubDirName)
-    sub_dir_nr = subdirSize
-    for file_name in fileNames:
-        file_naam_verwerkt_dir = os.path.join(target_raw_verwerkt_dir, file_name)
-        file_naam_bron_dir = os.path.join(source_data_set_dir, file_name)
-        sx, sy, im = convertImageToSquareIm_from_file(imagePath=file_naam_bron_dir, targetSizeIm=targetSizeImage)
-        if im is None:
-            print("image niet te verwerken. Afmetingen: ", str(sx), "x", str(sy))
-        else:
-            im = im.convert('RGB')
-            dir = os.path.join(target_data_set_dir, str(int(sub_dir_nr / subdirSize)))
-            if not os.path.exists(dir):
-                os.mkdir(dir)
-            dst = os.path.join(dir, file_name)
-            im.save(dst)
-            sub_dir_nr = sub_dir_nr + 1
-        shutil.move(file_naam_bron_dir, file_naam_verwerkt_dir)
-    print(target_data_set_dir, ' 1000 tal images:', len(os.listdir(target_data_set_dir)))
-
-
-def make_and_fill_subdirectory_randomly_with_squared_images(subSubDirName, targetDir, sourceDir, rawVerwerktDir,
-                                                            fileNames, targetSizeImage):
-    make_subdirectory(subSubDirName, targetDir)
-    return fill_subdirectory_with_squared_images(subSubDirName, targetDir, sourceDir, fileNames, targetSizeImage,
-                                                 rawVerwerktDir)
 
 
 def maak_doeldirectory_en_verplaats_random_files(subSubDirName, sourceDir, targetDir, numberOfFiles, fileNames):
@@ -75,25 +37,7 @@ def maak_doeldirectory_en_verplaats_random_files(subSubDirName, sourceDir, targe
     print(target_data_set_dir, ' total images:', len(os.listdir(target_data_set_dir)))
     return fileNames
 
-def maak_subdirectory_en_vul_met_random_images(subSubDirName, targetDir,
-                                               sourceDir, numberOfFiles, fileNames, targetSizeImage):
-    source_data_set_dir = os.path.join(sourceDir, subSubDirName)
-    target_data_set_dir = os.path.join(targetDir, subSubDirName)
-    if not os.path.exists(target_data_set_dir):
-        os.mkdir(target_data_set_dir)
-    for j in range(0, numberOfFiles):
-        file_name = random.choice(fileNames)
-        fileNames.remove(file_name)
-        file_naam_bron_dir = os.path.join(source_data_set_dir, file_name)
-        sx, sy, im = convertImageToSquareIm_from_file(imagePath=file_naam_bron_dir, targetSizeIm=targetSizeImage)
-        if im is None:
-            print("image niet te verwerken. Afmetingen: ", str(sx), "x", str(sy))
-        else:
-            im = im.convert('RGB')
-            dst = os.path.join(target_data_set_dir, file_name)
-            im.save(dst)
-    print(target_data_set_dir, ' total images:', len(os.listdir(target_data_set_dir)))
-    return fileNames
+
 
 def write_lijst_regels_naar_file(file_path, lijst):
     if os.path.exists(file_path):
@@ -179,13 +123,6 @@ def get_zekerheid_goede_classe(char, filenaam_in):
     return (100 * (char_waarde + char_waarde - totaal_waarde) / totaal_waarde)
 
 
-    f = filenaam_in[:-4]
-    i = -1
-    while f[i] == char:
-        i = i - 1
-    antwoord = -(1 + i)
-    return antwoord
-
 def get_controle_aantal_reeks(char, filenaam_in):
     if "_gecontroleer" not in filenaam_in:
         return 0
@@ -204,7 +141,7 @@ def markeerControleResultaat(file_naam_in, operatie):
     else:
         return get_hash_from_filename(file_naam_in) + "_gecontroleerd_" + operatie[0] + ".jpg"
 
-
+# Gebruikt in viewer
 def veranderVanKant(file_pad_in, operatie_in):
     pad_delen = os.path.split(file_pad_in)
     if pad_delen[0][-4:] == "niet":
@@ -225,7 +162,7 @@ def markeerGecontroleerd(file_pad_in, operatie_in):
     os.rename(file_pad_in, nieuw_pad)
     return nieuw_pad
 
-
+# Gebruikt in verplaaatsNaarWerkset
 def prioriteerGecontroleerd(fileList, aantal, controle_char):
     # Verdeel in twee delen
     antwoord = []

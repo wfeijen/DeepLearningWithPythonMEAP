@@ -22,15 +22,36 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor refactoring">
-      <change afterPath="$PROJECT_DIR$/4ControlerenLaatsteModelEnVerbeterenBasis.py" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor refactoring 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1ontdubbelenEnVerkleinen.py" beforeDir="false" afterPath="$PROJECT_DIR$/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/2verplaatsNaarWerkset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4ControlerenLaatsteModelBasisPlaatjes.py" beforeDir="false" afterPath="$PROJECT_DIR$/oud/4ControlerenLaatsteModelBasisPlaatjes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/8DownloadenVanYandexLogicaOntwikkeling.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/DataBewerkingFuncties.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/presentationFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/presentationFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/utilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/0BoordelingDataset.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/1 preTrainedCovNetVGG16.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/1 preTrainedInceptionResNetV2schedularExperiment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/1 preTrainedXception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/1plaatjesWiedenEnOverzettenNaarVolledigeSet.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/2volledigeSetNaarWerkset.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/3preTrainedInceptionResNetV2_parameters_zoeken.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/3preTrainedInceptionResNetV2b.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/4ControlerenLaatsteModelBasisPlaatjes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/hondenEnKattenAugmentedGovNetNadereExperimenten.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/hondenEnKattenGovNetNadereExperimenten.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/inrichtenDirectory2WelNietEnOverzettenGeschaaldeVierkantePlaatjes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/inrichtenDirectoryWelNietEnOverzettenFiles.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/inrichtenDirectoryWelNietEnOverzettenGeschaaldeVierkantePlaatjes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/maxVerhouding.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/scrapeExperiment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/splitFileNamesToDirs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oud/werkt niet goed preTrainedCovNetGedeeltelijkeHertrainingMetAugmentation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/voegRawTherapeeTemplateToe.py" beforeDir="false" afterPath="$PROJECT_DIR$/voegRawTherapeeTemplateToe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voorbeelden/covnetOpCijfers.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,7 +430,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609063091962</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="voor refactoring 2">
+      <created>1609337085118</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1609337085118</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -425,7 +453,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Op weg naar beoordelingsscherm" />
     <MESSAGE value="Irene naar bed" />
     <MESSAGE value="Beoordelingschermen klaar" />
     <MESSAGE value="Extra trainer die doorgaat op bestaand model" />
@@ -450,7 +477,8 @@
     <MESSAGE value="eerste serieuze poging yandex" />
     <MESSAGE value="xxxx" />
     <MESSAGE value="voor refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="voor refactoring" />
+    <MESSAGE value="voor refactoring 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="voor refactoring 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -511,51 +539,6 @@
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>27</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>58</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/calBackFuncties.py</url>
-          <line>69</line>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/voorbeelden/eerste form experiment</url>
           <line>7</line>
           <option name="timeStamp" value="70" />
@@ -576,24 +559,9 @@
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/2volledigeSetNaarWerkset.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/3preTrainedInceptionResNetV2_parameters_zoeken.py</url>
-          <line>123</line>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Weinig gebruikt/vulHashAdministratieAanOpBasisBestaandeFiles.py</url>
           <line>17</line>
           <option name="timeStamp" value="123" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/0BoordelingDataset.py</url>
-          <line>18</line>
-          <option name="timeStamp" value="136" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/5uitlezenVanafStartUrl.py</url>
@@ -646,29 +614,9 @@
           <option name="timeStamp" value="164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/scrapeExperiment.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/scrapeExperiment.py</url>
-          <line>46</line>
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Experimenten.py</url>
           <line>10</line>
           <option name="timeStamp" value="180" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/splitFileNamesToDirs.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="182" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/oud/splitFileNamesToDirs.py</url>
-          <line>18</line>
-          <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/8DownloadenVanYandex.py</url>
@@ -679,11 +627,6 @@
           <url>file://$PROJECT_DIR$/8DownloadenVanYandex.py</url>
           <line>41</line>
           <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py</url>
-          <line>91</line>
-          <option name="timeStamp" value="200" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

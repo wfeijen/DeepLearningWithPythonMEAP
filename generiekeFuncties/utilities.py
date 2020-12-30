@@ -12,10 +12,3 @@ def initializeerVoortgangsInformatie(meldingsText):
     tijdVorigePunt = startTijd
     geeftVoortgangsInformatie(meldingsText, (startTijd, tijdVorigePunt))
     return (startTijd, startTijd)
-
-
-def combine_lists(a, b):
-    c = []
-    c.extend(a)
-    c.extend(b)
-    return c

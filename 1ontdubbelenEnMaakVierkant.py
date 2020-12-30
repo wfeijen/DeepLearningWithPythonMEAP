@@ -1,5 +1,4 @@
 import os
-import math
 import shutil
 from send2trash import send2trash
 from PIL import Image
@@ -26,7 +25,6 @@ def ontdubbel_en_verklein_dir(input_dir, output_dir, subdir,
                               hash_size):
     hashes = set([strHash for strHash in gevonden_hashcodes_onder_dir(output_dir, hash_size)])
     aantal_verplaatste_files = 0
-    controle_char = subdir[0]
     for file in give_list_of_images(input_dir, subdir):
         oude_file_naam = os.path.join(input_dir, subdir, file)
         im = Image.open(oude_file_naam)
