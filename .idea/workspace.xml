@@ -22,12 +22,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="eerste serieuze poging yandex">
-      <change afterPath="$PROJECT_DIR$/data/model.txt" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor refactoring">
+      <change afterPath="$PROJECT_DIR$/4ControlerenLaatsteModelEnVerbeterenBasis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1ontdubbelenEnVerkleinen.py" beforeDir="false" afterPath="$PROJECT_DIR$/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/2verplaatsNaarWerkset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/8DownloadenVanYandex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4ControlerenLaatsteModelBasisPlaatjes.py" beforeDir="false" afterPath="$PROJECT_DIR$/oud/4ControlerenLaatsteModelBasisPlaatjes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
     </list>
@@ -65,13 +66,13 @@
       <recent name="$PROJECT_DIR$/data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/oud" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/generiekeFuncties" />
-      <recent name="$PROJECT_DIR$/oud" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2">
-    <configuration name="1ontdubbelenEnVerkleinen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.4ControlerenLaatsteModelEnVerbeterenBasis">
+    <configuration name="1ontdubbelenEnMaakVierkant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -83,7 +84,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1ontdubbelenEnVerkleinen.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1ontdubbelenEnMaakVierkant.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -92,7 +93,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="2maakVierkantEnVerplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="2verplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -104,7 +105,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2verplaatsNaarWerkset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -134,7 +135,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="6BoordelingDatasetEnKlaarzettenSets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="4ControlerenLaatsteModelEnVerbeterenBasis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -146,7 +147,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/6BoordelingDatasetEnKlaarzettenSets.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/4ControlerenLaatsteModelEnVerbeterenBasis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -178,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.4ControlerenLaatsteModelEnVerbeterenBasis" />
         <item itemvalue="Python.3preTrainedInceptionResNetV2" />
-        <item itemvalue="Python.2maakVierkantEnVerplaatsNaarWerkset" />
+        <item itemvalue="Python.2verplaatsNaarWerkset" />
+        <item itemvalue="Python.1ontdubbelenEnMaakVierkant" />
         <item itemvalue="Python.8DownloadenVanYandex" />
-        <item itemvalue="Python.1ontdubbelenEnVerkleinen" />
-        <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
       </list>
     </recent_temporary>
   </component>
@@ -401,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608934995841</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="voor refactoring">
+      <created>1609063091962</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1609063091962</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -417,7 +425,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Exponential delay experiment" />
     <MESSAGE value="Op weg naar beoordelingsscherm" />
     <MESSAGE value="Irene naar bed" />
     <MESSAGE value="Beoordelingschermen klaar" />
@@ -442,7 +449,8 @@
     <MESSAGE value="paden gezet naar take1" />
     <MESSAGE value="eerste serieuze poging yandex" />
     <MESSAGE value="xxxx" />
-    <option name="LAST_COMMIT_MESSAGE" value="xxxx" />
+    <MESSAGE value="voor refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="voor refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -599,12 +607,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/3preTrainedInceptionResNetV2.py</url>
-          <line>86</line>
+          <line>85</line>
           <option name="timeStamp" value="151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/3preTrainedInceptionResNetV2.py</url>
-          <line>75</line>
+          <line>76</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -673,9 +681,9 @@
           <option name="timeStamp" value="196" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/2maakVierkantEnVerplaatsNaarWerkset.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="197" />
+          <url>file://$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="200" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

@@ -38,7 +38,7 @@ def bigHash_size():
 
 
 def get_target_picture_size():
-    return 240
+    return 299
 
 
 def get_minimum_size_short_side_image():
@@ -85,115 +85,71 @@ def remove_small_images_and_give_list_of_proper_sized_images(subdir_name, basedi
     return file_names, verwijderd_vanwege_extentie, verwijderd_vanwege_te_klein, kleiner_gemaakt
 
 
-def resize_image(im, sx, sy, vergrotingsfactor):
+def resize_image(im, vergrotingsfactor):
+    sx, sy = im.size
     sx = int(sx * vergrotingsfactor)
     sy = int(sy * vergrotingsfactor)
-    return im.resize(size=(sx, sy), resample=Image.BICUBIC), sx, sy
+    return im.resize(size=(sx, sy), resample=Image.BICUBIC)
 
 
 def convert_image_to_square(im, targetsize_im):
     im = im.convert("RGB")
-    sx_oorspronkelijk, sy_oorspronkelijk = im.size
+    size_x, size_y = im.size
     mean_color = tuple([math.floor(n) for n in ImageStat.Stat(im)._getmean()])
     antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=mean_color)
     # Als plaatje idioot breed is knippen we de zijkanten er af
-    if max(sx_oorspronkelijk, sy_oorspronkelijk) > 4 * min(sx_oorspronkelijk, sy_oorspronkelijk):
-        if sx_oorspronkelijk > sy_oorspronkelijk:
-            nieuwe_breedte = sy_oorspronkelijk * 4
-            im = im.crop(((sx_oorspronkelijk - nieuwe_breedte) / 2, 0, nieuwe_breedte, sy_oorspronkelijk))
-            sx_oorspronkelijk = nieuwe_breedte
+    if max(size_x, size_y) > 4 * min(size_x, size_y):
+        if size_x > size_y:
+            nieuwe_breedte = size_y * 4
+            im = im.crop(((size_x - nieuwe_breedte) / 2, 0, nieuwe_breedte, size_y))
+            size_x = nieuwe_breedte
         else:
-            nieuwe_hoogte = sx_oorspronkelijk * 4
-            im = im.crop((0, (sy_oorspronkelijk - nieuwe_hoogte) / 2, sx_oorspronkelijk, nieuwe_hoogte))
-            sy_oorspronkelijk = nieuwe_hoogte
+            nieuwe_hoogte = size_x * 4
+            im = im.crop((0, (size_y - nieuwe_hoogte) / 2, size_x, nieuwe_hoogte))
+            size_y = nieuwe_hoogte
     # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de langste
     # as gelijk is aan targetSizeIm
-    if max(sx_oorspronkelijk, sy_oorspronkelijk) < targetsize_im:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk,
-                                  targetsize_im / max(sx_oorspronkelijk, sy_oorspronkelijk))
+    if max(size_x, size_y) < targetsize_im:
+        im = resize_image(im, targetsize_im / max(size_x, size_y))
+        sx, sy = im.size
         antwoord.paste(im, ((targetsize_im - sx) // 2, (targetsize_im - sy) // 2))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+        return antwoord
     # Breed plaatje knippen we in twee stukken en plaatsen onder elkaar
-    if sx_oorspronkelijk > sy_oorspronkelijk * 2:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sy_oorspronkelijk * 2))
+    if size_x > size_y * 2:
+        im = resize_image(im, targetsize_im / (size_y * 2))
+        sx, sy = im.size
         im_crop1 = im.crop((0, 0, targetsize_im, sy))
         im_crop2 = im.crop((sx - targetsize_im, 0, sx, sy))
         antwoord.paste(im_crop1, (0, 0))
         antwoord.paste(im_crop2, (0, targetsize_im // 2))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+        return antwoord
     # Hoog plaatje knippen we in twee stukken en plaatsen naast elkaar
-    if sx_oorspronkelijk * 2 < sy_oorspronkelijk:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sx_oorspronkelijk * 2))
+    if size_x * 2 < size_y:
+        im = resize_image(im, targetsize_im / (size_x * 2))
+        sx, sy = im.size
         im_crop1 = im.crop((0, 0, sx, targetsize_im))
         im_crop2 = im.crop((0, sy - targetsize_im, sx, sy))
         antwoord.paste(im_crop1, (0, 0))
         antwoord.paste(im_crop2, (targetsize_im // 2, 0))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+        return antwoord
     # Beetje breder of vierkant voegen we in de breedte  in het frame
-    if sx_oorspronkelijk >= sy_oorspronkelijk:  # (en sx <= 2* sy)
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sx_oorspronkelijk)
+    if size_x >= size_y:  # (en sx <= 2* sy)
+        im = resize_image(im, targetsize_im / size_x)
+        sx, sy = im.size
         antwoord.paste(im, (0, (targetsize_im - sy) // 2))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+        return antwoord
     # Blijft nog over: beetje hoger voegen we in de hoogte in het frame
-    im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sy_oorspronkelijk)
+    im = resize_image(im, targetsize_im / size_y)
+    sx, sy = im.size
     antwoord.paste(im, ((targetsize_im - sx) // 2, 0))
-    return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
+    return antwoord
 
 
 def convertImageToSquareIm_from_file(imagePath, targetSizeIm):
     # returns a square part of the image sized to target size
     im = Image.open(imagePath)
-    return convert_image_to_square(im=im, targetsize_im=targetSizeIm)
-
-def convert_image_to_centre_square(im, targetsize_im):
-    im = im.convert("RGB")
-    sx_oorspronkelijk, sy_oorspronkelijk = im.size
-    # we pakken het middelste vierkant
-    if sx_oorspronkelijk > sy_oorspronkelijk:
-        randBreedte = (sx_oorspronkelijk - sy_oorspronkelijk) // 2
-        im = im.crop(randBreedte, 0, sy_oorspronkelijk, sy_oorspronkelijk)
-    elif sx_oorspronkelijk < sy_oorspronkelijk:
-        randBreedte = (sy_oorspronkelijk - sx_oorspronkelijk) // 2
-        im = im.crop(0, randBreedte, sx_oorspronkelijk, sx_oorspronkelijk)
-    # En vervolgens resizen we het
-
-    # Als plaatje volledig binnen nieuwe image valt vergroten we het totdat de kortste
-    # as gelijk is aan targetSizeIm
-    if min(sx_oorspronkelijk, sy_oorspronkelijk) < targetsize_im:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk,
-                                  targetsize_im / min(sx_oorspronkelijk, sy_oorspronkelijk))
-        antwoord.paste(im, ((targetsize_im - sx) // 2, (targetsize_im - sy) // 2))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-    # Breed plaatje knippen we in twee stukken en plaatsen onder elkaar
-    if sx_oorspronkelijk > sy_oorspronkelijk * 2:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sy_oorspronkelijk * 2))
-        im_crop1 = im.crop((0, 0, targetsize_im, sy))
-        im_crop2 = im.crop((sx - targetsize_im, 0, sx, sy))
-        antwoord.paste(im_crop1, (0, 0))
-        antwoord.paste(im_crop2, (0, targetsize_im // 2))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-    # Hoog plaatje knippen we in twee stukken en plaatsen naast elkaar
-    if sx_oorspronkelijk * 2 < sy_oorspronkelijk:
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / (sx_oorspronkelijk * 2))
-        im_crop1 = im.crop((0, 0, sx, targetsize_im))
-        im_crop2 = im.crop((0, sy - targetsize_im, sx, sy))
-        antwoord.paste(im_crop1, (0, 0))
-        antwoord.paste(im_crop2, (targetsize_im // 2, 0))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-    # Beetje breder of vierkant voegen we in de breedte  in het frame
-    if sx_oorspronkelijk >= sy_oorspronkelijk:  # (en sx <= 2* sy)
-        im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sx_oorspronkelijk)
-        antwoord.paste(im, (0, (targetsize_im - sy) // 2))
-        return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-    # Blijft nog over: beetje hoger voegen we in de hoogte in het frame
-    im, sx, sy = resize_image(im, sx_oorspronkelijk, sy_oorspronkelijk, targetsize_im / sy_oorspronkelijk)
-    antwoord.paste(im, ((targetsize_im - sx) // 2, 0))
-    return sx_oorspronkelijk, sy_oorspronkelijk, antwoord
-
-def convertImageToCentreSquareIm_from_file(imagePath, targetSizeIm):
-    # returns a square part of the image sized to target size
-    im = Image.open(imagePath)
-    return convert_image_to_square(im=im, targetsize_im=targetSizeIm)
+    x, y = im.size
+    return x, y, convert_image_to_square(im=im, targetsize_im=targetSizeIm)
 
 # def get_square_images_from_image(im, targetSizeIm, maximaalVerschilInVerhoudingImages):
 #     # returns a square part of the image sized to target size

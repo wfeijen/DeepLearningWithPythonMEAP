@@ -7,7 +7,7 @@
 
 import os
 from generiekeFuncties.fileHandlingFunctions import give_list_of_images,  \
-    maak_directory_helemaal_leeg, prioriteerGecontroleerd, maak_subdirectory_en_vul_met_random_squared_images
+    maak_directory_helemaal_leeg, prioriteerGecontroleerd, maak_doeldirectory_en_verplaats_random_files
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
 
@@ -54,33 +54,30 @@ os.mkdir(validation_dir)
 voortgangs_informatie = geeftVoortgangsInformatie("Start niet files", voortgangs_informatie)
 
 nietFileNames = prioriteerGecontroleerd(nietFileNames, aantalSamplesNiet, "n")
-nietFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='niet',
-                                                                   sourceDir=full_data_set_dir,
-                                                                   targetDir=train_dir,
-                                                                   numberOfFiles=aantalSamplesTrainNiet,
-                                                                   fileNames=nietFileNames,
-                                                                   targetSizeImage=targetSizeImage)
-nietFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='niet',
-                                                                   sourceDir=full_data_set_dir,
-                                                                   targetDir=validation_dir,
-                                                                   numberOfFiles=aantalSamplesValidation,
-                                                                   fileNames=nietFileNames,
-                                                                   targetSizeImage=targetSizeImage)
+
+nietFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='niet',
+                                                           sourceDir=full_data_set_dir,
+                                                           targetDir=train_dir,
+                                                           numberOfFiles=aantalSamplesTrainNiet,
+                                                           fileNames=nietFileNames)
+nietFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='niet',
+                                                           sourceDir=full_data_set_dir,
+                                                           targetDir=validation_dir,
+                                                           numberOfFiles=aantalSamplesValidation,
+                                                           fileNames=nietFileNames)
 
 voortgangs_informatie = geeftVoortgangsInformatie("Start wel files", voortgangs_informatie)
 
 welFileNames = prioriteerGecontroleerd(welFileNames, aantalSamplesWel, "w")
-welFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='wel',
-                                                                  sourceDir=full_data_set_dir,
-                                                                  targetDir=train_dir,
-                                                                  numberOfFiles=aantalSamplesTrainWel,
-                                                                  fileNames=welFileNames,
-                                                                  targetSizeImage=targetSizeImage)
-welFileNames = maak_subdirectory_en_vul_met_random_squared_images(subSubDirName='wel',
-                                                                  sourceDir=full_data_set_dir,
-                                                                  targetDir=validation_dir,
-                                                                  numberOfFiles=aantalSamplesValidation,
-                                                                  fileNames=welFileNames,
-                                                                  targetSizeImage=targetSizeImage)
+welFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='wel',
+                                                          sourceDir=full_data_set_dir,
+                                                          targetDir=train_dir,
+                                                          numberOfFiles=aantalSamplesTrainWel,
+                                                          fileNames=welFileNames)
+welFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='wel',
+                                                          sourceDir=full_data_set_dir,
+                                                          targetDir=validation_dir,
+                                                          numberOfFiles=aantalSamplesValidation,
+                                                          fileNames=welFileNames)
 
 voortgangs_informatie = geeftVoortgangsInformatie("Klaar", voortgangs_informatie)
