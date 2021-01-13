@@ -29,14 +29,14 @@ minimaalVerschilInVerhoudingImages = 1.1
 
 ###########################################################################################
 baseUrl = 'https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/page'
-volgnummersUrl = range(11, 21)  #   1 - 46
+volgnummersUrl = range(21, 31)  #   1 - 46
 patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 patroon_naam_post = r'([0-9]{4}-[0-9]{2}-[0-9]{2}[^\<]+)<'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 
 
 # Globale variabelen
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
 constVoorberVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
 constBenaderde_hash_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
 constNieuwePlaatjesLocatie = os.path.join(base_dir, 'RawInput')

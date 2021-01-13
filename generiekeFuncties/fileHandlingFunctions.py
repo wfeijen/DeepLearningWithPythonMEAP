@@ -13,10 +13,9 @@ def silentremove(filename):
             raise  # re-raise exception if a different error occurred
 
 
-def give_list_of_images(baseDir, subdirName):
-    data_set_dir = os.path.join(baseDir, subdirName)
-    file_names = [f for f in os.listdir(data_set_dir) if os.path.isfile(os.path.join(data_set_dir, f))]
-    return file_names
+def move_file_en_maak_dir_als_nodig(bron_pad, doel_pad):
+    os.makedirs(os.path.dirname(doel_pad), exist_ok=True)
+    shutil.move(bron_pad, doel_pad)
 
 
 def maak_directory_helemaal_leeg(dir):
@@ -24,19 +23,18 @@ def maak_directory_helemaal_leeg(dir):
     os.mkdir(dir)
 
 
-def maak_doeldirectory_en_verplaats_random_files(subSubDirName, sourceDir, targetDir, numberOfFiles, fileNames):
-    source_data_set_dir = os.path.join(sourceDir, subSubDirName)
+def maak_doeldirectory_en_verplaats_random_files(subSubDirName, targetDir, numberOfFiles, fileNames):
     target_data_set_dir = os.path.join(targetDir, subSubDirName)
     os.mkdir(target_data_set_dir)
     for j in range(0, numberOfFiles):
-        file_name = random.choice(fileNames)
-        source_path = os.path.join(source_data_set_dir, file_name)
-        destination_path = os.path.join(target_data_set_dir, file_name)
+        source_path = random.choice(fileNames)
+        file_naam = os.path.basename(source_path)
+        destination_path = os.path.join(target_data_set_dir, file_naam[0], file_naam[1], file_naam)
+        os.makedirs(os.path.dirname(destination_path), exist_ok=True)
         shutil.copyfile(source_path, destination_path)
-        fileNames.remove(file_name)
-    print(target_data_set_dir, ' total images:', len(os.listdir(target_data_set_dir)))
+        fileNames.remove(source_path)
+    print(target_data_set_dir)
     return fileNames
-
 
 
 def write_lijst_regels_naar_file(file_path, lijst):
@@ -133,6 +131,7 @@ def get_controle_aantal_reeks(char, filenaam_in):
     antwoord = -(1 + i)
     return antwoord
 
+
 def markeerControleResultaat(file_naam_in, operatie):
     # Voegt de eerste letter van de operatie toe (n/w)
     filenaam_kort = file_naam_in[:-4]
@@ -141,25 +140,25 @@ def markeerControleResultaat(file_naam_in, operatie):
     else:
         return get_hash_from_filename(file_naam_in) + "_gecontroleerd_" + operatie[0] + ".jpg"
 
+
 # Gebruikt in viewer
 def veranderVanKant(file_pad_in, operatie_in):
-    pad_delen = os.path.split(file_pad_in)
-    if pad_delen[0][-4:] == "niet":
-        a = pad_delen[0][:-4] + "wel"
+    pad = os.path.dirname(file_pad_in)
+    if "/niet" in pad:
+        a = pad.replace("/niet", "/wel")
     else:
-        a = pad_delen[0][:-3] + "niet"
-    b = markeerControleResultaat(pad_delen[1], operatie_in)
+        a = pad.replace("/wel", "/niet")
+    b = markeerControleResultaat(os.path.basename(file_pad_in), operatie_in)
     nieuw_pad = os.path.join(a, b)
-    os.rename(file_pad_in, nieuw_pad)
+    move_file_en_maak_dir_als_nodig(file_pad_in, nieuw_pad)
     return nieuw_pad
 
 
 def markeerGecontroleerd(file_pad_in, operatie_in):
-    pad_delen = os.path.split(file_pad_in)
-    a = pad_delen[0]
-    b = markeerControleResultaat(pad_delen[1], operatie_in)
+    a = os.path.dirname(file_pad_in)
+    b = markeerControleResultaat(os.path.basename(file_pad_in), operatie_in)
     nieuw_pad = os.path.join(a, b)
-    os.rename(file_pad_in, nieuw_pad)
+    move_file_en_maak_dir_als_nodig(file_pad_in, nieuw_pad)
     return nieuw_pad
 
 # Gebruikt in verplaaatsNaarWerkset
@@ -188,25 +187,31 @@ def prioriteerGecontroleerd(fileList, aantal, controle_char):
     return antwoord
 
 
-def verwijderGecontroleerdeFilesBovenNummerFromList(fileList, aantal_bevestigingen):
+def verwijderUitgecontroleerdeFilesFromList(fileList):
     antwoord = []
-    pad = os.path.split(fileList[0])[0]
-    if pad[-3:] == "wel":
-        char = "w"
-    elif pad[-4:] == "niet":
-        char = "n"
-    else:
-        print("pad eindigt raar: ", pad)
-        return antwoord
-
     for file in fileList:
-        image_name = os.path.split(file)[1]
-        if get_controle_aantal_reeks(char, image_name) <= aantal_bevestigingen:
+        f = os.path.basename(file)
+        if f.count('w') < 4\
+                and f.count('n') < 4:
             antwoord.append(file)
     return antwoord
 
 
+def gevonden_hashcodes_onder_dir(dir, hash_size):
+    return([f[:hash_size * 2] for dp, dn, filenames in os.walk(dir) for f in filenames])
 
+
+def gevonden_files_onder_dir(directory, ext):
+    antwoord = ([os.path.join(root, f) for root, directorynamese, filenames in os.walk(directory) for f in filenames if f.endswith(ext)])
+    return antwoord
+
+
+
+
+# def give_list_of_images(baseDir, subdirName):
+#     data_set_dir = os.path.join(baseDir, subdirName)
+#     file_names = [f for f in os.listdir(data_set_dir) if os.path.isfile(os.path.join(data_set_dir, f))]
+#     return file_names
 
 
 

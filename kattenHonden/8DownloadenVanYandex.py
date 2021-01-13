@@ -11,6 +11,7 @@ from numpy.random import exponential
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
+from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
@@ -20,15 +21,23 @@ minimaalVerschilInVerhoudingImages = 1.1
 
 urlStart = 'https://yandex.com/images/search?text='
 urlEnd = '&isize=gt&iw=1920&ih=1080&recent=8D&p='
-urlWords = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst('./data/woorden.txt')]
+geladenUrlWords = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
+    '../data/woordenGeladen.txt')]
+bijvoegelijkeUrlWords = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
+    '../data/woordenBijvoegelijk.txt')]
+rawEditorDefaults = RawTherapeeDefaults()
 
-urlWordPermutations = []
-for i in range(2, len(urlWords)+1):
-    urlWordPermutations.extend(["%20".join(map(str, comb)) for comb in itertools.combinations(urlWords, i)])
+urlGeladenWoordenPermutations = []
+for i in range(1, len(geladenUrlWords) + 1):
+    urlGeladenWoordenPermutations.extend(["%20".join(map(str, comb)) for comb in itertools.combinations(geladenUrlWords, i)])
+urlBijvoegelijkeWoordenPermutations = []
+for i in range(1, len(geladenUrlWords) + 1):
+    urlBijvoegelijkeWoordenPermutations.extend(["%20".join(map(str, comb)) for comb in itertools.combinations(bijvoegelijkeUrlWords, i)])
+urlWoordenPermutaties = [a + '%20' + b for a in urlBijvoegelijkeWoordenPermutations for b in urlGeladenWoordenPermutations]
 
 screenSizes = [360, 375, 414, 667, 720, 760, 768, 812, 896, 900, 1080, 1366, 1440, 1536, 1920, 1200, 1600, 2560]
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-modelPath = os.path.join(base_dir, 'BesteModellen/m_')
+modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
 constBenaderde_hash_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
 constBenaderde_url_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_url.txt')
 constBenaderde_query_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_query.txt')
@@ -41,7 +50,7 @@ query_administratie = readDictFile(constBenaderde_query_administratie_pad)
 
 constClassifier = models.load_model(modelPath, custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 # Testen of hij goed geinitialiseerd is
-print(str(classificeer_vollig_image_from_file('./data/maan.jpg', constClassifier, targetImageSize)))
+print(str(classificeer_vollig_image_from_file('../data/maan.jpg', constClassifier, targetImageSize)))
 
 
 constBasisWachttijd = 900
@@ -78,14 +87,14 @@ def haal_query_resultaat_op(query_url, tijd_vorige_query):
     return page_query_resultaat, tijd_vorige_query
 
 
-for woorden_voor_query in urlWordPermutations:
+for woorden_voor_query in urlWoordenPermutaties:
     i = 1
     einde = False
     while not einde:
         zoek_url = urlStart + woorden_voor_query + urlEnd + str(i)
-        print('Zoekterm: ' + woorden_voor_query)
+        print('Zoekterm: ' + woorden_voor_query.replace('%20', ' '))
         if zoek_url in query_administratie:
-            print(zoek_url + ' is al eens bezocht.')
+            print(zoek_url.replace('%20', ' ') + ' is al eens bezocht.')
         else:
             page_text, vorigeClick = haal_query_resultaat_op(query_url=zoek_url, tijd_vorige_query=vorigeClick)
             # Zoeken naar plaatjes voorbeeld: {"url":"https://wallpapercave.com/wp/wp6828079.jpg"
@@ -118,7 +127,10 @@ for woorden_voor_query in urlWordPermutations:
                                 keuze = 'niet'
                                 if resultaat >= grenswaarde:
                                     keuze = 'wel'
-                                sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, keuze, hash_groot + ".jpg"))
+                                file_naam = os.path.join(constNieuwePlaatjesLocatie, keuze, hash_groot + ".jpg")
+                                sla_image_op(img, file_naam)
+                                if keuze == 'wel':
+                                    rawEditorDefaults.maak_specifiek(file_naam, img.size)
                                 writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
                         writeDict(url_administratie, constBenaderde_url_administratie_pad)
                 query_administratie[zoek_url] = datetime.now()

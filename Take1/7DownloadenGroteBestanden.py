@@ -9,6 +9,7 @@ from generiekeFuncties.plaatjesFuncties import download_image_naar_memory, sla_i
 from generiekeFuncties.fileHandlingFunctions import lees_file_regels_naar_ontdubbelde_lijst, \
     write_lijst_regels_naar_file
 from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
+from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 
 
 # noinspection SpellCheckingInspection
@@ -39,7 +40,9 @@ def getActualImageUrlFromTurboimagehost(driver):
             return (match[0])
     return None
 
-def plaatje_gedownload(url, doelDir, template):
+
+
+def plaatje_gedownload(url, doelDir, raw_editor_dafaults):
     result = False
     options = Options()
     options.add_argument('--headless')
@@ -60,37 +63,25 @@ def plaatje_gedownload(url, doelDir, template):
             if img is not None:
                 file_name = os.path.join(doelDir, os.path.basename(img_url) + ".jpg")
                 sla_image_op(img, file_name)
-                breedte, hoogte = img.size
-                factor = 16 / 9
-                if breedte > hoogte * factor:
-                    breedte = hoogte * factor
-                else:
-                    hoogte = int(breedte / factor)
-                inhoud_pp3 = template.replace("teVervangenBreedte",
-                                              str(breedte)).replace("teVervangenHoogte",
-                                              str(hoogte))
-                pp3_file_naam = file_name + ".pp3"
-                pp3_file = open(pp3_file_naam, "w")
-                pp3_file.write(inhoud_pp3)
+                raw_editor_dafaults.maak_specifiek(file_name, img.size)
                 result = True
     browser.quit()
     return result
 
-templateFile = open("rawtherapeeTemplate.pp3")
-template = templateFile.read()
-templateFile.close()
+
 
 # webBrowser = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 tijdenVorigePunt = initializeerVoortgangsInformatie("start")
 opTePakkenVerwijzingDirs = [d for d in os.listdir(constVerwijzingDir)
                             if os.path.isdir(os.path.join(constVerwijzingDir, d))]
+rawEditorDefaults = RawTherapeeDefaults()
 for verwijzingsDir in opTePakkenVerwijzingDirs:
     verwijzingsFile = os.path.join(constVerwijzingDir, verwijzingsDir, "verwijzingen.txt")
     lijstMislukteUrls = []
     verwijzingen = lees_file_regels_naar_ontdubbelde_lijst(verwijzingsFile)
     tijdenVorigePunt = geeftVoortgangsInformatie("VerwijzingsDir: " + verwijzingsDir + " met " + str(len(verwijzingen)) + " verwijzingen. ", tijdenVorigePunt)
     for verwijzing in verwijzingen:
-        if not plaatje_gedownload(verwijzing, os.path.join(constVerwijzingDir, verwijzingsDir), template):
+        if not plaatje_gedownload(verwijzing, os.path.join(constVerwijzingDir, verwijzingsDir), rawEditorDefaults):
             lijstMislukteUrls.append(verwijzing)
             print(verwijzing, " mislukt")
         else:

@@ -8,7 +8,7 @@ from PIL import Image, ImageStat
 fileNames = []
 rt = os.path.expanduser('~/VMuitwisseling/x')
 
-templateFile = open("rawtherapeeTemplate.pp3")
+templateFile = open("../generiekeFuncties/rawtherapeeTemplate.pp3")
 template = templateFile.read()
 templateFile.close()
 

@@ -8,7 +8,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras import applications
 from datetime import datetime
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
-from generiekeFuncties.fileHandlingFunctions import verwijderGecontroleerdeFilesBovenNummerFromList
+from generiekeFuncties.fileHandlingFunctions import verwijderUitgecontroleerdeFilesFromList
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 
@@ -48,6 +48,8 @@ image_flow_from_directory = image_generator.flow_from_directory(
     shuffle=False)
 steps_per_epoch = np.math.ceil(image_flow_from_directory.samples / image_flow_from_directory.batch_size)
 
+classifier = models.load_model(modelPath,
+                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 predictions = classifier.predict(image_flow_from_directory, steps=steps_per_epoch)
 # Get most likely class
 
@@ -77,18 +79,17 @@ plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.show()
 
-imageDict_onterecht_P = [(os.path.join(onderzoeks_dir, image_flow_from_directory.filenames[i]), predictions[i]) for i in
-                         range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
+imageDict_onterecht_P = [(image_flow_from_directory.filepaths[i], predictions[i])
+                         for i in range(0, len(true_classes)) if true_classes[i] < predicted_classes[i]]
 imageDict_onterecht_P.sort(key=lambda x: -x[1])
 imageList_onterecht_P = [key for key, waarde in imageDict_onterecht_P]
-imageDict_onterecht_geen_P = [(os.path.join(onderzoeks_dir, image_flow_from_directory.filenames[i]),
-                               predictions[i]) for i in
-                              range(0, len(true_classes)) if true_classes[i] > predicted_classes[i]]
+imageDict_onterecht_geen_P = [(image_flow_from_directory.filepaths[i], predictions[i])
+                              for i in range(0, len(true_classes)) if true_classes[i] > predicted_classes[i]]
 imageDict_onterecht_geen_P.sort(key=lambda x: x[1])
 imageList_onterecht_geen_P = [key for key, waarde in imageDict_onterecht_geen_P]
 
-imageList_onterecht_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_onterecht_P, 2)
-imageList_onterecht_geen_P = verwijderGecontroleerdeFilesBovenNummerFromList(imageList_onterecht_geen_P, 2)
+imageList_onterecht_P = verwijderUitgecontroleerdeFilesFromList(imageList_onterecht_P, 2)
+imageList_onterecht_geen_P = verwijderUitgecontroleerdeFilesFromList(imageList_onterecht_geen_P, 2)
 
 viewer = Viewer(imgList=imageList_onterecht_P, titel="GEREGISTREERD ALS NIET ", aanleidingTotVeranderen="wel")
 

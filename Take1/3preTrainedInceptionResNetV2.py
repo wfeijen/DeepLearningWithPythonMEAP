@@ -13,7 +13,7 @@ from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 model_dir = 'inceptionResnetV2_299'
-modelPath = os.path.join(base_dir, 'BesteModellen', model_dir, 'm_')
+modelPath = os.path.join(base_dir, '../BesteModellen', model_dir, 'm_')
 base_picture_dir = os.path.join(base_dir, 'Werkplaats')
 train_dir = os.path.join(base_picture_dir, 'train')
 validation_dir = os.path.join(base_picture_dir, 'validation')

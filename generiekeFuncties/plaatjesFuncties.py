@@ -49,6 +49,27 @@ def resize_image(im, vergrotingsfactor):
 
 
 def convert_image_to_square(im, targetsize_im):
+    #try:
+        im = im.convert("RGB")
+        size_x, size_y = im.size
+        mean_color = tuple([math.floor(n) for n in ImageStat.Stat(im)._getmean()])
+        antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=mean_color)
+        # Breder of vierkant voegen we in de breedte  in het frame
+        if size_x >= size_y:  # (en sx <= 2* sy)
+            im = resize_image(im, targetsize_im / size_x)
+            sx, sy = im.size
+            antwoord.paste(im, (0, (targetsize_im - sy) // 2))
+            return antwoord
+        # Blijft nog over: hoger voegen we in de hoogte in het frame
+        im = resize_image(im, targetsize_im / size_y)
+        sx, sy = im.size
+        antwoord.paste(im, ((targetsize_im - sx) // 2, 0))
+    # except :
+    #     antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=(0, 0, 0))
+        return antwoord
+
+
+def convert_image_to_square_oud(im, targetsize_im):
     im = im.convert("RGB")
     size_x, size_y = im.size
     mean_color = tuple([math.floor(n) for n in ImageStat.Stat(im)._getmean()])
@@ -131,7 +152,7 @@ def sla_image_op(img, doellocatie):
 def download_image_naar_memory(url_in):
     try:
         response = requests.get(url_in)
-    except requests.exceptions.ConnectionError as e:
+    except (requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError) as e:
         print("Communicatie fout in: ", url_in, " - ", e)
         return None
     try:
