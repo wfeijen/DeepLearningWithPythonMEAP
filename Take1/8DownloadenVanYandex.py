@@ -14,6 +14,7 @@ from fake_useragent import UserAgent
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 import random
 import sys
+from generiekeFuncties.queryResultaatScherm import QueryResultaatScherm
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
@@ -74,71 +75,14 @@ vorigeClick = datetime.now() - timedelta(seconds=constBasisWachttijd)
 ua = UserAgent()
 ua.update()
 
-
-
-def haal_query_resultaat_op(query_url, tijd_vorige_query):
-    user_agent = UserAgent().random
-    print(user_agent)
-    #options.add_argument(f'user-agent={user_agent}')
-    driver = webdriver.Chrome(options=options,
-                              executable_path="/usr/lib/chromium-browser/chromedriver")
-#        driver.set_window_size(random.choice(screenSizes), random.choice(screenSizes))
-    #driver.minimize_window()
-    nog_wachten = max(0.0, constBasisWachttijd - (datetime.now() - tijd_vorige_query).total_seconds()) + exponential(0.3) + exponential(0.2)
-    print(query_url)
-    print('start wachten: ' + str(datetime.now()) + ' nog wachten: ' + str(nog_wachten))
-    time.sleep(nog_wachten)
-    print('Klaar met wachten: ' + str(datetime.now()))
-    driver.get(query_url)
-    tijd_vorige_query = datetime.now()
-
-    # driver.click()
-    page_query_resultaat = driver.page_source
-    gevonden_verwijzingen_naar_plaatjes = regex.findall(regexPlaatje, page_query_resultaat , regex.IGNORECASE)
-    if len(gevonden_verwijzingen_naar_plaatjes) == 0:
-        print('Niks gevonden. Blijkbaar zijn we ontdekt 1.')
-        driver.maximize_window()
-        input("Press Enter to continue...")
-        page_query_resultaat = driver.page_source
-        gevonden_verwijzingen_naar_plaatjes = regex.findall(regexPlaatje, page_query_resultaat , regex.IGNORECASE)
-        if len(gevonden_verwijzingen_naar_plaatjes) == 0:
-            print('Niks gevonden. Blijkbaar zijn we ontdekt 2.')
-            sys.exit()
-    SCROLL_PAUSE_TIME = 10
-
-    # Get scroll height
-    last_height = driver.execute_script("return document.body.scrollHeight")
-
-    while True:
-        # Scroll down to bottom
-        print('scroll')
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-        # Wait to load page
-        time.sleep(SCROLL_PAUSE_TIME)
-
-        # Calculate new scroll height and compare with last scroll height
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            break
-        last_height = new_height
-    page_query_resultaat = driver.page_source
-    gevonden_verwijzingen_naar_plaatjes = regex.findall(regexPlaatje, page_query_resultaat , regex.IGNORECASE)
-    driver.quit()
-# Voor debug doeleinden schrijven we de pagina weg
-    f = open(os.path.join(const_base_dir, 'temp/pageSave' + str(datetime.now()) + '.html'), 'w')
-    f.write(page_query_resultaat)
-    f.close()
-    return gevonden_verwijzingen_naar_plaatjes, tijd_vorige_query
-
-
 for woorden_voor_query in urlWoordenPermutaties:
     if woorden_voor_query.replace('%20', ' ') in benaderde_woorden_administratie:
         print(woorden_voor_query.replace('%20', ' ') + ' is al eens bezocht.')
     else:
         zoek_url = urlStart + woorden_voor_query + urlEnd
         print('Zoekterm: ' + woorden_voor_query.replace('%20', ' '))
-        gevonden_verwijzingen, vorigeClick = haal_query_resultaat_op(query_url=zoek_url, tijd_vorige_query=vorigeClick)
+        queryResultaatScherm = QueryResultaatScherm(query_url=zoek_url)
+        gevonden_verwijzingen = queryResultaatScherm.gevonden_verwijzingen_naar_plaatjes
         for url_plaatje in gevonden_verwijzingen:
             url_plaatje = url_plaatje.replace('%3A', ':').replace('%2F', '/')
             if url_plaatje in url_administratie:

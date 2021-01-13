@@ -22,36 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="na refactoring 2. Niet gebruikte fncties weggegooid.">
-      <change afterPath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Weinig gebruikt/voegRawEditorDefaultsToe.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generiekeFuncties/RawTherapeeDefaults.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/4ControlerenLaatsteModelEnVerbeterenBasis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/5uitlezenVanafStartUrl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/6BoordelingDatasetEnKlaarzettenSets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kattenHonden/8DownloadenVanYandex.py" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor in gebruik nemen queryResultaatScherm.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2verplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4ControlerenLaatsteModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4ControlerenLaatsteModelEnVerbeterenBasis.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/4ControlerenLaatsteModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/5uitlezenVanafStartUrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/5uitlezenVanafStartUrl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/6BoordelingDatasetEnKlaarzettenSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/7DownloadenGroteBestanden.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLearningWithPythonMEAP200907.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/DeepLearningWithPythonMEAP200907.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Experimenten.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/Experimenten.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JariksFotosEenUurLater.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/JariksFotosEenUurLater.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/model.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rawtherapeeTemplate.pp3" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/rawtherapeeTemplate.pp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/voegRawTherapeeTemplateToe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/voegRawTherapeeTemplateToe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -447,7 +422,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609340113688</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="voor in gebruik nemen queryResultaatScherm.py">
+      <created>1610543094787</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1610543094787</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -463,7 +445,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Beoordelingschermen klaar" />
     <MESSAGE value="Extra trainer die doorgaat op bestaand model" />
     <MESSAGE value="Vanaf nu worden gecontroleerde files bevoordeeld" />
     <MESSAGE value="Hoera binnenhalen links doet het weer" />
@@ -488,7 +469,8 @@
     <MESSAGE value="voor refactoring" />
     <MESSAGE value="voor refactoring 2" />
     <MESSAGE value="na refactoring 2. Niet gebruikte fncties weggegooid." />
-    <option name="LAST_COMMIT_MESSAGE" value="na refactoring 2. Niet gebruikte fncties weggegooid." />
+    <MESSAGE value="voor in gebruik nemen queryResultaatScherm.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="voor in gebruik nemen queryResultaatScherm.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
