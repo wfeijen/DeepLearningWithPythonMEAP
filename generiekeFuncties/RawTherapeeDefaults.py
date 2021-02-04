@@ -1,6 +1,11 @@
+import os
 class RawTherapeeDefaults:
-    def __init__(self):
-        template_file = open('/home/willem/PycharmProjects/DeepLearningWithPythonMEAP/generiekeFuncties/rawtherapeeTemplate.pp3')
+    def __init__(self, file_format):
+        if file_format == '.jpg':
+            template_pad = os.path.expanduser('~/PycharmProjects/DeepLearningWithPythonMEAP/generiekeFuncties/rawtherapeeJPGtemplate.pp3')
+        else:
+            template_pad = os.path.expanduser('~/PycharmProjects/DeepLearningWithPythonMEAP/generiekeFuncties/rawtherapeeNEFtemplate.pp3')
+        template_file = open(template_pad)
         self.template = template_file.read()
         template_file.close()
 

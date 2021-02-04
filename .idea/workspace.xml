@@ -22,11 +22,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor in gebruik nemen queryResultaatScherm.py">
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="queryResultaatScherm.py in gebruik">
+      <change afterPath="$PROJECT_DIR$/generiekeFuncties/rawtherapeeNEFtemplate.pp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Take1/JariksFotosEenUurLater.py" beforeDir="false" afterPath="$PROJECT_DIR$/Weinig gebruikt/JariksFotosEenUurLater.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Take1/voegRawTherapeeTemplateToe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/voegRawTherapeeTemplateToe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weinig gebruikt/voegRawEditorDefaultsToe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Weinig gebruikt/voegRawEditorDefaultsToe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/RawTherapeeDefaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/RawTherapeeDefaults.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/rawtherapeeTemplate.pp3" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/rawtherapeeJPGtemplate.pp3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,25 +57,26 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/kattenHonden" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/generiekeFuncties" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/generiekeFuncties" />
       <recent name="$PROJECT_DIR$/kattenHonden" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Weinig gebruikt" />
       <recent name="$PROJECT_DIR$/Take1" />
       <recent name="$PROJECT_DIR$/generiekeFuncties" />
-      <recent name="$PROJECT_DIR$/Weinig gebruikt" />
       <recent name="$PROJECT_DIR$/oud" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="Python.8DownloadenVanYandex">
-    <configuration name="1ontdubbelenEnMaakVierkant (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="1ontdubbelenEnMaakVierkant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -79,32 +84,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kattenHonden" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kattenHonden/1ontdubbelenEnMaakVierkant.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2verplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kattenHonden" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -134,7 +118,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="4ControlerenLaatsteModelEnVerbeterenBasis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="6BoordelingDatasetEnKlaarzettenSets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -142,11 +126,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -176,13 +160,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="voegRawEditorDefaultsToe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Weinig gebruikt" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Weinig gebruikt/voegRawEditorDefaultsToe.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.8DownloadenVanYandex" />
+        <item itemvalue="Python.voegRawEditorDefaultsToe" />
+        <item itemvalue="Python.1ontdubbelenEnMaakVierkant" />
+        <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
         <item itemvalue="Python.3preTrainedInceptionResNetV2" />
-        <item itemvalue="Python.2verplaatsNaarWerkset" />
-        <item itemvalue="Python.1ontdubbelenEnMaakVierkant (1)" />
-        <item itemvalue="Python.4ControlerenLaatsteModelEnVerbeterenBasis" />
       </list>
     </recent_temporary>
   </component>
@@ -429,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610543094787</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="queryResultaatScherm.py in gebruik">
+      <created>1610545888751</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1610545888751</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -445,7 +457,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Extra trainer die doorgaat op bestaand model" />
     <MESSAGE value="Vanaf nu worden gecontroleerde files bevoordeeld" />
     <MESSAGE value="Hoera binnenhalen links doet het weer" />
     <MESSAGE value="Manier van vierkante plaatjes aangepast" />
@@ -470,7 +481,8 @@
     <MESSAGE value="voor refactoring 2" />
     <MESSAGE value="na refactoring 2. Niet gebruikte fncties weggegooid." />
     <MESSAGE value="voor in gebruik nemen queryResultaatScherm.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="voor in gebruik nemen queryResultaatScherm.py" />
+    <MESSAGE value="queryResultaatScherm.py in gebruik" />
+    <option name="LAST_COMMIT_MESSAGE" value="queryResultaatScherm.py in gebruik" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,7 +613,7 @@
           <option name="timeStamp" value="162" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Take1/JariksFotosEenUurLater.py</url>
+          <url>file://$PROJECT_DIR$/Weinig gebruikt/JariksFotosEenUurLater.py</url>
           <line>10</line>
           <option name="timeStamp" value="164" />
         </line-breakpoint>

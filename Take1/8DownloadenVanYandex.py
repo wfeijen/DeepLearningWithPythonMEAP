@@ -25,7 +25,7 @@ minimaalVerschilInVerhoudingImages = 1.1
 urlStart = 'https://yandex.com/images/search?text='
 urlEnd = '&isize=gt&iw=1920&ih=1080'
 
-rawEditorDefaults = RawTherapeeDefaults()
+rawEditorDefaults = RawTherapeeDefaults(".jpg")
 
 
 
@@ -83,6 +83,7 @@ for woorden_voor_query in urlWoordenPermutaties:
         print('Zoekterm: ' + woorden_voor_query.replace('%20', ' '))
         queryResultaatScherm = QueryResultaatScherm(query_url=zoek_url)
         gevonden_verwijzingen = queryResultaatScherm.gevonden_verwijzingen_naar_plaatjes
+        gevonden_verwijzingen = list(set(gevonden_verwijzingen))
         for url_plaatje in gevonden_verwijzingen:
             url_plaatje = url_plaatje.replace('%3A', ':').replace('%2F', '/')
             if url_plaatje in url_administratie:
@@ -94,12 +95,13 @@ for woorden_voor_query in urlWoordenPermutaties:
                 if img is None:
                     print(url_plaatje + ' niet gelezen.')
                 else:
+                    breedte, hoogte = img.size
                     hash_groot = bigHashPicture(img)
                     if hash_groot == '':
                         print(url_plaatje + ' wordt overgeslagen omdat de hash niet klopt')
                     elif hash_groot in hash_administratie:
                         print(url_plaatje + ' al eens gevonden.')
-                    elif max(img.size) < 1000:
+                    elif hoogte < 1080 or breedte < 1200:
                         print(url_plaatje + ' is te klein. Afmetingen: ' + str(img.size))
                     else:
                         hash_administratie[hash_groot] = str(datetime.now())
