@@ -15,10 +15,11 @@ class RawTherapeeDefaults:
         if breedte > hoogte * factor:
             breedte = hoogte * factor
         else:
-            hoogte = int(breedte / factor)
-        inhoud_pp3 = self.template.replace("teVervangenBreedte",
-                                  str(breedte)).replace("teVervangenHoogte",
-                                                        str(hoogte))
+            hoogte = breedte / factor
+        breedte = int(breedte)
+        hoogte = int(hoogte)
+        inhoud_pp3 = self.template.replace("teVervangenBreedte", str(breedte)).\
+            replace("teVervangenHoogte", str(hoogte))
         pp3_file_naam = f_naam + ".pp3"
         pp3_file = open(pp3_file_naam, "w")
         pp3_file.write(inhoud_pp3)

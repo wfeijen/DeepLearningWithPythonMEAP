@@ -11,10 +11,17 @@ from numpy.random import exponential
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
+from requests import exceptions
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 import random
 import sys
 from generiekeFuncties.queryResultaatScherm import QueryResultaatScherm
+
+minBreedte = 800
+minHoogte = 1000
+maxPerm = 3
+minPerm = 2
+
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
@@ -23,7 +30,7 @@ percentageAdditionalExtraRandom = 10
 minimaalVerschilInVerhoudingImages = 1.1
 
 urlStart = 'https://yandex.com/images/search?text='
-urlEnd = '&isize=gt&iw=1920&ih=1080'
+urlEnd = '&isize=gt&iw=' + str(minBreedte) +'&ih=' + str(minHoogte)
 
 rawEditorDefaults = RawTherapeeDefaults(".jpg")
 
@@ -37,20 +44,28 @@ constBenaderde_hash_administratie_pad = os.path.join(const_verwijzing_boekhoudin
 constBenaderde_url_administratie_pad = os.path.join(const_verwijzing_boekhouding_dir, 'benaderde_url.txt')
 constBenaderde_query_administratie_pad = os.path.join(const_verwijzing_boekhouding_dir, 'benaderde_woorden.txt')
 
-geladenUrlWords = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
-    os.path.join(const_verwijzing_boekhouding_dir, 'woordenGeladen.txt'))]
+onderwerpUrlWords = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
+    os.path.join(const_verwijzing_boekhouding_dir, 'woordenOnderwerp.txt'))]
 bijvoegelijkeUrlWords = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
     os.path.join(const_verwijzing_boekhouding_dir, 'woordenBijvoegelijk.txt'))]
-urlGeladenWoordenPermutations = []
-for i in range(1, len(geladenUrlWords) + 1):
-    urlGeladenWoordenPermutations.extend(
-        ["%20".join(map(str, comb)) for comb in itertools.combinations(geladenUrlWords, i)])
+bijvoegelijkeUrlWordsEssentie = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
+    os.path.join(const_verwijzing_boekhouding_dir, 'woordenBijvoegelijkEssentie.txt'))]
+
+urlOnderwerpWoordenPermutations = []
+for i in range(minPerm, min(len(onderwerpUrlWords) + 1, maxPerm)):
+    urlOnderwerpWoordenPermutations.extend(
+        ["%20".join(map(str, comb)) for comb in itertools.combinations(onderwerpUrlWords, i)])
 urlBijvoegelijkeWoordenPermutations = []
-for i in range(1, len(geladenUrlWords) + 1):
+for i in range(minPerm, min(len(bijvoegelijkeUrlWords) + 1, maxPerm)):
     urlBijvoegelijkeWoordenPermutations.extend(
         ["%20".join(map(str, comb)) for comb in itertools.combinations(bijvoegelijkeUrlWords, i)])
-urlWoordenPermutaties = [a + '%20' + b for a in urlBijvoegelijkeWoordenPermutations for b in
-                         urlGeladenWoordenPermutations]
+urlBijvoegelijkeWoordenEssentiePermutations = []
+for i in range(minPerm, min(len(bijvoegelijkeUrlWordsEssentie) + 1, maxPerm)):
+    urlBijvoegelijkeWoordenEssentiePermutations.extend(
+        ["%20".join(map(str, comb)) for comb in itertools.combinations(bijvoegelijkeUrlWordsEssentie, i)])
+
+urlWoordenPermutaties = [a + '%20' + b + '%20' + c for a in urlBijvoegelijkeWoordenPermutations for b in
+                         urlOnderwerpWoordenPermutations for c in urlBijvoegelijkeWoordenEssentiePermutations]
 random.shuffle(urlWoordenPermutaties)
 print(str(len(urlWoordenPermutaties)) + ' permutaties')
 
@@ -91,7 +106,13 @@ for woorden_voor_query in urlWoordenPermutaties:
             else:
                 url_administratie[url_plaatje] = str(datetime.now())
                 #print(url_plaatje)
-                img = download_image_naar_memory(url_plaatje)
+                try:
+                    img = download_image_naar_memory(url_plaatje)
+                except exceptions.InvalidURL as e:
+                    print("Url: " + url_plaatje + " niet leesbaar.")
+                    print(e)
+                    img = None
+
                 if img is None:
                     print(url_plaatje + ' niet gelezen.')
                 else:
@@ -101,7 +122,7 @@ for woorden_voor_query in urlWoordenPermutaties:
                         print(url_plaatje + ' wordt overgeslagen omdat de hash niet klopt')
                     elif hash_groot in hash_administratie:
                         print(url_plaatje + ' al eens gevonden.')
-                    elif hoogte < 1080 or breedte < 1200:
+                    elif hoogte < minHoogte or breedte < minBreedte:
                         print(url_plaatje + ' is te klein. Afmetingen: ' + str(img.size))
                     else:
                         hash_administratie[hash_groot] = str(datetime.now())
@@ -110,9 +131,9 @@ for woorden_voor_query in urlWoordenPermutaties:
                         if resultaat >= grenswaarde:
                             keuze = 'wel'
                         print(url_plaatje + ' ' + keuze)
-                        file_naam = os.path.join(constNieuwePlaatjesLocatie, keuze, hash_groot + ".jpg")
-                        sla_image_op(img, file_naam)
-                        if keuze == 'wel':
+                        if keuze == 'wel' or random.random() < resultaat:
+                            file_naam = os.path.join(constNieuwePlaatjesLocatie, keuze, hash_groot + ".jpg")
+                            sla_image_op(img, file_naam)
                             rawEditorDefaults.maak_specifiek(file_naam, img.size)
                         writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
                 writeDict(url_administratie, constBenaderde_url_administratie_pad)

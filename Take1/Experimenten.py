@@ -1,11 +1,5 @@
-import os
-import regex
+import itertools
 
-a = "https://imx.to/i/20bygb"
+l = [1, 2, 3]
 
-print(os.path.basename(a))
-print(os.path.split(a))
-
-match = regex.findall('//([^\.]+)\.', a, regex.IGNORECASE)
-
-print(match)
+print([comb for comb in itertools.combinations(l, 3)])

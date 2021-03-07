@@ -12,8 +12,7 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-model_dir = 'inceptionResnetV2_299'
-modelPath = os.path.join(base_dir, '../BesteModellen', model_dir, 'm_')
+modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
 base_picture_dir = os.path.join(base_dir, 'Werkplaats')
 train_dir = os.path.join(base_picture_dir, 'train')
 validation_dir = os.path.join(base_picture_dir, 'validation')
@@ -21,7 +20,7 @@ imageSize = get_target_picture_size()
 batchSize = 16
 sequences = range(3)
 epochs_list = [20, 20, 20]
-images_per_epoch_list = [5000, 5000, 5000]
+images_per_epoch_list = [20000, 20000, 20000]
 aantal_lerende_lagen_conv_base_list = [30, 30, 30]
 
 validation_images = 3000

@@ -16,6 +16,10 @@ def silentremove(filename):
 def move_file_en_maak_dir_als_nodig(bron_pad, doel_pad):
     os.makedirs(os.path.dirname(doel_pad), exist_ok=True)
     shutil.move(bron_pad, doel_pad)
+    try:
+        shutil.move(bron_pad + '.pp3', doel_pad + '.pp3')
+    except FileNotFoundError as e:
+        print(bron_pad + '.pp3 bestond niet')
 
 
 def maak_directory_helemaal_leeg(dir):

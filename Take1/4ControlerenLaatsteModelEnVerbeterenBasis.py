@@ -19,7 +19,7 @@ imageSize = get_target_picture_size()
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 model_dir = 'inceptionResnetV2_299'
-modelPath = os.path.join(base_dir, '../BesteModellen', model_dir, 'm_')
+modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
 onderzoeks_dir = os.path.join(base_dir, 'OntdubbeldEnVerkleind')
 
 print("############### start: ", str(datetime.now()))
@@ -35,6 +35,8 @@ steps_per_epoch = np.math.ceil(image_flow_from_directory.samples / image_flow_fr
 
 classifier = models.load_model(modelPath,
                                custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+
+print("############### start met voorspellen: ", str(datetime.now()))
 predictions = classifier.predict(image_flow_from_directory, steps=steps_per_epoch)
 # Get most likely class
 
