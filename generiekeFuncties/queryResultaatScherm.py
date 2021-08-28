@@ -1,11 +1,8 @@
 import os
 import sys
 import regex
-import time
 from tkinter import ttk, Tk, CENTER, DISABLED, NORMAL
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from fake_useragent import UserAgent
 
 
 class QueryResultaatScherm:

@@ -13,8 +13,8 @@ from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerV
 
 voortgangs_informatie = initializeerVoortgangsInformatie("start verklein en verplaats")
 
-aantalSamplesWel = 40000
-aantalSamplesNiet = 20000
+aantalSamplesWel = 50000
+aantalSamplesNiet = 40000
 percentageTrain = 0.9
 percentageValidation = 0.1
 
@@ -30,8 +30,8 @@ welFileNames = gevonden_files_onder_dir(os.path.join(full_data_set_dir, 'wel'), 
 print("aantal Niet totaal:", len(nietFileNames), " aantal Wel totaal:", len(welFileNames))
 
 # Zorgen voor een zekere balans in de samples
-aantalSamplesWel = len(welFileNames) // 2
-aantalSamplesNiet = len(nietFileNames) // 2
+aantalSamplesWel = min(len(welFileNames), aantalSamplesWel)
+aantalSamplesNiet = min(len(nietFileNames) , aantalSamplesNiet)
 if aantalSamplesWel < aantalSamplesNiet // 2:
     aantalSamplesNiet = 2 * aantalSamplesWel
 elif aantalSamplesNiet < aantalSamplesWel // 2:

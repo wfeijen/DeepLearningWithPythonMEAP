@@ -74,7 +74,7 @@ def plaatje_gedownload(url, doelDir, raw_editor_dafaults):
 tijdenVorigePunt = initializeerVoortgangsInformatie("start")
 opTePakkenVerwijzingDirs = [d for d in os.listdir(constVerwijzingDir)
                             if os.path.isdir(os.path.join(constVerwijzingDir, d))]
-rawEditorDefaults = RawTherapeeDefaults()
+rawEditorDefaults = RawTherapeeDefaults('.jpg')
 for verwijzingsDir in opTePakkenVerwijzingDirs:
     verwijzingsFile = os.path.join(constVerwijzingDir, verwijzingsDir, "verwijzingen.txt")
     lijstMislukteUrls = []

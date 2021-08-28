@@ -38,6 +38,23 @@ def zet_random_lagen_open_van_conv_base(model_in, aantal):
     print('naar: ', len(model_in.trainable_weights))
     return model_in
 
+def zet_bovenste_lagen_open_van_conv_base(model_in, aantal_lagen_open):
+    print('trainable weights van: ', len(model_in.trainable_weights))
+    if aantal_lagen_open == 0:
+        model_in.layers[0].trainable = False
+        print('naar: ', len(model_in.trainable_weights))
+        return model_in
+    # Open zetten alle toplayers
+    for layer in model_in.layers:
+        layer.trainable = True
+    # Dichtzetten layers onder layer[0] zodat er aantal layers open blijven
+    aantal_lagen_dicht = len(model_in.layers[0].layers) - aantal_lagen_open
+    for layer in model_in.layers[0].layers[:aantal_lagen_dicht]:
+        layer.trainable = False
+        print("Layer dicht: ", str(layer))
+    print('naar: ', len(model_in.trainable_weights))
+    print('waarvan ', len(model_in.layers[0].trainable_weights), ' in transfer model.')
+    return model_in
 
 def recall_m(y_true, y_pred):
     true_positives = K.sum(K.round(K.clip(y_true, 0, 1)) * y_pred)

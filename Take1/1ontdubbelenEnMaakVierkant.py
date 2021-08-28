@@ -61,3 +61,7 @@ else:
     ontdubbel_en_verklein_dir(input_directory, output_directory, "wel",
                               minimumSizeLongSideImage, hash_size())
     voortgangs_informatie = geeftVoortgangsInformatie("klaar", voortgangs_informatie)
+
+filesWel = gevonden_files_onder_dir(os.path.join(output_directory, "wel"), "jpg")
+filesNiet = gevonden_files_onder_dir(os.path.join(output_directory, "niet"), "jpg")
+print("Aantal wel: ", str(len(filesWel)), "    aantal niet: ", str(len(filesNiet)))

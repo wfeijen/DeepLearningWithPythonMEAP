@@ -5,10 +5,10 @@ import numpy as np
 
 
 def plotLossAndAcc(history):
-    acc = history.history['acc']
-    val_acc = history.history['val_acc']
-    recall_m = history.history['recall_m']
-    val_recall_m = history.history['val_recall_m']
+    acc = history['acc']
+    val_acc = history['val_acc']
+    recall_m = history['recall_m']
+    val_recall_m = history['val_recall_m']
     epochs = range(1, len(acc) + 1)
     plt.plot(epochs, acc, 'bo', label='Training acc')
     plt.plot(epochs, val_acc, 'b', label='Validation acc')

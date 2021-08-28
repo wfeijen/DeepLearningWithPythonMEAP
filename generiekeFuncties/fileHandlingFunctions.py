@@ -90,7 +90,7 @@ def readDictFile(path):
             f.write('')
     with open(path, 'r') as r:
         for line in r:
-            splitted = line.strip().split(',')
+            splitted = line.strip().split(',', 1)
             name = splitted[0].strip()
             value = splitted[1].strip()
             d[name] = value

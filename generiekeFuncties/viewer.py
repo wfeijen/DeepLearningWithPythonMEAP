@@ -3,6 +3,10 @@ from tkinter import ttk, Tk, CENTER
 from PIL import ImageTk, Image, UnidentifiedImageError
 from generiekeFuncties.fileHandlingFunctions import veranderVanKant, markeerGecontroleerd
 
+def rgb_naar_hex(rgb):
+    """translates an rgb tuple of int to a tkinter friendly color code
+    """
+    return "#%02x%02x%02x" % rgb
 
 class Viewer:
     def __init__(self, imgList, titel, aanleidingTotVeranderen):
@@ -16,11 +20,14 @@ class Viewer:
             self.root.geometry('1800x1000')
             try:
                 img = Image.open(self.imageList[self.index])
-                vergroting = 600 / max(img.size)
+                imGrootte = img.size
+                vergroting = min(1800 / img.size[0], 1000 / img.size[1])
                 nieuweGrootte = (int(img.size[0] * vergroting), int(img.size[1] * vergroting))
                 img = img.resize(nieuweGrootte, Image.BICUBIC)
                 stgImg = ImageTk.PhotoImage(img)
-                self.root.title(self.titel + "      " + self.imageList[self.index])
+                self.root.title(self.titel + str(imGrootte) +
+                " [" + str(self.index) + " van " + str(len(self.imageList)) + "]    " +
+                "      " + self.imageList[self.index])
                 self.label = ttk.Label(self.root, image=stgImg)
                 self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
             except UnidentifiedImageError as e:
@@ -73,14 +80,17 @@ class Viewer:
         if self.index < len(self.imageList):
             image_path = self.imageList[self.index]
             im = Image.open(image_path)
-            vergroting = 600 / max(im.size)
+            imGrootte = im.size
+            vergroting = min(1800 / im.size[0], 1000 / im.size[1])
             nieuweGrootte = (int(im.size[0] * vergroting), int(im.size[1] * vergroting))
             im = im.resize(nieuweGrootte, Image.BICUBIC)
             stgImg = ImageTk.PhotoImage(im)
             self.label.configure(image=stgImg)
             self.label.image = stgImg
-            self.root.title(self.titel + " (" + str(self.index) + " van " +
-                            str(len(self.imageList)) + ")    " + image_path)
+            self.root.title(self.titel + str(imGrootte) +
+                " [" + str(self.index) + " van " + str(len(self.imageList)) + "]    " +
+                image_path)
+            self.root.configure(bg=rgb_naar_hex(((100 + 10 * self.index % 3), 100 + 10 * ((self.index + 1) % 3), 100 + 10 * ((self.index + 2) % 3))))
         else:
             self.root.title(self.titel + "      Alle images verwerkt")
 

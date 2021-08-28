@@ -7,26 +7,23 @@ from generiekeFuncties.fileHandlingFunctions import readDictFile, writeDict, lee
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture, classificeer_vollig_image_from_file
 from datetime import datetime, timedelta
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
-from numpy.random import exponential
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from fake_useragent import UserAgent
 from requests import exceptions
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 import random
-import sys
 from generiekeFuncties.queryResultaatScherm import QueryResultaatScherm
 
-minBreedte = 800
-minHoogte = 1000
+minBreedte = 700
+minHoogte = 1080
+minFileSize = 100 #kB
 maxPerm = 3
 minPerm = 2
 
-
+# &isize=gt&iw=600&ih=1080
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
 targetImageSize = get_target_picture_size()
-percentageRandomFromChosen = 0
-percentageAdditionalExtraRandom = 10
+nogTeLadenNietCounter = 0
+aantalWelPerNiet = 1
 minimaalVerschilInVerhoudingImages = 1.1
 
 urlStart = 'https://yandex.com/images/search?text='
@@ -50,6 +47,10 @@ bijvoegelijkeUrlWords = [woorden.replace(' ', '%20') for woorden in lees_file_re
     os.path.join(const_verwijzing_boekhouding_dir, 'woordenBijvoegelijk.txt'))]
 bijvoegelijkeUrlWordsEssentie = [woorden.replace(' ', '%20') for woorden in lees_file_regels_naar_ontdubbelde_lijst(
     os.path.join(const_verwijzing_boekhouding_dir, 'woordenBijvoegelijkEssentie.txt'))]
+
+# ua = UserAgent()
+# ua.update()
+
 
 urlOnderwerpWoordenPermutations = []
 for i in range(minPerm, min(len(onderwerpUrlWords) + 1, maxPerm)):
@@ -87,8 +88,7 @@ regexPlaatje = '(https[^&]+jpg)&'  # '{"url":"([^"]+jpg)"' #{"url":"https://wall
 
 vorigeClick = datetime.now() - timedelta(seconds=constBasisWachttijd)
 
-ua = UserAgent()
-ua.update()
+
 
 for woorden_voor_query in urlWoordenPermutaties:
     if woorden_voor_query.replace('%20', ' ') in benaderde_woorden_administratie:
@@ -127,12 +127,18 @@ for woorden_voor_query in urlWoordenPermutaties:
                     else:
                         hash_administratie[hash_groot] = str(datetime.now())
                         resultaat = classificeer_vollig_image(img, url_plaatje, constClassifier, targetImageSize)
-                        keuze = 'niet'
                         if resultaat >= grenswaarde:
                             keuze = 'wel'
+                            nogTeLadenNietCounter += 1
+                        else:
+                            keuze = 'niet'
+                            nietPlaatjeLaden = nogTeLadenNietCounter >= aantalWelPerNiet
+                            if nietPlaatjeLaden:
+                                nogTeLadenNietCounter = nogTeLadenNietCounter - aantalWelPerNiet
                         print(url_plaatje + ' ' + keuze)
-                        if keuze == 'wel' or random.random() < resultaat:
+                        if keuze == 'wel' or nietPlaatjeLaden:
                             file_naam = os.path.join(constNieuwePlaatjesLocatie, keuze, hash_groot + ".jpg")
+                            print(file_naam)
                             sla_image_op(img, file_naam)
                             rawEditorDefaults.maak_specifiek(file_naam, img.size)
                         writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
