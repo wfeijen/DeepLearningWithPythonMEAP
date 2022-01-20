@@ -4,7 +4,7 @@ from send2trash import send2trash
 from PIL import Image
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size, hashPicture, hash_size, convert_image_to_square
 from generiekeFuncties.fileHandlingFunctions import gevonden_files_onder_dir, gevonden_hashcodes_onder_dir
-from generiekeFuncties.utilities import initializeerVoortgangsInformatie, geeftVoortgangsInformatie
+from generiekeFuncties.utilities import initializeer_voortgangs_informatie, geeft_voortgangs_informatie
 
 targetSizeImage = get_target_picture_size()  # Size that the ml engine expects
 minimumSizeLongSideImage = targetSizeImage // 2
@@ -51,10 +51,10 @@ nog_te_bekijken_verwijzingen = [os.path.join(constVerwijzingDir, f) for f in os.
 if len(nog_te_bekijken_verwijzingen) > 0:
     print("Er zijn nog te bekijken verwijzingen.")
 else:
-    voortgangs_informatie = initializeerVoortgangsInformatie("start ontdubbel en verklein")
+    voortgangs_informatie = initializeer_voortgangs_informatie("start ontdubbel en verklein")
     ontdubbel_en_verklein_dir(input_directory, output_directory, "niet",
                               minimumSizeLongSideImage, hash_size())
-    voortgangs_informatie = geeftVoortgangsInformatie("niet gedaan", voortgangs_informatie)
+    voortgangs_informatie = geeft_voortgangs_informatie("niet gedaan", voortgangs_informatie)
     ontdubbel_en_verklein_dir(input_directory, output_directory, "wel",
                               minimumSizeLongSideImage, hash_size())
-    voortgangs_informatie = geeftVoortgangsInformatie("klaar", voortgangs_informatie)
+    voortgangs_informatie = geeft_voortgangs_informatie("klaar", voortgangs_informatie)

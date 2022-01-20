@@ -17,7 +17,7 @@ import random
 from generiekeFuncties.fileHandlingFunctions import write_voorbereiding_na_te_lopen_verwijzingen, readDictFile, writeDict
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture
 from datetime import datetime
-from generiekeFuncties.utilities import initializeerVoortgangsInformatie, geeftVoortgangsInformatie
+from generiekeFuncties.utilities import initializeer_voortgangs_informatie, geeft_voortgangs_informatie
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
@@ -60,7 +60,7 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
         # even de troep er uit
         na_te_lopen_verwijzingen = [(groot, klein) for (groot, klein) in gevonden_verwijzingen if
                                     groot[:4] == 'http' and klein[:4] == 'http']
-        vgi = geeftVoortgangsInformatie(
+        vgi = geeft_voortgangs_informatie(
             'Post ' + postname + ' met ' + str(len(na_te_lopen_verwijzingen)) + ' gevonden verwijzingen',
             vgi)
         for na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein in na_te_lopen_verwijzingen:
@@ -82,7 +82,7 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
                             sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "wel", hash_groot + ".jpg"))
                         elif resultaat < 0:
                             print("Negatieve score: ", na_te_lopen_verwijzing_groot)
-        vgi = geeftVoortgangsInformatie(
+        vgi = geeft_voortgangs_informatie(
             'Post ' + postname + ' heeft ' + str(len(hashes_voor_lokale_filenaam_en_url_groot)) + ' echte verwijzingen',
             vgi)
         aantalRandomOpgenomen = 0
@@ -100,7 +100,7 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
                         sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash_groot + ".jpg"))
                         hashes_voor_lokale_filenaam_en_url_groot[hash_groot] = na_te_lopen_verwijzing_groot
                         aantalRandomOpgenomen = aantalRandomOpgenomen + 1
-        vgi = geeftVoortgangsInformatie(
+        vgi = geeft_voortgangs_informatie(
             'Post ' + postname + ' heeft ' + str(aantalRandomOpgenomen) + ' random verwijzingen'
             , vgi)
 
@@ -108,9 +108,9 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
         writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
 
 
-voortgangs_informatie = initializeerVoortgangsInformatie("Uitlezen urls")
+voortgangs_informatie = initializeer_voortgangs_informatie("Uitlezen urls")
 for volgnummerUrl in volgnummersUrl:
-    voortgangs_informatie = geeftVoortgangsInformatie("#### volgnummer: " + str(volgnummerUrl), voortgangs_informatie)
+    voortgangs_informatie = geeft_voortgangs_informatie("#### volgnummer: " + str(volgnummerUrl), voortgangs_informatie)
     url = baseUrl + str(volgnummerUrl)
     plunder_overzicht_pagina(url, patroon_verwijzing_plaatje, patroon_naam_post, voortgangs_informatie)
 

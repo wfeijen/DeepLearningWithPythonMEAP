@@ -14,7 +14,7 @@ from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_
 import pyttsx3
 
 # aantal goedgeclassificeerde die we willen controleren
-const_te_controleren_goed_geclassificeerd = 100
+const_te_controleren_goed_geclassificeerd = 1000
 
 imageSize = get_target_picture_size()
 

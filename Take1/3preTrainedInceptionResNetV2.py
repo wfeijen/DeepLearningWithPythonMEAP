@@ -8,8 +8,8 @@ from tensorflow.keras import applications
 from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
-from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
-from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
+from generiekeFuncties.utilities import geeft_voortgangs_informatie, initializeer_voortgangs_informatie
+from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base, zet_bovenste_lagen_open_van_conv_base
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
@@ -18,20 +18,20 @@ train_dir = os.path.join(base_picture_dir, 'train')
 validation_dir = os.path.join(base_picture_dir, 'validation')
 imageSize = get_target_picture_size()
 batchSize = 16
-sequences = range(3)
-epochs_list = [20, 20, 20]
-images_per_epoch_list = [20000, 20000, 20000]
-aantal_lerende_lagen_conv_base_list = [30, 30, 30]
+sequences = range(5)
+epochs_list = [20, 20, 20, 20, 20]
+images_per_epoch_list = [10000, 10000, 10000, 10000, 10000]
+aantal_lerende_lagen_conv_base_list = [0, 30, 60, 90, 120]
 
 validation_images = 3000
-start_Learning_rate_factor_list = [1, 0.7, 0.5]
-initial_start_learning_rate = 0.0050
+start_Learning_rate_factor_list = [1, 0.5, 0.25, 0.1, 0.05]
+initial_start_learning_rate = 0.0030
 
-bestaandmodel_verder_brengen = True
+bestaandmodel_verder_brengen = False
 
 start_Learning_rate_list = [initial_start_learning_rate * i for i in start_Learning_rate_factor_list]
 validation_steps = validation_images // batchSize + 1
-tijdenVorigePunt = initializeerVoortgangsInformatie("start")
+tijdenVorigePunt = initializeer_voortgangs_informatie("start")
 
 train_datagen = ImageDataGenerator(
     preprocessing_function=applications.inception_resnet_v2.preprocess_input,
@@ -59,6 +59,7 @@ validation_generator = test_datagen.flow_from_directory(
     shuffle=True,
     class_mode='binary')
 
+
 if bestaandmodel_verder_brengen:
     model = models.load_model(modelPath,
                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
@@ -71,6 +72,7 @@ else:
     model.add(conv_base)
     model.add(layers.Flatten())
     model.add(layers.Dense(256, activation='relu'))
+    model.add(layers.Dropout(0.2))
     model.add(layers.Dense(1, activation='sigmoid'))
     print('This is the number of trainable weights before freezing the conv base:', len(model.trainable_weights))
     conv_base.trainable = False
@@ -91,11 +93,11 @@ for i in sequences:
     epochs = epochs_list[i]
     learning_rate = start_Learning_rate_list[i]
     aantal_lerende_lagen_conv_base = aantal_lerende_lagen_conv_base_list[i]
-    tijdenVorigePunt = geeftVoortgangsInformatie(
+    tijdenVorigePunt = geeft_voortgangs_informatie(
         "##########################################################################", tijdenVorigePunt)
-    model = zet_random_lagen_open_van_conv_base(model, aantal_lerende_lagen_conv_base)
-    tijdenVorigePunt = geeftVoortgangsInformatie(str(aantal_lerende_lagen_conv_base) + "lagen opgengezet. ",
-                                                 tijdenVorigePunt)
+    model = zet_bovenste_lagen_open_van_conv_base(model, aantal_lerende_lagen_conv_base)
+    tijdenVorigePunt = geeft_voortgangs_informatie(str(aantal_lerende_lagen_conv_base) + "lagen opgengezet. ",
+                                                   tijdenVorigePunt)
     print('sequence: ', str(i), ' epochs: ', epochs, ' start lr: ', str(learning_rate), ' trainable weights:',
           len(model.trainable_weights))
 
@@ -103,7 +105,7 @@ for i in sequences:
                   optimizer=optimizers.SGD(learning_rate=learning_rate, momentum=0.9),
                   metrics=['acc', recall_m, f2_m])
 
-    tijdenVorigePunt = geeftVoortgangsInformatie("Model ingeladen", tijdenVorigePunt)
+    tijdenVorigePunt = geeft_voortgangs_informatie("Model ingeladen", tijdenVorigePunt)
     history = model.fit(
         train_generator,
         steps_per_epoch=steps_per_epoch,
@@ -112,12 +114,12 @@ for i in sequences:
         validation_steps=validation_steps,
         callbacks=[checkpoint])
     historyList.append(history.history)
-    tijdenVorigePunt = geeftVoortgangsInformatie("Na fit", tijdenVorigePunt)
-    del (model)
-    gc.collect()
-    model = models.load_model(modelPath,
-                              custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+    tijdenVorigePunt = geeft_voortgangs_informatie("Na fit", tijdenVorigePunt)
+    # del (model)
+    # gc.collect()
+    # model = models.load_model(modelPath,
+    #                           custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 
-tijdenVorigePunt = geeftVoortgangsInformatie("Totaal ", tijdenVorigePunt)
+tijdenVorigePunt = geeft_voortgangs_informatie("Totaal ", tijdenVorigePunt)
 for i in sequences:
     plotLossAndAcc(history=historyList[i])
