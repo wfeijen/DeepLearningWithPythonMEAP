@@ -22,32 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="sinusvormige learning rate geimplementeerd">
-      <change afterPath="$PROJECT_DIR$/Take1/51.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandexZonderZoekterm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Deep Learning with Python MEAP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Deep Learning with Python MEAP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2learningRate.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2learningRate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EigenFotots/voegRawEditorDefaultsToe.py" beforeDir="false" afterPath="$PROJECT_DIR$/EigenFotots/voegRawEditorDefaultsToe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/5uitlezenVanafStartUrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/5uitlezenVanafStartUrl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/Experimenten.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/Experimenten.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/utilities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/viewer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kattenHonden/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kattenHonden/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/3preTrainedInceptionResNetV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kattenHonden/5uitlezenVanafStartUrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/5uitlezenVanafStartUrl.py" afterDir="false" />
-    </list>
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -488,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630167851425</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start">
+      <created>1676150373382</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1676150373382</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -503,7 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Vierkante plaajtjes controleren basisplaatjes werkt bijna" />
     <MESSAGE value="Vierkante plaajtjes controleren basisplaatjes werkt" />
     <MESSAGE value="5 aangepast nog niet gecontroleerd" />
     <MESSAGE value="Alle code lijkt leuk samen te spelen" />
@@ -528,7 +509,8 @@
     <MESSAGE value="yandex werkt" />
     <MESSAGE value="Aanmaken zoektermen aangepast" />
     <MESSAGE value="sinusvormige learning rate geimplementeerd" />
-    <option name="LAST_COMMIT_MESSAGE" value="sinusvormige learning rate geimplementeerd" />
+    <MESSAGE value="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start" />
+    <option name="LAST_COMMIT_MESSAGE" value="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
