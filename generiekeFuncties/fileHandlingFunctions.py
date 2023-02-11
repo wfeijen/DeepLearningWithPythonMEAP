@@ -186,7 +186,7 @@ def prioriteerGecontroleerd(fileList, aantal, controle_char):
             file_name = fileGroep[random.randint(0, len(fileGroep) - 1)]
             fileGroep.remove(file_name)
             antwoord.append(file_name)
-        print(str(j), " files rang ", nr , " toegevoegd ")
+        print(str(j), " files rang ", nr , " toegevoegd van ", str(len(fileGroep)))
     print("totaal ", i, " files toegevoegd")
     return antwoord
 

@@ -100,7 +100,7 @@ def sla_image_op(img, doellocatie):
 def download_image_naar_memory(url_in):
     try:
         response = requests.get(url_in)
-    except (requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError, requests.exceptions.TooManyRedirects) as e:
+    except (requests.exceptions.ContentDecodingError, requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError, requests.exceptions.TooManyRedirects, requests.exceptions.MissingSchema) as e:
         print("Communicatie fout in: ", url_in, " - ", e)
         return None
     try:

@@ -22,25 +22,31 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="Aanmaken zoektermen aangepast">
-      <change afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2learningRate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Take1/uitbreidenHashAdiminstratie2.py" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="sinusvormige learning rate geimplementeerd">
+      <change afterPath="$PROJECT_DIR$/Take1/51.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandexZonderZoekterm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Deep Learning with Python MEAP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Deep Learning with Python MEAP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3preTrainedInceptionResNetV2learningRate.py" beforeDir="false" afterPath="$PROJECT_DIR$/3preTrainedInceptionResNetV2learningRate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EigenFotots/voegRawEditorDefaultsToe.py" beforeDir="false" afterPath="$PROJECT_DIR$/EigenFotots/voegRawEditorDefaultsToe.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/5uitlezenVanafStartUrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/5uitlezenVanafStartUrl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/Experimenten.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/Experimenten.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/neural_netwerk_maatwerk.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/neural_netwerk_maatwerk.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/presentationFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/presentationFunctions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/utilities.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/viewer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kattenHonden/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kattenHonden/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/3preTrainedInceptionResNetV2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kattenHonden/5uitlezenVanafStartUrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/kattenHonden/5uitlezenVanafStartUrl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,20 +63,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1bK0OIrawZv00EoIifQPSR9DUtA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="TODO_SCOPE" value="All Places" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Take1" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;/home/willem/PycharmProjects/DeepLearningWithPythonMEAP&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Take1" />
@@ -87,7 +94,7 @@
       <recent name="$PROJECT_DIR$/generiekeFuncties" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2learningRate">
+  <component name="RunManager" selected="Python.8DownloadenVanYandexZonderZoekterm">
     <configuration name="1ontdubbelenEnMaakVierkant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,48 +116,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="2verplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="3preTrainedInceptionResNetV2learningRate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3preTrainedInceptionResNetV2learningRate.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="4ControlerenLaatsteModelEnVerbeterenBasis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -164,6 +129,48 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/4ControlerenLaatsteModelEnVerbeterenBasis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="6BoordelingDatasetEnKlaarzettenSets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="8DownloadenVanYandexZonderZoekterm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/8DownloadenVanYandexZonderZoekterm.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -195,11 +202,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.3preTrainedInceptionResNetV2learningRate" />
-        <item itemvalue="Python.2verplaatsNaarWerkset" />
-        <item itemvalue="Python.4ControlerenLaatsteModelEnVerbeterenBasis" />
+        <item itemvalue="Python.8DownloadenVanYandexZonderZoekterm" />
         <item itemvalue="Python.voegRawEditorDefaultsToe" />
+        <item itemvalue="Python.4ControlerenLaatsteModelEnVerbeterenBasis" />
         <item itemvalue="Python.1ontdubbelenEnMaakVierkant" />
+        <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
       </list>
     </recent_temporary>
   </component>
@@ -467,7 +474,21 @@
       <option name="project" value="LOCAL" />
       <updated>1615102971042</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="sinusvormige learning rate geimplementeerd">
+      <created>1630167818615</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1630167818615</updated>
+    </task>
+    <task id="LOCAL-00038" summary="sinusvormige learning rate geimplementeerd">
+      <created>1630167851425</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1630167851425</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,10 +501,8 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Manier van vierkante plaatjes aangepast" />
     <MESSAGE value="Vierkante plaajtjes controleren basisplaatjes werkt bijna" />
     <MESSAGE value="Vierkante plaajtjes controleren basisplaatjes werkt" />
     <MESSAGE value="5 aangepast nog niet gecontroleerd" />
@@ -508,7 +527,8 @@
     <MESSAGE value="queryResultaatScherm.py in gebruik" />
     <MESSAGE value="yandex werkt" />
     <MESSAGE value="Aanmaken zoektermen aangepast" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aanmaken zoektermen aangepast" />
+    <MESSAGE value="sinusvormige learning rate geimplementeerd" />
+    <option name="LAST_COMMIT_MESSAGE" value="sinusvormige learning rate geimplementeerd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -580,7 +600,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Take1/4ControlerenLaatsteModel.py</url>
-          <line>90</line>
+          <line>89</line>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -684,16 +704,6 @@
           <option name="timeStamp" value="225" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Take1/Experimenten.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="230" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Take1/Experimenten.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="231" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py</url>
           <line>29</line>
           <option name="timeStamp" value="232" />
@@ -702,6 +712,11 @@
           <url>file://$PROJECT_DIR$/generiekeFuncties/presentationFunctions.py</url>
           <line>7</line>
           <option name="timeStamp" value="236" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/EigenFotots/voegRawEditorDefaultsToe.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="237" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

@@ -9,9 +9,9 @@ import os
 from generiekeFuncties.fileHandlingFunctions import gevonden_files_onder_dir, \
     maak_directory_helemaal_leeg, prioriteerGecontroleerd, maak_doeldirectory_en_verplaats_random_files
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
-from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
+from generiekeFuncties.utilities import geeft_voortgangs_informatie, initializeer_voortgangs_informatie
 
-voortgangs_informatie = initializeerVoortgangsInformatie("start verklein en verplaats")
+voortgangs_informatie = initializeer_voortgangs_informatie("start verklein en verplaats")
 
 #aantalSamplesWel = 31000
 #aantalSamplesNiet = 16000
@@ -44,7 +44,7 @@ aantalSamplesTest = int(min(aantalSamplesNiet, aantalSamplesWel) * percentageTes
 aantalSamplesTrainWel = aantalSamplesWel - aantalSamplesTest - aantalSamplesValidation
 aantalSamplesTrainNiet = aantalSamplesNiet - aantalSamplesTest - aantalSamplesValidation
 
-voortgangs_informatie = geeftVoortgangsInformatie("Start leegmaken dirs", voortgangs_informatie)
+voortgangs_informatie = geeft_voortgangs_informatie("Start leegmaken dirs", voortgangs_informatie)
 
 maak_directory_helemaal_leeg(target_base_dir)
 train_dir = os.path.join(target_base_dir, 'train')
@@ -55,7 +55,7 @@ validation_dir = os.path.join(target_base_dir, 'validation')
 os.mkdir(validation_dir)
 
 
-voortgangs_informatie = geeftVoortgangsInformatie("Start niet files", voortgangs_informatie)
+voortgangs_informatie = geeft_voortgangs_informatie("Start niet files", voortgangs_informatie)
 
 nietFileNames = prioriteerGecontroleerd(nietFileNames, aantalSamplesNiet, "n")
 
@@ -72,7 +72,7 @@ nietFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='niet
                                                              numberOfFiles=aantalSamplesValidation,
                                                              fileNames=nietFileNames)
 
-voortgangs_informatie = geeftVoortgangsInformatie("Start wel files", voortgangs_informatie)
+voortgangs_informatie = geeft_voortgangs_informatie("Start wel files", voortgangs_informatie)
 
 welFileNames = prioriteerGecontroleerd(welFileNames, aantalSamplesWel, "w")
 welFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='wel',
@@ -88,4 +88,4 @@ welFileNames = maak_doeldirectory_en_verplaats_random_files(subSubDirName='wel',
                                                             numberOfFiles=aantalSamplesValidation,
                                                             fileNames=welFileNames)
 
-voortgangs_informatie = geeftVoortgangsInformatie("Klaar", voortgangs_informatie)
+voortgangs_informatie = geeft_voortgangs_informatie("Klaar", voortgangs_informatie)

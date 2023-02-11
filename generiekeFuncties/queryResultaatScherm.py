@@ -21,9 +21,10 @@ class QueryResultaatScherm:
 
     def open_scherm(self):
         self.start_btn["state"] = DISABLED
-        self.driver = webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver")
+        self.driver = webdriver.Chrome(executable_path="/snap/chromium/2295/usr/lib/chromium-browser/chromedriver")
         self.driver.get(self.query_url)
         self.interactie_compleet_btn["state"] = NORMAL
+        print("####################################################################################")
 
     def afronden(self):
         self.interactie_compleet_btn["state"] = DISABLED

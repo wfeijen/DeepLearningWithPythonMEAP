@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from generiekeFuncties.plaatjesFuncties import download_image_naar_memory, sla_image_op
 from generiekeFuncties.fileHandlingFunctions import lees_file_regels_naar_ontdubbelde_lijst, \
     write_lijst_regels_naar_file
-from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
+from generiekeFuncties.utilities import geeft_voortgangs_informatie, initializeer_voortgangs_informatie
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 
 
@@ -63,7 +63,7 @@ def plaatje_gedownload(url, doelDir, raw_editor_dafaults):
             if img is not None:
                 file_name = os.path.join(doelDir, os.path.basename(img_url) + ".jpg")
                 sla_image_op(img, file_name)
-                raw_editor_dafaults.maak_specifiek(file_name, img.size)
+                # raw_editor_dafaults.maak_specifiek(file_name, img.size)
                 result = True
     browser.quit()
     return result
@@ -71,7 +71,7 @@ def plaatje_gedownload(url, doelDir, raw_editor_dafaults):
 
 
 # webBrowser = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
-tijdenVorigePunt = initializeerVoortgangsInformatie("start")
+tijdenVorigePunt = initializeer_voortgangs_informatie("start")
 opTePakkenVerwijzingDirs = [d for d in os.listdir(constVerwijzingDir)
                             if os.path.isdir(os.path.join(constVerwijzingDir, d))]
 rawEditorDefaults = RawTherapeeDefaults('.jpg')
@@ -79,7 +79,7 @@ for verwijzingsDir in opTePakkenVerwijzingDirs:
     verwijzingsFile = os.path.join(constVerwijzingDir, verwijzingsDir, "verwijzingen.txt")
     lijstMislukteUrls = []
     verwijzingen = lees_file_regels_naar_ontdubbelde_lijst(verwijzingsFile)
-    tijdenVorigePunt = geeftVoortgangsInformatie("VerwijzingsDir: " + verwijzingsDir + " met " + str(len(verwijzingen)) + " verwijzingen. ", tijdenVorigePunt)
+    tijdenVorigePunt = geeft_voortgangs_informatie("VerwijzingsDir: " + verwijzingsDir + " met " + str(len(verwijzingen)) + " verwijzingen. ", tijdenVorigePunt)
     for verwijzing in verwijzingen:
         if not plaatje_gedownload(verwijzing, os.path.join(constVerwijzingDir, verwijzingsDir), rawEditorDefaults):
             lijstMislukteUrls.append(verwijzing)

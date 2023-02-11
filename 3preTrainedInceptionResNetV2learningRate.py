@@ -1,5 +1,7 @@
 import os
 import gc
+import sys
+
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import models
 from tensorflow.keras import layers
@@ -8,11 +10,12 @@ from tensorflow.keras import applications
 from tensorflow.keras import callbacks
 #from tensorflow import math
 import math
+import copy
 from tensorflow.keras.callbacks import ModelCheckpoint
 from generiekeFuncties.presentationFunctions import plotLossAndAcc
 from generiekeFuncties.plaatjesFuncties import get_target_picture_size
-from generiekeFuncties.utilities import geeftVoortgangsInformatie, initializeerVoortgangsInformatie
-from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base, zet_bovenste_lagen_open_van_conv_base
+from generiekeFuncties.utilities import geeft_voortgangs_informatie, initializeer_voortgangs_informatie, get_size
+from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_bovenste_lagen_open_van_conv_base
 
 
 base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
@@ -23,19 +26,19 @@ validation_dir = os.path.join(base_picture_dir, 'validation')
 imageSize = get_target_picture_size()
 batchSize = 16
 sequences = range(3)
-epochs_list = [150, 150, 150]
-images_per_epoch_list = [2000, 2000, 2000]
+epochs_list = [100, 100, 100]
+images_per_epoch_list = [2543, 2543, 2543]
 aantal_lerende_lagen_conv_base_list = [0, 30, 100]
 
-validation_images = 2000
+validation_images = 2543 #prime number
 start_Learning_rate_factor_list = [1, 0.2, 0.04]
-initial_start_learning_rate = 0.005
+initial_start_learning_rate = 0.003
 
-bestaandmodel_verder_brengen = False
+bestaandmodel_verder_brengen = True
 
 start_Learning_rate_list = [initial_start_learning_rate * i for i in start_Learning_rate_factor_list]
 validation_steps = validation_images // batchSize + 1
-tijdenVorigePunt = initializeerVoortgangsInformatie("start")
+tijdenVorigePunt = initializeer_voortgangs_informatie("start")
 
 train_datagen = ImageDataGenerator(
     preprocessing_function=applications.inception_resnet_v2.preprocess_input,
@@ -91,10 +94,12 @@ checkpoint = ModelCheckpoint(modelPath, monitor='val_f2_m', verbose=1,
 
 
 def scheduler(epoch, lr):
-    if epoch < 10:
-        lr_nieuw = (learning_rate * (epoch + 1)) / 10
+    startUpEpochs = 20
+    totaalAantalEpochs = epochs
+    if epoch < startUpEpochs:
+        lr_nieuw = (learning_rate * (epoch + 1)) / startUpEpochs
     else:
-        lr_nieuw = learning_rate * (0.55 + 0.45 * math.cos(math.pi * (epoch - 20) / 180))
+        lr_nieuw = learning_rate * (0.55 + 0.45 * math.cos(math.pi * (epoch - startUpEpochs) / (totaalAantalEpochs - startUpEpochs)))
     return lr_nieuw
 
 lr_sceduler_callback = callbacks.LearningRateScheduler(scheduler, verbose=1)
@@ -106,11 +111,11 @@ for i in sequences:
     epochs = epochs_list[i]
     learning_rate = start_Learning_rate_list[i]
     aantal_lerende_lagen_conv_base = aantal_lerende_lagen_conv_base_list[i]
-    tijdenVorigePunt = geeftVoortgangsInformatie(
+    tijdenVorigePunt = geeft_voortgangs_informatie(
         "##########################################################################", tijdenVorigePunt)
     model = zet_bovenste_lagen_open_van_conv_base(model, aantal_lerende_lagen_conv_base)
-    tijdenVorigePunt = geeftVoortgangsInformatie(str(aantal_lerende_lagen_conv_base) + "lagen opgengezet. ",
-                                                 tijdenVorigePunt)
+    tijdenVorigePunt = geeft_voortgangs_informatie(str(aantal_lerende_lagen_conv_base) + "lagen opgengezet. ",
+                                                   tijdenVorigePunt)
     print('sequence: ', str(i), ' epochs: ', epochs, ' start lr: ', str(learning_rate), ' trainable weights:',
           len(model.trainable_weights))
 
@@ -118,9 +123,7 @@ for i in sequences:
                   optimizer=optimizers.SGD(learning_rate=learning_rate, momentum=0.9),
                   metrics=['acc', recall_m, f2_m])
 
-
-
-    tijdenVorigePunt = geeftVoortgangsInformatie("Model ingeladen", tijdenVorigePunt)
+    tijdenVorigePunt = geeft_voortgangs_informatie("Model ingeladen", tijdenVorigePunt)
     history = model.fit(
         train_generator,
         steps_per_epoch=steps_per_epoch,
@@ -128,13 +131,15 @@ for i in sequences:
         validation_data=validation_generator,
         validation_steps=validation_steps,
         callbacks=[checkpoint, lr_sceduler_callback])
-    historyList.append(history.history)
-    tijdenVorigePunt = geeftVoortgangsInformatie("Na fit", tijdenVorigePunt)
-    del (model)
+    historyList.append(copy.deepcopy(history.history))
+    tijdenVorigePunt = geeft_voortgangs_informatie("Na fit", tijdenVorigePunt)
+    del model
+    del history
     gc.collect()
     model = models.load_model(modelPath,
                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
 
-tijdenVorigePunt = geeftVoortgangsInformatie("Totaal ", tijdenVorigePunt)
+tijdenVorigePunt = geeft_voortgangs_informatie("Totaal ", tijdenVorigePunt)
+
 for i in sequences:
     plotLossAndAcc(history=historyList[i])

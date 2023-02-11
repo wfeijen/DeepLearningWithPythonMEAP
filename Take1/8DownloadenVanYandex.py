@@ -13,8 +13,9 @@ from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 import random
 from generiekeFuncties.queryResultaatScherm import QueryResultaatScherm
 
-minBreedte = 700
-minHoogte = 1080
+#                  &isize=gt&iw=699&ih=1079
+minBreedte = 699
+minHoogte = 1079
 minFileSize = 100 #kB
 maxPerm = 3
 minPerm = 2
