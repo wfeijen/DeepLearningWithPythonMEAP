@@ -6,7 +6,7 @@ from selenium import webdriver
 
 
 class QueryResultaatScherm:
-    def __init__(self, query_url):
+    def __init__(self, query_url, webDriver):
         self.query_url = query_url
 
         self.root = Tk()
@@ -17,12 +17,16 @@ class QueryResultaatScherm:
         self.interactie_compleet_btn.place(x=0, y=30)
         self.interactie_compleet_btn["state"] = DISABLED
         self.gevonden_verwijzingen_naar_plaatjes = None
+        self.driver = webDriver
+        self.driverHandle = self.driver.current_window_handle
+        self.driver.minimize_window()
         self.root.mainloop()
 
     def open_scherm(self):
         self.start_btn["state"] = DISABLED
-        self.driver = webdriver.Chrome(executable_path="/snap/chromium/2295/usr/lib/chromium-browser/chromedriver")
         self.driver.get(self.query_url)
+        self.driver.switch_to.window(self.driverHandle)
+        self.driver.set_window_rect(0, 0)
         self.interactie_compleet_btn["state"] = NORMAL
         print("####################################################################################")
 
@@ -44,5 +48,5 @@ class QueryResultaatScherm:
                 sys.exit()
         page_query_resultaat = self.driver.page_source
         self.gevonden_verwijzingen_naar_plaatjes = regex.findall(regex_plaatje, page_query_resultaat, regex.IGNORECASE)
-        self.driver.quit()
         self.root.destroy()
+

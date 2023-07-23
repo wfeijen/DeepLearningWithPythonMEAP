@@ -12,13 +12,16 @@ from requests import exceptions
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 import random
 from generiekeFuncties.queryResultaatScherm import QueryResultaatScherm
+from selenium import webdriver
 
 
 # &isize=gt&iw=699&ih=1079
+# &isize=gt&iw=999&ih=1199
 # https://yandex.com/tune/
 
-minBreedte = 699
-minHoogte = 1079
+
+minBreedte = 999
+minHoogte = 1199
 minFileSize = 100 #kB
 
 # &isize=gt&iw=600&ih=1080
@@ -69,12 +72,11 @@ options = Options()
 regexPlaatje = '(https[^&]+jpg)&'  # '{"url":"([^"]+jpg)"' #{"url":"https://wallpapercave.com/wp/wp6828079.jpg"
 
 vorigeClick = datetime.now() - timedelta(seconds=constBasisWachttijd)
-
-
+driver = webdriver.Chrome(executable_path="/snap/chromium/2295/usr/lib/chromium-browser/chromedriver")
 
 for i in range(100):
     zoek_url = urlStart
-    queryResultaatScherm = QueryResultaatScherm(query_url=zoek_url)
+    queryResultaatScherm = QueryResultaatScherm(query_url=zoek_url, webDriver=driver)
     gevonden_verwijzingen = queryResultaatScherm.gevonden_verwijzingen_naar_plaatjes
     gevonden_verwijzingen = list(set(gevonden_verwijzingen))
     for url_plaatje in gevonden_verwijzingen:
@@ -122,4 +124,6 @@ for i in range(100):
                     writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
             writeDict(url_administratie, constBenaderde_url_administratie_pad)
         print("#######################################################################################################################################")
+
+driver.quit()
 

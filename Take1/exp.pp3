@@ -1,0 +1,10 @@
+[Crop]
+Enabled=true
+X=0
+Y=0
+W=teVervangenBreedte
+H=teVervangenHoogte
+FixedRatio=false
+Ratio=16:9
+Orientation=Landscape
+Guide=Rule of thirds

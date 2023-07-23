@@ -11,7 +11,7 @@ from generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.utilities import geeft_voortgangs_informatie, initializeer_voortgangs_informatie
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m, zet_random_lagen_open_van_conv_base
 
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
+base_dir = '/media/willem/KleindSSD/machineLearningPictures/take1'
 modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
 base_picture_dir = os.path.join(base_dir, 'Werkplaats')
 train_dir = os.path.join(base_picture_dir, 'train')

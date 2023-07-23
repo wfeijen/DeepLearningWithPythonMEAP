@@ -3,10 +3,10 @@ from PIL import Image, UnidentifiedImageError
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 from generiekeFuncties.fileHandlingFunctions import gevonden_files_onder_dir
 
-# locatie = os.path.expanduser('~/Pictures/In_bewerking')
+locatie = os.path.expanduser('~/Pictures/In_bewerking')
 # locatie = '/mnt/GroteSchijf/PictureStore/2021'
 # locatie = '/mnt/GroteSchijf/machineLearningPictures/take1/RawInput'
-locatie = '/media/willem/KleindSSD/VM uitwisseling'
+# locatie = '/media/willem/KleindSSD/VM uitwisseling'
 
 
 def voeg_toe_voor_extentie(pad, extentie):
