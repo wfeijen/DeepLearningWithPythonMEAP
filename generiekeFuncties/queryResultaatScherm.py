@@ -8,6 +8,7 @@ from selenium import webdriver
 class QueryResultaatScherm:
     def __init__(self, query_url, webDriver):
         self.query_url = query_url
+        self.neutraal_url = "https://duckduckgo.com/?q=warhammer+40k&t=newext&atb=v348-1&ia=web"
 
         self.root = Tk()
         self.root.title("query resultaten voorbereiden")
@@ -30,9 +31,16 @@ class QueryResultaatScherm:
         self.interactie_compleet_btn["state"] = NORMAL
         print("####################################################################################")
 
+    def zet_scherm_neutraal(self):
+        self.driver.get(self.neutraal_url)
+        # self.driver.switch_to.window(self.driverHandle)
+        # self.driver.set_window_rect(0, 0)
+        self.driver.minimize_window()
+
+
     def afronden(self):
         self.interactie_compleet_btn["state"] = DISABLED
-        self.driver.minimize_window()
+        #self.driver.minimize_window()
         page_query_resultaat = self.driver.page_source
         regex_plaatje = '(https[^&]+jpg)&'  # '{"url":"([^"]+jpg)"' #{"url":"https://wallpapercave.com/wp/wp6828079.jpg"
         gevonden_verwijzingen_naar_plaatjes = regex.findall(regex_plaatje, page_query_resultaat, regex.IGNORECASE)
@@ -48,5 +56,6 @@ class QueryResultaatScherm:
                 sys.exit()
         page_query_resultaat = self.driver.page_source
         self.gevonden_verwijzingen_naar_plaatjes = regex.findall(regex_plaatje, page_query_resultaat, regex.IGNORECASE)
+        self.zet_scherm_neutraal()
         self.root.destroy()
 

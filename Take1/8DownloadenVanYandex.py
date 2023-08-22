@@ -1,15 +1,12 @@
-import regex
 import os
 import itertools
-import time
 from tensorflow.keras import models
-from generiekeFuncties.fileHandlingFunctions import readDictFile, writeDict, lees_file_regels_naar_ontdubbelde_lijst
-from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture, classificeer_vollig_image_from_file
+from generiekeFuncties.fileHandlingFunctions import readDictFile, writeDict, lees_file_regels_naar_ontdubbelde_lijst, dict_values_string_to_int
+from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture, classificeer_vollig_image_from_file, scherpte_maalGrootte_image
 from datetime import datetime, timedelta
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 from selenium.webdriver.chrome.options import Options
 from requests import exceptions
-from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 import random
 from generiekeFuncties.queryResultaatScherm import QueryResultaatScherm
 
@@ -30,7 +27,7 @@ minimaalVerschilInVerhoudingImages = 1.1
 urlStart = 'https://yandex.com/images/search?text='
 urlEnd = '&isize=gt&iw=' + str(minBreedte) +'&ih=' + str(minHoogte)
 
-rawEditorDefaults = RawTherapeeDefaults(".jpg")
+
 
 
 
@@ -38,7 +35,7 @@ screenSizes = [360, 375, 414, 667, 720, 760, 768, 812, 896, 900, 1080, 1366, 144
 const_base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
 const_verwijzing_boekhouding_dir = os.path.join(const_base_dir, 'VerwijzingenBoekhouding')
 const_model_dir = os.path.join(const_base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
-constBenaderde_hash_administratie_pad = os.path.join(const_verwijzing_boekhouding_dir, 'benaderde_hash.txt')
+constBenaderde_hash_administratie_pad = os.path.join(const_verwijzing_boekhouding_dir, 'benaderde_hash_size.txt')
 constBenaderde_url_administratie_pad = os.path.join(const_verwijzing_boekhouding_dir, 'benaderde_url.txt')
 constBenaderde_query_administratie_pad = os.path.join(const_verwijzing_boekhouding_dir, 'benaderde_woorden.txt')
 
@@ -74,6 +71,7 @@ print(str(len(urlWoordenPermutaties)) + ' permutaties')
 constNieuwePlaatjesLocatie = os.path.join(const_base_dir, 'RawInput')
 
 hash_administratie = readDictFile(constBenaderde_hash_administratie_pad)
+hash_administratie = dict_values_string_to_int(hash_administratie)
 url_administratie = readDictFile(constBenaderde_url_administratie_pad)
 benaderde_woorden_administratie = readDictFile(constBenaderde_query_administratie_pad)
 
@@ -118,15 +116,17 @@ for woorden_voor_query in urlWoordenPermutaties:
                     print(url_plaatje + ' niet gelezen.')
                 else:
                     breedte, hoogte = img.size
+                    scherpte = scherpte_maalGrootte_image(im=img)
                     hash_groot = bigHashPicture(img)
                     if hash_groot == '':
                         print(url_plaatje + ' wordt overgeslagen omdat de hash niet klopt')
-                    elif hash_groot in hash_administratie:
-                        print(url_plaatje + ' al eens gevonden.')
                     elif hoogte < minHoogte or breedte < minBreedte:
                         print(url_plaatje + ' is te klein. Afmetingen: ' + str(img.size))
+                    elif hash_groot in hash_administratie:
+                        if hash_administratie[hash_groot] >= scherpte:
+                            print(url_plaatje + ' al eens gevonden.')
                     else:
-                        hash_administratie[hash_groot] = str(datetime.now())
+                        hash_administratie[hash_groot] = scherpte
                         resultaat = classificeer_vollig_image(img, url_plaatje, constClassifier, targetImageSize)
                         if resultaat >= grenswaarde:
                             keuze = 'wel'
@@ -141,7 +141,6 @@ for woorden_voor_query in urlWoordenPermutaties:
                             file_naam = os.path.join(constNieuwePlaatjesLocatie, keuze, hash_groot + ".jpg")
                             print(file_naam)
                             sla_image_op(img, file_naam)
-                            rawEditorDefaults.maak_specifiek(file_naam, img.size)
                         writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
                 writeDict(url_administratie, constBenaderde_url_administratie_pad)
         benaderde_woorden_administratie[woorden_voor_query.replace('%20', ' ')] = datetime.now()

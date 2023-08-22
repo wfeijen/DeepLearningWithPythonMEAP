@@ -16,10 +16,6 @@ def silentremove(filename):
 def move_file_en_maak_dir_als_nodig(bron_pad, doel_pad):
     os.makedirs(os.path.dirname(doel_pad), exist_ok=True)
     shutil.move(bron_pad, doel_pad)
-    try:
-        shutil.move(bron_pad + '.pp3', doel_pad + '.pp3')
-    except FileNotFoundError as e:
-        print(bron_pad + '.pp3 bestond niet')
 
 
 def maak_directory_helemaal_leeg(dir):
@@ -95,6 +91,11 @@ def readDictFile(path):
             value = splitted[1].strip()
             d[name] = value
     return d
+
+def dict_values_string_to_int(dict_in):
+    antwoord = dict([key, int(value)]
+          for key, value in dict_in.items())
+    return antwoord
 
 # 80772dca3644b9e7gecontroleerd.jpg
 def get_hash_from_filename(file_naam_in):

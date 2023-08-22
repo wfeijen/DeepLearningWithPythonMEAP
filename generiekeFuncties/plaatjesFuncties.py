@@ -1,13 +1,18 @@
 import math
 import os
-from PIL import Image, ImageStat
+from datetime import datetime, timedelta
+from PIL import Image, ImageStat, ImageOps
 from send2trash import send2trash
-from keras import preprocessing
 import numpy as np
 import requests
 from io import BytesIO
 import imagehash
-from tensorflow.keras import applications
+
+from requests import exceptions
+from generiekeFuncties.fileHandlingFunctions import writeDict
+
+
+
 
 constHash_size = 6
 constBigHash_size = 16
@@ -47,6 +52,13 @@ def resize_image(im, vergrotingsfactor):
     sy = int(sy * vergrotingsfactor)
     return im.resize(size=(sx, sy), resample=Image.BICUBIC)
 
+def scherpte_maalGrootte_image(im):
+    im = ImageOps.grayscale(im)
+    sx, sy = im.size
+    array = np.asarray(im, dtype=np.int32)
+    gy, gx = np.gradient(array)
+    g_norm = np.sqrt(gx ** 2 + gy ** 2)
+    return int(np.sum(g_norm) / sx) # Merk op dat avg de gemiddelde scherpte geeft. Nu nemen we ook de grootte van de image mee. Precies wat we willen.
 
 def convert_image_to_square(im, targetsize_im):
     #try:
@@ -68,26 +80,6 @@ def convert_image_to_square(im, targetsize_im):
     #     antwoord = Image.new(mode="RGB", size=(targetsize_im, targetsize_im), color=(0, 0, 0))
         return antwoord
 
-def classificeer_vollig_image(img, kenmerk, classifier_in, image_size_in):
-    try:
-        img = convert_image_to_square(img, image_size_in)
-        pp_image = preprocessing.image.img_to_array(img)
-        np_image = np.array(pp_image)
-        np_image = np.expand_dims(np.array(np_image).astype(float), axis=0)
-        # np_image /= 255.0
-        np_image = applications.inception_resnet_v2.preprocess_input(np_image)
-        classifications = classifier_in.predict(np_image)
-        return classifications[0][0]
-    except ValueError as e:
-        print('###', kenmerk, ' niet goed verwerkt:', e)
-        return -1
-
-
-def classificeer_vollig_image_from_file(file_name_in, classifier_in, image_size_in):
-    img = Image.open(file_name_in)
-    return classificeer_vollig_image(img, file_name_in, classifier_in, image_size_in)
-
-
 def sla_image_op(img, doellocatie):
     try:
         img.save(doellocatie)
@@ -99,13 +91,15 @@ def sla_image_op(img, doellocatie):
 
 def download_image_naar_memory(url_in):
     try:
-        response = requests.get(url_in)
-    except (requests.exceptions.ContentDecodingError, requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError, requests.exceptions.TooManyRedirects, requests.exceptions.MissingSchema) as e:
-        print("Communicatie fout in: ", url_in, " - ", e)
+        response = requests.get(url_in, verify=False, timeout=10)
+    except (requests.exceptions.ContentDecodingError, requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError, requests.exceptions.TooManyRedirects, requests.exceptions.MissingSchema, requests.exceptions.ReadTimeout) as e:
+        print("Communicatie fout - ", e)
         return None
     try:
         img = Image.open(BytesIO(response.content))
     except IOError as e:
-        print("Image corrupt: ", url_in, " - ", e)
+        print("Image corrupt - ", e)
         return None
     return img
+
+

@@ -2,17 +2,18 @@ from generiekeFuncties.fileHandlingFunctions import write_voorbereiding_na_te_lo
 import os
 
 
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-constBenaderde_hash_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
-constBenaderde_hash_nieuw_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash_n.txt')
+base_dir = '/media/willem/KleindSSD/machineLearningPictures/take1'
+constBenaderde_hash_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash_size.txt')
+constBenaderde_hash_nieuw_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash_size2.txt')
 hash_administratie = readDictFile(constBenaderde_hash_administratie_pad)
 
-tuples = [(key, value, 10000, 10000, 10000) for key, value in hash_administratie.items()]
 
-with open(constBenaderde_hash_nieuw_administratie_pad, 'w') as f:
-    for tuple in tuples:
-        f.write('%s,%s,%d,%d,%d\n' % tuple)
 
+newDict = {k: v for k, v in hash_administratie.items() if v != '1000'}
+
+x = max(newDict.values())
+
+writeDict(newDict, constBenaderde_hash_nieuw_administratie_pad)
 
 i = 1
 

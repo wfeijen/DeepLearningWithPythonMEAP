@@ -7,7 +7,7 @@ from keras import models
 from keras.preprocessing.image import ImageDataGenerator
 from keras import applications
 from datetime import datetime
-from generiekeFuncties.plaatjesFuncties import get_target_picture_size
+from Take1.generiekeFuncties.plaatjesFuncties import get_target_picture_size
 from generiekeFuncties.fileHandlingFunctions import verwijderUitgecontroleerdeFilesFromList
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
