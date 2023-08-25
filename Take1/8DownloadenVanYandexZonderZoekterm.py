@@ -7,11 +7,12 @@ from generiekeFuncties.plaatjes_downloader_en_beoordeler import Plaatjes_beoorde
 
 
 # &isize=gt&iw=999&ih=1199
+# &isize=gt&iw=1279&ih=1439
 # https://yandex.com/tune/
 
 
-minBreedte = 999
-minHoogte = 1199
+minBreedte = 1279
+minHoogte = 1439
 minFileSize = 100 #kB
 min_scherpte_grootte = 2000
 

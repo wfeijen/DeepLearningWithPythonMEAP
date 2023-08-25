@@ -53,7 +53,12 @@ def resize_image(im, vergrotingsfactor):
     return im.resize(size=(sx, sy), resample=Image.BICUBIC)
 
 def scherpte_maalGrootte_image(im):
-    im = ImageOps.grayscale(im)
+    try:
+        im = ImageOps.grayscale(im)
+    except Exception as e:
+        print("Grayscale niet gelukt: " + e)
+        return 0
+
     sx, sy = im.size
     array = np.asarray(im, dtype=np.int32)
     gy, gx = np.gradient(array)

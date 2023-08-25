@@ -22,21 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start">
-      <change afterPath="$PROJECT_DIR$/Take1/experimenten.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Take1/scherpte_test_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjes_downloader_en_beoordeler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oud/8DownloadenVanYandexZonderZoekterm.py" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="gerefactord en zo dat hij nu bogus scherm toont als verborgen scherm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/4ControlerenLaatsteModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/7DownloadenGroteBestanden.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandex.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/8DownloadenVanYandexZonderZoekterm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/8DownloadenVanYandexZonderZoekterm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/Experimenten.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/uitbreidenHashAdiminstratie2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/uitbreidenHashAdiminstratie2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/queryResultaatScherm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +45,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="1bK0OIrawZv00EoIifQPSR9DUtA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -84,7 +76,7 @@
       <recent name="$PROJECT_DIR$/Take1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.6BoordelingDatasetEnKlaarzettenSets">
+  <component name="RunManager" selected="Python.8DownloadenVanYandexZonderZoekterm (1)">
     <configuration name="6BoordelingDatasetEnKlaarzettenSets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,8 +226,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
         <item itemvalue="Python.8DownloadenVanYandexZonderZoekterm (1)" />
+        <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
         <item itemvalue="Python.uitbreidenHashAdiminstratie2" />
         <item itemvalue="Python.experimenten" />
         <item itemvalue="Python.8DownloadenVanYandexZonderZoekterm" />
@@ -534,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1676150575741</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="gerefactord en zo dat hij nu bogus scherm toont als verborgen scherm">
+      <option name="closed" value="true" />
+      <created>1692735491568</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1692735491568</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -549,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Vierkante plaajtjes controleren basisplaatjes werkt" />
     <MESSAGE value="5 aangepast nog niet gecontroleerd" />
     <MESSAGE value="Alle code lijkt leuk samen te spelen" />
     <MESSAGE value="Voor pipeline controleren binnengehaald voorselectie sets" />
@@ -574,7 +573,8 @@
     <MESSAGE value="Aanmaken zoektermen aangepast" />
     <MESSAGE value="sinusvormige learning rate geimplementeerd" />
     <MESSAGE value="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start" />
-    <option name="LAST_COMMIT_MESSAGE" value="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start" />
+    <MESSAGE value="gerefactord en zo dat hij nu bogus scherm toont als verborgen scherm" />
+    <option name="LAST_COMMIT_MESSAGE" value="gerefactord en zo dat hij nu bogus scherm toont als verborgen scherm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
