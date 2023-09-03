@@ -4,6 +4,17 @@ from generiekeFuncties.fileHandlingFunctions import gevonden_files_onder_dir, re
 from generiekeFuncties.viewer import Viewer
 from generiekeFuncties.plaatjesFuncties import bigHash_size
 
+from screeninfo import get_monitors
+
+monitors = get_monitors()
+for m in monitors:
+    if m.y ==0:
+        print(str(m))
+        breedte = m.width - 100
+        hoogte = m.height - 70
+
+# breedte = 2450
+# hoogte = 1400
 directoryNr = 2
 aantal = 25
 hash_size = bigHash_size()
@@ -19,9 +30,9 @@ imageList_P = [f for f in gevonden_files_onder_dir(constWelDir, '.jpg') if contr
 imageList_P.sort()
 imageList_geen_P = [f for f in gevonden_files_onder_dir(constNietDir, '.jpg') if controleText not in f]
 imageList_geen_P.sort()
-dummyX = Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel")
+dummyX = Viewer(imgList=imageList_geen_P, titel="NIET", aanleidingTotVeranderen="wel", breedte=breedte, hoogte=hoogte)
 dummyX = None
-dummyY = Viewer(imgList=imageList_P, titel="WEL", aanleidingTotVeranderen="niet")
+dummyY = Viewer(imgList=imageList_P, titel="WEL", aanleidingTotVeranderen="niet", breedte=breedte, hoogte=hoogte)
 dummyY = None
 
 

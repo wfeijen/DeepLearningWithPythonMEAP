@@ -9,7 +9,7 @@ def rgb_naar_hex(rgb):
     return "#%02x%02x%02x" % rgb
 
 class Viewer:
-    def __init__(self, imgList, titel, aanleidingTotVeranderen):
+    def __init__(self, imgList, titel, aanleidingTotVeranderen, breedte, hoogte):
         if len(imgList)>0:
             self.index = 0
             self.changeList = []
@@ -17,11 +17,14 @@ class Viewer:
             self.root = Tk()
             self.titel = titel
             self.aanleidingTotVranderen = aanleidingTotVeranderen
-            self.root.geometry('1800x1000')
+            geometrie = str(breedte) + "x" + str(hoogte)
+            self.breedte = breedte
+            self.hoogte = hoogte
+            self.root.geometry(geometrie)
             try:
                 img = Image.open(self.imageList[self.index])
                 imGrootte = img.size
-                vergroting = min(1800 / img.size[0], 1000 / img.size[1])
+                vergroting = min(breedte / img.size[0], hoogte / img.size[1])
                 nieuweGrootte = (int(img.size[0] * vergroting), int(img.size[1] * vergroting))
                 img = img.resize(nieuweGrootte, Image.BICUBIC)
                 stgImg = ImageTk.PhotoImage(img)
@@ -34,19 +37,19 @@ class Viewer:
                 print("Image niet te openen: ", self.imageList[self.index], " - ", e)
 
             nietBtn = ttk.Button(self.root, text="NIET (z)", command=self.niet)
-            nietBtn.place(x=1800, y=0)
+            nietBtn.place(x=breedte, y=0)
             verwijderBtn = ttk.Button(self.root, text="VERWIJDER (^)", command=self.verwijder)
-            verwijderBtn.place(x=1800, y=30)
+            verwijderBtn.place(x=breedte, y=30)
             welBtn = ttk.Button(self.root, text="WEL (x)", command=self.wel)
-            welBtn.place(x=1800, y=60)
+            welBtn.place(x=breedte, y=60)
             backBtn = ttk.Button(self.root, text="TERUG (<)", command=self.undo)
-            backBtn.place(x=1800, y=90)
+            backBtn.place(x=breedte, y=90)
             verwerkenBtn = ttk.Button(self.root, text="VERWERKEN", command=self.verwerken)
-            verwerkenBtn.place(x=1800, y=400)
+            verwerkenBtn.place(x=breedte, y=400)
             klaarBtn = ttk.Button(self.root, text="KLAAR", command=self.klaar)
-            klaarBtn.place(x=1800, y=610)
+            klaarBtn.place(x=breedte, y=610)
             afbrekenBtn = ttk.Button(self.root, text="AFBREKEN", command=self.afbreken)
-            afbrekenBtn.place(x=1800, y=640)
+            afbrekenBtn.place(x=breedte, y=640)
             self.root.bind("<Key>", self.key)
             self.root.mainloop()
         else:
@@ -81,7 +84,7 @@ class Viewer:
             image_path = self.imageList[self.index]
             im = Image.open(image_path)
             imGrootte = im.size
-            vergroting = min(1800 / im.size[0], 1000 / im.size[1])
+            vergroting = min(self.breedte / im.size[0], self.hoogte / im.size[1])
             nieuweGrootte = (int(im.size[0] * vergroting), int(im.size[1] * vergroting))
             im = im.resize(nieuweGrootte, Image.BICUBIC)
             stgImg = ImageTk.PhotoImage(im)

@@ -20,7 +20,7 @@ percentageValidation = 0.2
 
 # The path to the directory where the original
 # data set was uncompressed
-root = '/mnt/GroteSchijf/machineLearningPictures/take1'
+root = '/media/willem/KleindSSD/machineLearningPictures/take1'
 full_data_set_dir = os.path.join(root, 'OntdubbeldEnVerkleind')
 target_base_dir = os.path.join(root, 'Werkplaats')
 targetSizeImage = get_target_picture_size()
