@@ -14,10 +14,27 @@ import regex
 import os
 from tensorflow.keras import models
 import random
-from generiekeFuncties.fileHandlingFunctions import write_voorbereiding_na_te_lopen_verwijzingen, readDictFile, writeDict
-from generiekeFuncties.plaatjesFuncties import get_target_picture_size, classificeer_vollig_image, download_image_naar_memory, sla_image_op, bigHashPicture
+import sys
+
+
+sys.path.insert(0, os.getcwd())
+from generiekeFuncties.plaatjes_downloader_en_beoordeler import Plaatjes_beoordelaar
+from generiekeFuncties.fileHandlingFunctions import (
+    write_voorbereiding_na_te_lopen_verwijzingen,
+    readDictFile,
+    writeDict,
+)
+from generiekeFuncties.plaatjesFuncties import (
+    get_target_picture_size,
+    download_image_naar_memory,
+    sla_image_op,
+    bigHashPicture,
+)
 from datetime import datetime
-from generiekeFuncties.utilities import initializeer_voortgangs_informatie, geeft_voortgangs_informatie
+from generiekeFuncties.utilities import (
+    initializeer_voortgangs_informatie,
+    geeft_voortgangs_informatie,
+)
 from generiekeFuncties.neural_netwerk_maatwerk import recall_m, precision_m, f2_m
 
 grenswaarde = 0.5  # Waarde waarboven we uitgaan van een p plaatje
@@ -28,43 +45,65 @@ minimaalVerschilInVerhoudingImages = 1.1
 
 
 ###########################################################################################
-baseUrl = 'https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/page'
+baseUrl = "https://vipergirls.to/threads/3545152-MetArt-2018-High-Resolution!/page"
 volgnummersUrl = range(31, 41)  #   1 - 46
-patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
-patroon_naam_post = r'([0-9]{4}-[0-9]{2}-[0-9]{2}[^\<]+)<'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
+patroon_verwijzing_plaatje = r"<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>"
+patroon_naam_post = r"([0-9]{4}-[0-9]{2}-[0-9]{2}[^\<]+)<"  # 2019-06-19 - Monika Dee - Time To Unwind<br />
 
 
 # Globale variabelen
-base_dir = '/mnt/GroteSchijf/machineLearningPictures/take1'
-modelPath = os.path.join(base_dir, 'BesteModellen/inceptionResnetV2_299/m_')
-constVoorberVerwijzingDir = os.path.join(base_dir, 'Verwijzingen')
-constBenaderde_hash_administratie_pad = os.path.join(base_dir, 'VerwijzingenBoekhouding/benaderde_hash.txt')
-constNieuwePlaatjesLocatie = os.path.join(base_dir, 'RawInput')
-constClassifier = models.load_model(modelPath,
-                               custom_objects={'recall_m': recall_m, 'precision_m': precision_m, "f2_m": f2_m})
+base_dir = "/media/willem/KleindSSD/machineLearningPictures/take1"
+modelPath = os.path.join(base_dir, "BesteModellen/inceptionResnetV2_299/m_")
+constVoorberVerwijzingDir = os.path.join(base_dir, "Verwijzingen")
+constBenaderde_hash_administratie_pad = os.path.join(
+    base_dir, "VerwijzingenBoekhouding/benaderde_hash.txt"
+)
+constNieuwePlaatjesLocatie = os.path.join(base_dir, "RawInput")
+constClassifier = models.load_model(
+    modelPath,
+    custom_objects={"recall_m": recall_m, "precision_m": precision_m, "f2_m": f2_m},
+)
 
 hash_administratie = readDictFile(constBenaderde_hash_administratie_pad)
 
-def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam_post_in, vgi):
+
+def plunder_overzicht_pagina(
+    url_in, patroon_verwijzing_plaatje_in, patroon_naam_post_in, vgi
+):
     random_counter = 0
     page_text = requests.get(url_in).text
     posts = page_text.split('<blockquote class="postcontent restore ">')[1:]
     for post in posts:
         hashes_voor_lokale_filenaam_en_url_groot = {}
         postname = regex.findall(patroon_naam_post_in, post, regex.IGNORECASE)
-        gevonden_verwijzingen = regex.findall(patroon_verwijzing_plaatje_in, post, regex.IGNORECASE)
+        gevonden_verwijzingen = regex.findall(
+            patroon_verwijzing_plaatje_in, post, regex.IGNORECASE
+        )
         if len(postname) > 0:
             postname = postname[0].strip()  # van list naar postname zelf
         else:
             postname = ""
         # even de troep er uit
-        na_te_lopen_verwijzingen = [(groot, klein) for (groot, klein) in gevonden_verwijzingen if
-                                    groot[:4] == 'http' and klein[:4] == 'http']
+        na_te_lopen_verwijzingen = [
+            (groot, klein)
+            for (groot, klein) in gevonden_verwijzingen
+            if groot[:4] == "http" and klein[:4] == "http"
+        ]
         vgi = geeft_voortgangs_informatie(
-            'Post ' + postname + ' met ' + str(len(na_te_lopen_verwijzingen)) + ' gevonden verwijzingen',
-            vgi)
-        for na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein in na_te_lopen_verwijzingen:
-            random_counter = random_counter + percentageAdditionalExtraRandom #random.randint(0, percentageAdditionalExtraRandom * 2)
+            "Post "
+            + postname
+            + " met "
+            + str(len(na_te_lopen_verwijzingen))
+            + " gevonden verwijzingen",
+            vgi,
+        )
+        for (
+            na_te_lopen_verwijzing_groot,
+            na_te_lopen_verwijzing_klein,
+        ) in na_te_lopen_verwijzingen:
+            random_counter = (
+                random_counter + percentageAdditionalExtraRandom
+            )  # random.randint(0, percentageAdditionalExtraRandom * 2)
             if na_te_lopen_verwijzing_groot not in na_te_lopen_verwijzingen:
                 img = download_image_naar_memory(na_te_lopen_verwijzing_klein)
                 if img is None:
@@ -72,47 +111,95 @@ def plunder_overzicht_pagina(url_in, patroon_verwijzing_plaatje_in, patroon_naam
                 else:
                     hash_groot = bigHashPicture(img)
                     if hash_groot not in hash_administratie:
-                        resultaat = classificeer_vollig_image(img, na_te_lopen_verwijzing_klein,
-                                                                       constClassifier,
-                                                                       targetImageSize)
+                        resultaat = classificeer_vollig_image(
+                            img,
+                            na_te_lopen_verwijzing_klein,
+                            constClassifier,
+                            targetImageSize,
+                        )
                         if resultaat >= grenswaarde:
-                            hashes_voor_lokale_filenaam_en_url_groot[hash_groot] = na_te_lopen_verwijzing_groot
+                            hashes_voor_lokale_filenaam_en_url_groot[
+                                hash_groot
+                            ] = na_te_lopen_verwijzing_groot
                             hash_administratie[hash_groot] = str(datetime.now())
-                            random_counter = random_counter + percentageRandomFromChosen #random.randint(0, percentageRandomFromChosen * 2)
-                            sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "wel", hash_groot + ".jpg"))
+                            random_counter = (
+                                random_counter + percentageRandomFromChosen
+                            )  # random.randint(0, percentageRandomFromChosen * 2)
+                            sla_image_op(
+                                img,
+                                os.path.join(
+                                    constNieuwePlaatjesLocatie,
+                                    "wel",
+                                    hash_groot + ".jpg",
+                                ),
+                            )
                         elif resultaat < 0:
                             print("Negatieve score: ", na_te_lopen_verwijzing_groot)
         vgi = geeft_voortgangs_informatie(
-            'Post ' + postname + ' heeft ' + str(len(hashes_voor_lokale_filenaam_en_url_groot)) + ' echte verwijzingen',
-            vgi)
+            "Post "
+            + postname
+            + " heeft "
+            + str(len(hashes_voor_lokale_filenaam_en_url_groot))
+            + " echte verwijzingen",
+            vgi,
+        )
         aantalRandomOpgenomen = 0
         while random_counter > 0 and len(na_te_lopen_verwijzingen) > 0:
-            na_te_lopen_verwijzing = na_te_lopen_verwijzingen[random.randint(0, len(na_te_lopen_verwijzingen) - 1)]
+            na_te_lopen_verwijzing = na_te_lopen_verwijzingen[
+                random.randint(0, len(na_te_lopen_verwijzingen) - 1)
+            ]
             na_te_lopen_verwijzingen.remove(na_te_lopen_verwijzing)
-            na_te_lopen_verwijzing_groot, na_te_lopen_verwijzing_klein = na_te_lopen_verwijzing
+            (
+                na_te_lopen_verwijzing_groot,
+                na_te_lopen_verwijzing_klein,
+            ) = na_te_lopen_verwijzing
             img = download_image_naar_memory(na_te_lopen_verwijzing_klein)
             if img is not None:
                 hash_groot = bigHashPicture(img)
                 if hash_groot not in hash_administratie:
-                    if na_te_lopen_verwijzing_groot not in hashes_voor_lokale_filenaam_en_url_groot:
+                    if (
+                        na_te_lopen_verwijzing_groot
+                        not in hashes_voor_lokale_filenaam_en_url_groot
+                    ):
                         random_counter = random_counter - 100
                         hash_administratie[hash_groot] = str(datetime.now())
-                        sla_image_op(img, os.path.join(constNieuwePlaatjesLocatie, "niet", hash_groot + ".jpg"))
-                        hashes_voor_lokale_filenaam_en_url_groot[hash_groot] = na_te_lopen_verwijzing_groot
+                        sla_image_op(
+                            img,
+                            os.path.join(
+                                constNieuwePlaatjesLocatie, "niet", hash_groot + ".jpg"
+                            ),
+                        )
+                        hashes_voor_lokale_filenaam_en_url_groot[
+                            hash_groot
+                        ] = na_te_lopen_verwijzing_groot
                         aantalRandomOpgenomen = aantalRandomOpgenomen + 1
         vgi = geeft_voortgangs_informatie(
-            'Post ' + postname + ' heeft ' + str(aantalRandomOpgenomen) + ' random verwijzingen'
-            , vgi)
+            "Post "
+            + postname
+            + " heeft "
+            + str(aantalRandomOpgenomen)
+            + " random verwijzingen",
+            vgi,
+        )
 
-        write_voorbereiding_na_te_lopen_verwijzingen(constVoorberVerwijzingDir, url_in, postname, hashes_voor_lokale_filenaam_en_url_groot)
+        write_voorbereiding_na_te_lopen_verwijzingen(
+            constVoorberVerwijzingDir,
+            url_in,
+            postname,
+            hashes_voor_lokale_filenaam_en_url_groot,
+        )
         writeDict(hash_administratie, constBenaderde_hash_administratie_pad)
 
 
 voortgangs_informatie = initializeer_voortgangs_informatie("Uitlezen urls")
 for volgnummerUrl in volgnummersUrl:
-    voortgangs_informatie = geeft_voortgangs_informatie("#### volgnummer: " + str(volgnummerUrl), voortgangs_informatie)
+    voortgangs_informatie = geeft_voortgangs_informatie(
+        "#### volgnummer: " + str(volgnummerUrl), voortgangs_informatie
+    )
     url = baseUrl + str(volgnummerUrl)
-    plunder_overzicht_pagina(url, patroon_verwijzing_plaatje, patroon_naam_post, voortgangs_informatie)
+    plunder_overzicht_pagina(
+        url, patroon_verwijzing_plaatje, patroon_naam_post, voortgangs_informatie
+    )
 
 
 #################################### nog doen
@@ -150,7 +237,7 @@ for volgnummerUrl in volgnummersUrl:
 # patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
 # patroon_naam_post = '<b>([^\~<>]+)\~' #<b>Leggy Bombshell ~
 ###########################################################################################
-baseUrl = 'https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page'
+baseUrl = "https://vipergirls.to/threads/4254377-MetArt-2019-High-Resolution!/page"
 volgnummersUrl = range(51, 61)  #   1 - 46
-patroon_verwijzing_plaatje = r'<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>'
-patroon_naam_post = r'([^<]+)<br />'  # 2019-06-19 - Monika Dee - Time To Unwind<br />
+patroon_verwijzing_plaatje = r"<a href=\"([^\"]+)\"[^>]+><img src=\"([^\"]+)\"[^>]+>"
+patroon_naam_post = r"([^<]+)<br />"  # 2019-06-19 - Monika Dee - Time To Unwind<br />

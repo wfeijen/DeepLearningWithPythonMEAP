@@ -22,13 +22,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="zoeken naar grotere plaatjes">
-      <change afterPath="$PROJECT_DIR$/Take1/randomBlur.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Take1/randomClipping.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Take1/randomDots.py" afterDir="false" />
+    <list default="true" id="1058d90e-8fbc-4753-88a2-cf060d71fb43" name="Default Changelist" comment="we gaan hierna hoop ik kunnen blurren">
+      <change afterPath="$PROJECT_DIR$/Take1/gradual_blur.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Take1/rectangle_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" beforeDir="false" afterPath="$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/fileHandlingFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjesFuncties.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generiekeFuncties/plaatjes_downloader_en_beoordeler.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/plaatjes_downloader_en_beoordeler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generiekeFuncties/viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/generiekeFuncties/viewer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +63,8 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/willem/PycharmProjects/DeepLearningWithPythonMEAP/Take1&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
@@ -80,9 +85,10 @@
       <recent name="$PROJECT_DIR$/Take1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.3preTrainedInceptionResNetV2">
+  <component name="RunManager" selected="Python.voegRawEditorDefaultsToe">
     <configuration name="1ontdubbelenEnMaakVierkant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -102,50 +108,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="2verplaatsNaarWerkset" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/2verplaatsNaarWerkset.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="3preTrainedInceptionResNetV2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Deep Learning with Python MEAP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Take1" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/3preTrainedInceptionResNetV2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="6BoordelingDatasetEnKlaarzettenSets" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -165,8 +130,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="randomBlur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="8DownloadenVanYandexZonderZoekterm" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Deep Learning with Python MEAP" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -177,7 +143,51 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/randomBlur.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Take1/8DownloadenVanYandexZonderZoekterm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="JariksFotosEenUurLater" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EigenFotots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EigenFotots/JariksFotosEenUurLater.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="voegRawEditorDefaultsToe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Deep Learning with Python MEAP" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EigenFotots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EigenFotots/voegRawEditorDefaultsToe.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -188,13 +198,20 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.3preTrainedInceptionResNetV2" />
-        <item itemvalue="Python.2verplaatsNaarWerkset" />
+        <item itemvalue="Python.voegRawEditorDefaultsToe" />
+        <item itemvalue="Python.JariksFotosEenUurLater" />
         <item itemvalue="Python.1ontdubbelenEnMaakVierkant" />
         <item itemvalue="Python.6BoordelingDatasetEnKlaarzettenSets" />
-        <item itemvalue="Python.randomBlur" />
+        <item itemvalue="Python.8DownloadenVanYandexZonderZoekterm" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-67fca87a943a-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.11799.259" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -504,7 +521,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692967960637</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="we gaan hierna hoop ik kunnen blurren">
+      <option name="closed" value="true" />
+      <created>1693765788787</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1693765788787</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +544,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Alle code lijkt leuk samen te spelen" />
     <MESSAGE value="Voor pipeline controleren binnengehaald voorselectie sets" />
     <MESSAGE value="controleren gecombineerd met verbeteren voorselectie" />
     <MESSAGE value="controleren beste versies op basis van F2" />
@@ -544,7 +568,8 @@
     <MESSAGE value="voor aanpassen yandex scherm zodat het niet telkens opnieuw chrome start" />
     <MESSAGE value="gerefactord en zo dat hij nu bogus scherm toont als verborgen scherm" />
     <MESSAGE value="zoeken naar grotere plaatjes" />
-    <option name="LAST_COMMIT_MESSAGE" value="zoeken naar grotere plaatjes" />
+    <MESSAGE value="we gaan hierna hoop ik kunnen blurren" />
+    <option name="LAST_COMMIT_MESSAGE" value="we gaan hierna hoop ik kunnen blurren" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -645,11 +670,6 @@
           <option name="timeStamp" value="164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="214" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/kattenHonden/2verplaatsNaarWerkset.py</url>
           <line>69</line>
           <option name="timeStamp" value="218" />
@@ -700,9 +720,29 @@
           <option name="timeStamp" value="244" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Take1/6BoordelingDatasetEnKlaarzettenSets.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="245" />
+          <url>file://$PROJECT_DIR$/Take1/rectangle_code.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="248" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Take1/rectangle_code.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="249" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="250" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Take1/1ontdubbelenEnMaakVierkant.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="252" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Take1/gradual_blur.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="253" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -713,5 +753,10 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="self.posn_tracker.end" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

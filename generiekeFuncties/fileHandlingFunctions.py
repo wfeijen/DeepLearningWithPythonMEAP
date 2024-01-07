@@ -193,17 +193,18 @@ def prioriteerGecontroleerd(fileList, aantal, controle_char):
 
 
 def verwijderUitgecontroleerdeFilesFromList(fileList):
+    max_aantal_controle_karakters = 4
     antwoord = []
     for file in fileList:
         f = os.path.basename(file)
-        if f.count('w') < 4\
-                and f.count('n') < 4:
+        if f.count('w') <= max_aantal_controle_karakters\
+                and f.count('n') <= max_aantal_controle_karakters:
             antwoord.append(file)
     return antwoord
 
 
 def gevonden_hashcodes_onder_dir(dir, hash_size):
-    return([f[:hash_size * 2] for dp, dn, filenames in os.walk(dir) for f in filenames])
+    return([re.match(r"([0-9a-f]*)", f).group() for dp, dn, filenames in os.walk(dir) for f in filenames])
 
 
 def gevonden_files_onder_dir(directory, ext):

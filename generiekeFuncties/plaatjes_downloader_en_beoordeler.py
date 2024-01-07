@@ -46,6 +46,7 @@ class Plaatjes_beoordelaar:
             print('   is al eens benaderd.')
         else:
             self._url_administratie[url_plaatje] = str(datetime.now())
+            writeDict(self._url_administratie, self._benaderde_url_administratie_pad)
             try:
                 img = download_image_naar_memory(url_plaatje)
             except exceptions.InvalidURL as e:
@@ -77,8 +78,7 @@ class Plaatjes_beoordelaar:
         if goed_image:
             self._hash_administratie[hash_groot] = scherpte
             writeDict(self._hash_administratie, self._benaderde_hash_administratie_pad)
-            writeDict(self._url_administratie, self._benaderde_url_administratie_pad)
-            nieuwe_file_naam = "{:06d}".format(scherpte) + "_" + hash_groot + ".jpg"
+            nieuwe_file_naam = "{:06d}".format(breedte) + "x" + "{:06d}".format(hoogte) + "_" + "{:06d}".format(scherpte) + "_" + hash_groot + ".jpg"
         return goed_image, img, nieuwe_file_naam
 
     def beoordeel_plaatje(self, img, url_plaatje, file_naam):

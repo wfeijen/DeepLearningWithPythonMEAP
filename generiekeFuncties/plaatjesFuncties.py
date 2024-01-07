@@ -1,7 +1,7 @@
 import math
 import os
 from datetime import datetime, timedelta
-from PIL import Image, ImageStat, ImageOps
+from PIL import Image, ImageStat, ImageOps, ImageFilter, ImageDraw
 from send2trash import send2trash
 import numpy as np
 import requests
@@ -50,16 +50,18 @@ def resize_image(im, vergrotingsfactor):
     sx, sy = im.size
     sx = int(sx * vergrotingsfactor)
     sy = int(sy * vergrotingsfactor)
-    return im.resize(size=(sx, sy), resample=Image.BICUBIC)
+    return im.resize(size=(sx, sy), resample=Image.LANCZOS)
 
 def scherpte_maalGrootte_image(im):
     try:
         im = ImageOps.grayscale(im)
     except Exception as e:
-        print("Grayscale niet gelukt: " + e)
+        print("Grayscale niet gelukt: " + str(e))
         return 0
 
     sx, sy = im.size
+    if sx * sy < 10000:
+        return 0 # Image te klein om scherpte te bepalen dus is het zo wie zo slecht
     array = np.asarray(im, dtype=np.int32)
     gy, gx = np.gradient(array)
     g_norm = np.sqrt(gx ** 2 + gy ** 2)
@@ -87,7 +89,7 @@ def convert_image_to_square(im, targetsize_im):
 
 def sla_image_op(img, doellocatie):
     try:
-        img.save(doellocatie)
+        img.save(doellocatie, quality=95)
         return True
     except IOError as e:
         print("Image niet op te slaan: ", doellocatie, " - ", e)
@@ -106,5 +108,20 @@ def download_image_naar_memory(url_in):
         print("Image corrupt - ", e)
         return None
     return img
+
+def make_ellipse_mask(size, x0, y0, x1, y1, blur_radius):
+    img = Image.new("L", size, color=0)
+    draw = ImageDraw.Draw(img)
+    draw.ellipse((x0, y0, x1, y1), fill=255)
+    return img.filter(ImageFilter.GaussianBlur(radius=blur_radius))
+
+def blur(im, box):
+    blur_waarde = ((box[2] - box[0]) + (box[3] - box[1])) // 20
+    blurred_im = im.filter(ImageFilter.GaussianBlur(blur_waarde))
+    x1, y1, x2, y2 = box
+    mask_im = make_ellipse_mask(blurred_im.size, x1, y1, x2, y2, blur_waarde / 2)
+    oval_blur_im = Image.composite(blurred_im, im, mask_im)
+    return oval_blur_im
+
 
 
