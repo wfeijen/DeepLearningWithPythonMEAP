@@ -1,5 +1,9 @@
 import os
 from PIL import Image, UnidentifiedImageError
+import sys
+
+
+sys.path.append(os.getcwd())
 from generiekeFuncties.RawTherapeeDefaults import RawTherapeeDefaults
 from generiekeFuncties.fileHandlingFunctions import gevonden_files_onder_dir
 
